@@ -1,4 +1,3 @@
 # CS-102
-# CS-102
-Group Members
+# Group Members
 Javid Moradi 21903645
