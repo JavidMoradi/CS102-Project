@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLOutput;
 
 public class FileExplorerPanel extends JPanel
 {
     JEditorPane dtrPnCode;
     public FileExplorerPanel ()
     {
+        setPreferredSize( new Dimension( 200, 600 ) );
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -32,12 +32,7 @@ public class FileExplorerPanel extends JPanel
         lstFiles.setFont(new Font("Tahoma", Font.PLAIN, 20));
         scrollPane.setViewportView(lstFiles);
         lstFiles.setBackground(new Color(204, 0, 102));
-        //scrollPane.setLocation( new Point ( 600, 200 ) );
-
-        JLabel lblIcon = new JLabel("");
-        lblIcon.setIcon(new ImageIcon("C:\\Users\\onura\\Desktop\\CSProject\\Pictures\\Resim1.png"));
-        lblIcon.setBounds(690, 0, 471, 188);
-        add(lblIcon);
+        scrollPane.setLocation( new Point ( 600, 200 ) );
 
     }
 }
