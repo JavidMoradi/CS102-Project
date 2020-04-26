@@ -3,32 +3,24 @@ import java.awt.*;
 
 public class FileExplorerPanel extends JPanel
 {
-    public static DefaultListModel model;//<String>?
-    JEditorPane dtrPnCode;
+    public static DefaultListModel model;
     
     public FileExplorerPanel ()
     {
-
-        setLocation( 500, 500 );
-        setPreferredSize( new Dimension( 200, 600 ) );
+        setPreferredSize( new Dimension( 200, 220 ) );
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(-1, 187, 196, 556);
         add(scrollPane);
-
-        //DefaultListModel model = new DefaultListModel();
-        model = new DefaultListModel();//<String>?
-        JList lstFiles = new JList(model);//<String>?
+        
+        model = new DefaultListModel();
+        JList lstFiles = new JList(model);
         model.addElement("File Name #0.java");
         model.addElement( "File Name #1.java");
-      
-
-
+        lstFiles.setPreferredSize( new Dimension( 180, 150 ) );
+        
         lstFiles.setFont(new Font("Tahoma", Font.PLAIN, 20));
         scrollPane.setViewportView(lstFiles);
         lstFiles.setBackground(new Color(204, 0, 102));
-        scrollPane.setLocation( new Point ( 600, 200 ) );
-
     }
 }

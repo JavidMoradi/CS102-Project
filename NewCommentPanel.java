@@ -24,54 +24,39 @@ public class NewCommentPanel extends JPanel
         JButton wrongIndentationError = new JButton(" Wrong Indentation");
         wrongIndentationError.setBackground(Color.RED);
         wrongIndentationError.setForeground( Color.WHITE );
-        //indentAll.setBounds(0, 148, 201, 40);
         wrongIndentationError.setPreferredSize( new Dimension( 190, 25) );
         add ( wrongIndentationError );
 
         JButton inefficientError = new JButton("Inefficient Code");
         inefficientError.setBackground(Color.BLUE);
         inefficientError.setForeground( Color.WHITE );
-        //indentAll.setBounds(0, 148, 201, 40);
         inefficientError.setPreferredSize( new Dimension( 170, 25) );
         add ( inefficientError );
 
         JButton namingConventionError = new JButton("Naming Conventions Error");
         namingConventionError.setBackground(Color.MAGENTA);
         namingConventionError.setForeground( Color.WHITE );
-        //indentAll.setBounds(0, 148, 201, 40);
         namingConventionError.setPreferredSize( new Dimension( 190, 25) );
         add ( namingConventionError );
 
         JButton javaDocError = new JButton("JavaDoc Error");
         javaDocError.setBackground(Color.yellow);
         javaDocError.setForeground( Color.BLACK );
-        //indentAll.setBounds(0, 148, 201, 40);
         javaDocError.setPreferredSize( new Dimension( 170, 25) );
         add ( javaDocError );
 
         JButton styleErrorButton = new JButton("Blank Line/Space Error");
         styleErrorButton.setBackground(Color.gray);
         styleErrorButton.setForeground( Color.WHITE );
-        //indentAll.setBounds(0, 148, 201, 40);
         styleErrorButton.setPreferredSize( new Dimension( 190, 25) );
         add ( styleErrorButton );
 
         JButton commentError = new JButton("Comment Error");
         commentError.setBackground(Color.black);
         commentError.setForeground( Color.WHITE );
-        //indentAll.setBounds(0, 148, 201, 40);
         commentError.setPreferredSize( new Dimension( 170, 25) );
         add ( commentError );
-
-//        JComboBox errorComboBox = new JComboBox();
-//        errorComboBox.setPreferredSize( new Dimension(170, 20) );
-//        errorComboBox.setBackground(Color.CYAN);
-//        errorComboBox.setToolTipText("");
-//        //fontComboBox.setBounds(0, 74, 101, 29);
-//        errorComboBox.addItem(" Choose Type ");
-//        add ( errorComboBox );
-
-
+        
     }
 
 }

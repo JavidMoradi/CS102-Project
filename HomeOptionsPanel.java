@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -19,14 +18,12 @@ public class HomeOptionsPanel extends JPanel
         homeLabel.setOpaque(true);
         homeLabel.setBackground(Color.WHITE);
         homeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        //homeLabel.setBounds(0, 36, 201, 40);
         add( homeLabel );
 
         JComboBox fontComboBox = new JComboBox();
         fontComboBox.setPreferredSize( new Dimension(94, 20) );
         fontComboBox.setBackground(Color.CYAN);
         fontComboBox.setToolTipText("");
-        //fontComboBox.setBounds(0, 74, 101, 29);
         fontComboBox.addItem(" Font ");
         add ( fontComboBox );
 
@@ -34,7 +31,6 @@ public class HomeOptionsPanel extends JPanel
         sizeComboBox.setPreferredSize( new Dimension(94, 20) );
         sizeComboBox.setBackground(Color.CYAN);
         sizeComboBox.setToolTipText("a");
-        //sizeComboBox.setBounds(100, 74, 101, 29);
         sizeComboBox.addItem(" Size ");
         add( sizeComboBox );
 
@@ -45,8 +41,8 @@ public class HomeOptionsPanel extends JPanel
 
         JButton indentAll = new JButton("Indent All");
         indentAll.setBackground(Color.CYAN);
-        //indentAll.setBounds(0, 148, 201, 40);
         indentAll.setPreferredSize( new Dimension( 195, 25) );
         add ( indentAll );
+        
     }
 }

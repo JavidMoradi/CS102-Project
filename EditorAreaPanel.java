@@ -7,21 +7,17 @@ public class EditorAreaPanel extends JPanel
 
     public EditorAreaPanel ()
     {
+        
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
-        editorPanel.setRows( 35 );
-        editorPanel.setColumns( 60 );
+        editorPanel.setRows( 19 );
+        editorPanel.setColumns( 40 );
         editorPanel.setWrapStyleWord( true );
         editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 19) );
-//        editorPanel
         JScrollPane scrollPane = new JScrollPane( editorPanel );
         add ( scrollPane );
     }
-
-
-    /**
-     * This method is to display the String parameter to the JTextArea, but as expected, doesn't work!!!!!
-     */
+    
     public void setContent ( String str )
     {
         editorPanel.setText( str );
