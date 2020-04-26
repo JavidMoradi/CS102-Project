@@ -44,6 +44,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         displayArea = new EditorAreaPanel();
         add(displayArea);
+        
 
 
     }
@@ -53,6 +54,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         if (actionEvent.getActionCommand().equals(newFile.getText())) // The Action Listener For The "New File" Button
         {
             System.out.println(" The New File Button Has Been Pressed ");
+            
 
         } else if (actionEvent.getActionCommand().equals(saveFile.getText())) // The Action Listener For The "Save File" Button
         {
@@ -85,6 +87,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                         + "or a Text Document (.txt) ",
                                 "WARNING", JOptionPane.WARNING_MESSAGE);
                     } else {
+                        FileExplorerPanel.model.addElement( fileName );
+                        
                         while (scan.hasNextLine()) {
                             fileContent += scan.nextLine() + "\n";
                         }
