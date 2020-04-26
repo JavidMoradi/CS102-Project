@@ -88,7 +88,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                 "WARNING", JOptionPane.WARNING_MESSAGE);
                     } else {
                         FileExplorerPanel.model.addElement( fileName );
-                        
+
                         while (scan.hasNextLine()) {
                             fileContent += scan.nextLine() + "\n";
                         }
@@ -104,6 +104,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         } else if (actionEvent.getActionCommand().equals(closeFile.getText())) // The Action Listener For The "Close File" Button
         {
             System.out.println(" The Close File Button Has Been Pressed  ");
+            FileExplorerPanel.model.remove(FileExplorerPanel.model.size() - 1);
+
 
         } else {
 

@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class FileExplorerPanel extends JPanel
 {
-    public static DefaultListModel<String> model;
+    public static DefaultListModel model;//<String>?
     JEditorPane dtrPnCode;
     
     public FileExplorerPanel ()
@@ -16,8 +16,8 @@ public class FileExplorerPanel extends JPanel
         add(scrollPane);
 
         //DefaultListModel model = new DefaultListModel();
-        model = new DefaultListModel<String>();
-        JList lstFiles = new JList<String>(model);
+        model = new DefaultListModel();//<String>?
+        JList lstFiles = new JList(model);//<String>?
         model.addElement("File Name #0.java");
         model.addElement( "File Name #1.java");
       
