@@ -21,16 +21,6 @@ public class NewCommentPanel extends JPanel
         insertLabel.setBounds( 200, 36, 201, 40 );
         add ( insertLabel );
 
-//        JLabel errorTypeLabel = new JLabel( "Types of Errors" );
-//        errorTypeLabel.setPreferredSize(new Dimension( 250, 25));
-//        errorTypeLabel.setForeground( Color.BLUE );
-//        errorTypeLabel.setBorder( new LineBorder( new Color(0, 0, 0) ) );
-//        errorTypeLabel.setOpaque( true );
-//        errorTypeLabel.setBackground( Color.WHITE );
-//        errorTypeLabel.setHorizontalAlignment( SwingConstants.CENTER );
-//        errorTypeLabel.setBounds( 200, 36, 201, 40 );
-//        add ( errorTypeLabel );
-
         JButton wrongIndentationError = new JButton(" Wrong Indentation");
         wrongIndentationError.setBackground(Color.RED);
         wrongIndentationError.setForeground( Color.WHITE );
