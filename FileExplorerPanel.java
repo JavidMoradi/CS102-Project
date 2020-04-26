@@ -6,6 +6,8 @@ public class FileExplorerPanel extends JPanel
     JEditorPane dtrPnCode;
     public FileExplorerPanel ()
     {
+
+        setLocation( 500, 500 );
         setPreferredSize( new Dimension( 200, 600 ) );
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
