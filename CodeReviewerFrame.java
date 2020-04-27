@@ -30,6 +30,5 @@ public class CodeReviewerFrame extends JFrame
         constraints.gridx = 0;
         constraints.gridy = 0;
         //add ( fileOptionsPanel, constraints );
-        
     }
 }

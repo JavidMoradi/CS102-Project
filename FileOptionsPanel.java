@@ -21,6 +21,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     String fileContent;
     FileWriter fileWriter;
     String filePath;
+    boolean isCreated;
 
     public FileOptionsPanel()
     {
@@ -54,6 +55,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         fileContent = "";
         selectedFile = null;
         filePath = "";
+        fileName = "";
 
 
     }
@@ -70,19 +72,34 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         if ( actionEvent.getActionCommand().equals( newFile.getText() ) ) // The Action Listener For The "New File" Button
         {
-            fileName = JOptionPane.showInputDialog( " Please Enter The Name of The New File " );
-            
             chooser = new JFileChooser();
             chooser.setFileSelectionMode( JFileChooser.FILES_AND_DIRECTORIES) ;
 
             if ( chooser.showOpenDialog( null ) == JFileChooser.APPROVE_OPTION )
             {
-                try {
-                    filePath = chooser.getSelectedFile().getAbsolutePath();
+                try
+                {
+                   // selectedFile = null;
+                    fileName = JOptionPane.showInputDialog( " Please Enter The Name of The New File " );
+                    filePath = chooser.getSelectedFile().getPath();
+                    
                     System.out.println( filePath );
-                    selectedFile = new File(filePath);
-                    //selectedFile.getParentFile().mkdirs();
-                    selectedFile.createTempFile( " Test1 ", ".java", selectedFile );
+                    selectedFile = new File( filePath + "/" + fileName + ".java" );
+                    isCreated = selectedFile.createNewFile();
+                    
+                    if ( isCreated )
+                    {
+                       JOptionPane.showMessageDialog(this, " The File Has Been Created Successfully ",
+                                "NOTE", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ",
+                                "WARNING", JOptionPane.WARNING_MESSAGE);
+                    }
+                    
+                    fileName += ".java";
+                    FileExplorerPanel.model.addElement( fileName );
 
                 } catch ( IOException e )
                 {
@@ -142,7 +159,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         FileExplorerPanel.model.addElement( fileName );
 
                        
-                        while ( scan.hasNextLine() )
+                        while ( scan.hasNextLine() ) // Reads the File Content
                         {
                             fileContent += scan.nextLine() + "\n";
                         }
@@ -156,9 +173,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         } else if  ( actionEvent.getActionCommand().equals( closeFile.getText() ) ) // The Action Listener For The "Close File" Button
         {
-            if ( FileExplorerPanel.model.size() > 0 ) {
+            if ( FileExplorerPanel.model.size() > 0 )
+            {
                 FileExplorerPanel.model.remove(FileExplorerPanel.model.size() - 1);
                 displayArea.setContent( "" );
+                selectedFile = null;
             }
             else
             {
