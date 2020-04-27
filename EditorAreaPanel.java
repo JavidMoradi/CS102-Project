@@ -28,24 +28,22 @@ public class EditorAreaPanel extends JPanel
     {
         return editorPanel.getText();
     }
-    
+
     public void setEditorFont ( Font font )
     {
     	editorFont = font;
         editorPanel.setFont( editorFont);
-	}
+    }
 
-	public Font getEditorFont (){
-		return editorPanel.getFont();
-	}
+    public Font getEditorFont (){
+	return editorPanel.getFont();
+    }
 
-	public int getSelectionFirst (){
-		return editorPanel.getSelectionStart();
-	}
+    public int getSelectionFirst (){
+	return editorPanel.getSelectionStart();
+    }
 
-	public int getSelectionLast (){
-		return editorPanel.getSelectionEnd();
-	}
-    
-    
+    public int getSelectionLast (){
+	return editorPanel.getSelectionEnd();
+    }
 }
