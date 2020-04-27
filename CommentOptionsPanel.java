@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.*;
 
 public class CommentOptionsPanel extends JPanel
 {
