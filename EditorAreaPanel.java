@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.BadLocationException;
 
 public class EditorAreaPanel extends JPanel
 {
-    JTextArea editorPanel;
     Font editorFont;
     static JTextArea editorPanel;
     static int a;
