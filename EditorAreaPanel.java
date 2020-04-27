@@ -14,11 +14,7 @@ public class EditorAreaPanel extends JPanel
     static DefaultHighlighter.DefaultHighlightPainter painter;
     
     public EditorAreaPanel ()
-    {
-        highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
-	painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
-	highlighter.setDrawsLayeredHighlights(false); // this is the key line
-		
+    {	
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
         editorPanel.setRows( 19 );
@@ -27,6 +23,9 @@ public class EditorAreaPanel extends JPanel
         editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 19) );
         JScrollPane scrollPane = new JScrollPane( editorPanel );
         add ( scrollPane );
+	highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
+	painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
+	highlighter.setDrawsLayeredHighlights(false); // this is the key line
     }
     
     public void setContent ( String str )
