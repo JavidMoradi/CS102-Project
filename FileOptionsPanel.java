@@ -23,9 +23,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     String filePath;
     boolean isCreated;
 
-    public FileOptionsPanel()
+    public FileOptionsPanel( EditorAreaPanel displayArea)
     {
 
+        this.displayArea = displayArea; 
+        
         newFile = new JButton(" New File \u2795 ");
         saveFile = new JButton(" Save File \uD83D\uDCBE ");
         openFile = new JButton(" Open File ");
