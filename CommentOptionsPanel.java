@@ -25,6 +25,27 @@ public class CommentOptionsPanel extends JPanel
         insertCommentButton.setBackground(Color.blue);
         insertCommentButton.setForeground( Color.WHITE );
         insertCommentButton.setPreferredSize( new Dimension( 280, 25) );
+        insertCommentButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                JPanel fields = new JPanel(new GridLayout(2, 1));
+                JTextField field = new JTextField(10);
+                JComboBox<String> comboBox = new JComboBox<>(new String[]{"Color 1", "Color 2", "Color 3"});
+
+                fields.add(field);
+                fields.add(comboBox);
+
+                int result = JOptionPane.showConfirmDialog(null, fields, "Insert Comment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                switch (result) {
+                    case JOptionPane.OK_OPTION:
+                        // Process the results...
+                        System.out.println(field.getText());
+                        System.out.println( comboBox.getSelectedItem());
+                        break;
+                }
+
+            }
+
+        });
         add ( insertCommentButton, BorderLayout.EAST );
 
         JButton nextCommentButton = new JButton("Next Comment");
