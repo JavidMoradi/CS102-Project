@@ -10,15 +10,14 @@ public class CodeReviewerFrame extends JFrame
         super(title);
         setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         setPreferredSize( new Dimension( 1500, 1000 ) );
-        
-        add(display);
+       
         add ( new HomeOptionsPanel ( display));
         
         add ( new NewCommentPanel () );
         add ( new CommentOptionsPanel(), BorderLayout.EAST);
         add ( new FileExplorerPanel() );
         add ( fileOptionsPanel );
-        
+        add( new CommentShowPanel());
 
         setLayout ( new FlowLayout( ) );
 
