@@ -52,7 +52,7 @@ public class HomeOptionsPanel extends JPanel
         sizeComboBox.addItem(" Size ");
         add( sizeComboBox );
 
-        JButton commentingAndUncommenting = new JButton("Comment");
+        JButton commentingAndUncommenting = new JButton("Comment/Uncomment");
         commentingAndUncommenting.setBackground(Color.CYAN);
         commentingAndUncommenting.setBounds(0, 112, 101, 40);
         add ( commentingAndUncommenting );
