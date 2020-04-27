@@ -4,7 +4,8 @@ import java.awt.*;
 public class EditorAreaPanel extends JPanel
 {
     JTextArea editorPanel;
-
+	Font editorFont;
+    
     public EditorAreaPanel ()
     {
         
@@ -22,9 +23,29 @@ public class EditorAreaPanel extends JPanel
     {
         editorPanel.setText( str );
     }
-
+    
     public String getContent ()
     {
         return editorPanel.getText();
     }
+    
+    public void setEditorFont ( Font font )
+    {
+    	editorFont = font;
+        editorPanel.setFont( editorFont);
+	}
+
+	public Font getEditorFont (){
+		return editorPanel.getFont();
+	}
+
+	public int getSelectionFirst (){
+		return editorPanel.getSelectionStart();
+	}
+
+	public int getSelectionLast (){
+		return editorPanel.getSelectionEnd();
+	}
+    
+    
 }
