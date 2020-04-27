@@ -4,11 +4,20 @@ import java.awt.*;
 public class EditorAreaPanel extends JPanel
 {
     JTextArea editorPanel;
-	Font editorFont;
+    Font editorFont;
+    static JTextArea editorPanel;
+    static int a;
+    static int b;
+    
+    static DefaultHighlighter highlighter;
+    static DefaultHighlighter.DefaultHighlightPainter painter;
     
     public EditorAreaPanel ()
     {
-        
+        highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
+	painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
+	highlighter.setDrawsLayeredHighlights(false); // this is the key line
+		
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
         editorPanel.setRows( 19 );
@@ -45,5 +54,17 @@ public class EditorAreaPanel extends JPanel
 
     public int getSelectionLast (){
 	return editorPanel.getSelectionEnd();
+    }
+    
+    public static void addHighlight(Color color) {
+	painter = new DefaultHighlighter.DefaultHighlightPainter(color);
+	a = editorPanel.getSelectionStart();
+	b = editorPanel.getSelectionEnd();
+	try {
+ 	    highlighter.addHighlight(a, b, painter);
+  	} catch (BadLocationException exeption) {
+	// TODO Auto-generated catch block
+   	exeption.printStackTrace();
+   	}
     }
 }
