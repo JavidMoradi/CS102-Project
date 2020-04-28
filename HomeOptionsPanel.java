@@ -14,7 +14,8 @@ public class HomeOptionsPanel extends JPanel
     JComboBox fontComboBox;
     Font displayFont;
     String fontList[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-
+    String[] sizes = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22" };
+    
     public HomeOptionsPanel( EditorAreaPanel display)
     {        
         this.display = display;
@@ -49,8 +50,13 @@ public class HomeOptionsPanel extends JPanel
         sizeComboBox.setPreferredSize( new Dimension(94, 20) );
         sizeComboBox.setBackground(Color.CYAN);
         sizeComboBox.setToolTipText("a");
-        sizeComboBox.addItem(" Size ");
+        for (int i = 0; i < sizes.length; i++) {
+            sizeComboBox.addItem(sizes[i]);
+            if( display.getEditorFont().getSize() == Integer.parseInt(sizes[i]))
+                sizeComboBox.setSelectedItem( sizes[i]);
+        }
         add( sizeComboBox );
+        sizeComboBox.addActionListener( new SizeListener());
 
         JButton commentingAndUncommenting = new JButton("Comment/Uncomment");
         commentingAndUncommenting.setBackground(Color.CYAN);
@@ -96,6 +102,17 @@ public class HomeOptionsPanel extends JPanel
                 }
             }
             display.setContent( content);
+        }
+    }
+    
+    class SizeListener implements ActionListener {
+
+        String size;
+        public void actionPerformed(ActionEvent e) {
+            JComboBox cb = (JComboBox) e.getSource();
+            size = (String) cb.getSelectedItem();
+            displayFont = display.getEditorFont();
+            display.setEditorFont(displayFont.deriveFont((float)Integer.parseInt(size)));
         }
     }
 }
