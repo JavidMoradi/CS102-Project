@@ -20,7 +20,7 @@ public class EditorAreaPanel extends JPanel
         editorPanel.setRows( 21 );
         editorPanel.setColumns( 60 );
         editorPanel.setWrapStyleWord( true );
-        editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 19) );
+        editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 18) );
         JScrollPane scrollPane = new JScrollPane( editorPanel );
         add ( scrollPane );
 	highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
