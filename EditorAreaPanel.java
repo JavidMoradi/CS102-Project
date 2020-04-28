@@ -17,8 +17,8 @@ public class EditorAreaPanel extends JPanel
     {	
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
-        editorPanel.setRows( 19 );
-        editorPanel.setColumns( 40 );
+        editorPanel.setRows( 21 );
+        editorPanel.setColumns( 60 );
         editorPanel.setWrapStyleWord( true );
         editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 19) );
         JScrollPane scrollPane = new JScrollPane( editorPanel );

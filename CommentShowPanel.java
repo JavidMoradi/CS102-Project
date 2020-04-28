@@ -12,9 +12,10 @@ public class CommentShowPanel extends JPanel
             + "Line 15: Better to use JButton instead of Button\r\n"
             + "Line 34: Names does not make sense! \r\n");
       commentJTextArea.setVisible(true);
-      commentJTextArea.setRows(19);
-      commentJTextArea.setColumns(40);
+      commentJTextArea.setRows(24);
+      commentJTextArea.setColumns( 25 );
       commentJTextArea.setWrapStyleWord(true);
+      commentJTextArea.setLineWrap( true );
       commentJTextArea.setFont(new Font("Tahoma", Font.PLAIN, 19));
       JScrollPane scrollPane = new JScrollPane(commentJTextArea);
 

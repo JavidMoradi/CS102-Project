@@ -23,18 +23,16 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     String filePath;
     boolean isCreated;
 
-    public FileOptionsPanel( EditorAreaPanel displayArea)
+    public FileOptionsPanel( EditorAreaPanel editingAreaPanel )
     {
 
-        this.displayArea = displayArea; 
-        
         newFile = new JButton(" New File \u2795 ");
         saveFile = new JButton(" Save File \uD83D\uDCBE ");
         openFile = new JButton(" Open File ");
         closeFile = new JButton(" Close File ");
 
         setLayout( new FlowLayout() );
-        setPreferredSize( new Dimension( 655, 500 ) );
+        setPreferredSize( new Dimension( 1300, 500 ) ); //655
         setBackground(Color.BLUE);
         setLocation(500, 500);
 
@@ -50,7 +48,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         setFocusable(true);
 
-        displayArea = new EditorAreaPanel();
+        displayArea = editingAreaPanel;
         add(displayArea);
         
 
@@ -93,6 +91,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     {
                        JOptionPane.showMessageDialog(this, " The File Has Been Created Successfully ",
                                 "NOTE", JOptionPane.INFORMATION_MESSAGE);
+                       displayArea.setContent( "" );
                     }
                     else
                     {
@@ -122,22 +121,24 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
             else
             {
                 try {
+                    
                     fileWriter = new FileWriter( selectedFile );
                     fileWriter.write( displayArea.getContent() );
                     JOptionPane.showMessageDialog(this, " The File Was Saved Successfully ",
-                                "WARNING", JOptionPane.INFORMATION_MESSAGE);
+                                "NOTE", JOptionPane.INFORMATION_MESSAGE);
                     fileWriter.close();
                 } catch ( IOException e )
                 {
                     JOptionPane.showMessageDialog(this, " The File Was Not Saved, Please Try Again ",
-                                "NOTE", JOptionPane.WARNING_MESSAGE);
+                                "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
             }
 
 
         } else if ( actionEvent.getActionCommand().equals( openFile.getText() ) ) // The Action Listener For The "Open File" Button
         {
-
+            int lineNumber;
+            
             try {
                 chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -160,10 +161,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     } else {
                         FileExplorerPanel.model.addElement( fileName );
 
-                       
+                       lineNumber = 1;
                         while ( scan.hasNextLine() ) // Reads the File Content
                         {
-                            fileContent += scan.nextLine() + "\n";
+                            fileContent += lineNumber + "  " + scan.nextLine() + "\n";
+                            lineNumber++;
                         }
                     }
                     displayArea.setContent( fileContent ); // Displays the contents of the file
