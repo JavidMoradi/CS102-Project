@@ -32,7 +32,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         closeFile = new JButton(" Close File ");
 
         setLayout( new FlowLayout() );
-        setPreferredSize( new Dimension( 1300, 500 ) ); //655
+        setPreferredSize( new Dimension( 900, 550 ) );
         setBackground(Color.BLUE);
         setLocation(500, 500);
 
@@ -137,6 +137,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         } else if ( actionEvent.getActionCommand().equals( openFile.getText() ) ) // The Action Listener For The "Open File" Button
         {
+            int lineNumber;
             
             try {
                 chooser = new JFileChooser();
@@ -163,7 +164,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                        lineNumber = 1;
                         while ( scan.hasNextLine() ) // Reads the File Content
                         {
-                            fileContent += scan.nextLine() + "\n";
+                            fileContent += lineNumber + "  " + scan.nextLine() + "\n";
+                            lineNumber++;
                         }
                     }
                     displayArea.setContent( fileContent ); // Displays the contents of the file
