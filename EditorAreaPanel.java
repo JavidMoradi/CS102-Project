@@ -1,12 +1,22 @@
+package project102;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.*;
+import java.util.ArrayList;
+
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.BadLocationException;
 
 public class EditorAreaPanel extends JPanel
 {
     Font editorFont;
+    CommentsModel commentControl;
     static JTextArea editorPanel;
+    
+    static JScrollPane scrollPane = new JScrollPane( editorPanel );
     static int a;
     static int b;
     
@@ -14,18 +24,23 @@ public class EditorAreaPanel extends JPanel
     static DefaultHighlighter.DefaultHighlightPainter painter;
     
     public EditorAreaPanel ()
-    {	
+    {
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
-        editorPanel.setRows( 22 );
-        editorPanel.setColumns( 57 );
+        editorPanel.setRows( 20 );
+        editorPanel.setColumns( 30 );
         editorPanel.setWrapStyleWord( true );
-        editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 18) );
-        JScrollPane scrollPane = new JScrollPane( editorPanel );
+        editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 19) );
+
+
+    //TextLineNumber tln = new TextLineNumber(textPane);
+        scrollPane = new JScrollPane( editorPanel);
+        TextLineNumber tln = new TextLineNumber(editorPanel);
+        scrollPane.setRowHeaderView( tln );
         add ( scrollPane );
-	highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
-	painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
-	highlighter.setDrawsLayeredHighlights(false); // this is the key line
+		highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
+		painter = new DefaultHighlighter.DefaultHighlightPainter( Color.RED);
+		highlighter.setDrawsLayeredHighlights(false); // this is the key line
     }
     
     public void setContent ( String str )
@@ -33,7 +48,7 @@ public class EditorAreaPanel extends JPanel
         editorPanel.setText( str );
     }
     
-    public String getContent ()
+    public static String getContent()
     {
         return editorPanel.getText();
     }
@@ -48,11 +63,11 @@ public class EditorAreaPanel extends JPanel
 	return editorPanel.getFont();
     }
 
-    public int getSelectionFirst (){
+    public static int getSelectionFirst (){
 	return editorPanel.getSelectionStart();
     }
 
-    public int getSelectionLast (){
+    public static int getSelectionLast (){
 	return editorPanel.getSelectionEnd();
     }
     
@@ -64,7 +79,112 @@ public class EditorAreaPanel extends JPanel
  	    highlighter.addHighlight(a, b, painter);
   	} catch (BadLocationException exeption) {
 	// TODO Auto-generated catch block
-   	exeption.printStackTrace();
-   	}
+  		exeption.printStackTrace();
+  		}
+    }
+    
+    public static JScrollPane getJScrollPane() {
+    	return scrollPane;
+    }
+
+    
+    public static int getLineNumber( int pos) {
+    	String text;
+    	String currentSubString;
+    	
+    	int lineNumber;
+    	text = editorPanel.getText();
+    	lineNumber = 1	;
+
+    	for( int i = 0; i <= pos; i++) {
+    	   	currentSubString = text.substring(i, i+1);	
+    		if(currentSubString.equals("\n"))
+    			lineNumber++;
+    	}
+    	return lineNumber;
+    }
+    
+    //returns the starting position of the line
+    public static int getPos(int lineNumber) {
+    	int pos;
+    	int count;
+    	String text;
+    	String currentSubString = "";
+    	
+    	count = lineNumber;
+    	pos = 0;
+    	text = editorPanel.getText();
+    	
+    	for( int i = 0; i < text.length(); i++){
+    		currentSubString = text.substring(i, i+1);	
+		 	if(currentSubString.equals("\n"))
+	            count--;
+		 	if(count == 2)
+		 		pos = i + 2 ;
+    	}
+    	
+    	return pos;
+    }
+    
+    //adds pointer at the specified position
+    public static void addNewPointer( int pos) {
+    	//First we delete any previous pointers (if any)
+    	//editorPanel.setText(editorPanel.getText().replace(">>",""));
+    	
+    	RemovePointer();
+    	
+    	//Secondly we add new one
+    	String str;
+    	str = ">>";
+    	editorPanel.insert(str, pos);
+    	
+    	//reHighlight because normally it loses highlight
+    	reHighlight(CommentsModel.commentsBag);
+    }
+    
+    public static void RemovePointer() {
+    	String text;
+    	String currentSubString;
+    	
+    	text = editorPanel.getText();
+    	
+    	 System.out.println("entered");
+    	for( int i = 0; i < text.length() - 2; i++) {
+    		currentSubString = text.substring(i, i+2);	
+    		 if(currentSubString.equals(">>")) {
+    			 System.out.println("found");
+    			 editorPanel.replaceRange("", i, i+2);
+    		 }
+    	}
+    }
+    
+    public static void reHighlight( ArrayList<Comment> commentsBag) {
+    	int a;
+    	int b;
+    	Color color;
+    
+    	for( int i = 0; i < commentsBag.size(); i++) {
+    		a = commentsBag.get(i).getStartIndex();
+    		b = commentsBag.get(i).getEndIndex();
+    		color = commentsBag.get(i).getColor();
+  
+	    	painter = new DefaultHighlighter.DefaultHighlightPainter( color);
+	    	try {
+	     	    highlighter.addHighlight(a, b, painter);
+	      	} catch (BadLocationException exeption) {
+	    	// TODO Auto-generated catch block
+	       	exeption.printStackTrace();
+	       	}
+    	}
     }
 }
+
+    /**
+     * 
+     * This method is to display the String parameter to the JTextArea, but as expected, doesn't work!!!!!
+     */
+//    public void setAText ( String str )
+//    {
+//        editorPanel.setEditable( true );
+//        editorPanel.setText( str );
+//    }
