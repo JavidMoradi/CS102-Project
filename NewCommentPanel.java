@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -28,9 +29,18 @@ public class NewCommentPanel extends JPanel
         wrongIndentationError.setPreferredSize( new Dimension( 190, 25) );
         wrongIndentationError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-                EditorAreaPanel.addHighlight( Color.RED);
-                CommentShowPanel.addComment( "Line ... : Wrong Identation Error." );
+        		Color color;
+        		Comment c;
+        		
+        		color = Color.RED;
+        		c = new Comment( "Wrong Indentation", EditorAreaPanel.getSelectionFirst(), EditorAreaPanel.getSelectionLast(), EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()), color);
+                
+        		EditorAreaPanel.addHighlight( color );
+                //add comment with 5 parameters!
+        		CommentsModel.addComment(c);
+                CommentShowPanel.update();
         	}
+        	
 
         });
         add ( wrongIndentationError );
@@ -41,8 +51,20 @@ public class NewCommentPanel extends JPanel
         inefficientError.setPreferredSize( new Dimension( 170, 25) );
         inefficientError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
                 EditorAreaPanel.addHighlight( Color.BLUE);
-                CommentShowPanel.addComment( "Line ... : Inefficient Code Error." );
+        		Color color;
+        		Comment c;
+        		
+        		color = Color.BLUE;
+        		EditorAreaPanel.addHighlight( color );
+        		
+        		c = new Comment( "Inefficient Code Error", EditorAreaPanel.getSelectionFirst(), EditorAreaPanel.getSelectionLast(), EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()), color);
+                
+                //add comment with 5 parameters!
+        		CommentsModel.addComment(c);
+                CommentShowPanel.update();
+               // CommentShowPanel.addComment( "Line: " + EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()) + " Inefficient Code Error." );
         	}
 
         });
@@ -54,8 +76,18 @@ public class NewCommentPanel extends JPanel
         namingConventionError.setPreferredSize( new Dimension( 190, 25) );
         namingConventionError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-                EditorAreaPanel.addHighlight( Color.MAGENTA);
-                CommentShowPanel.addComment( "Line ... : Nameing Convention Error." );
+                
+        		Color color;
+        		Comment c;
+        		
+        		color = Color.MAGENTA;
+        		EditorAreaPanel.addHighlight( color);
+        		c = new Comment( "Naming Convention Error", EditorAreaPanel.getSelectionFirst(), EditorAreaPanel.getSelectionLast(), EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()), color);
+                
+                //add comment with 5 parameters!
+        		CommentsModel.addComment(c);
+                CommentShowPanel.update();
+              //  CommentShowPanel.addComment( "Line: " + EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()) + " Nameing Convention Error." );
         	}
 
         });
@@ -67,8 +99,17 @@ public class NewCommentPanel extends JPanel
         javaDocError.setPreferredSize( new Dimension( 170, 25) );
         javaDocError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-                EditorAreaPanel.addHighlight( Color.yellow);
-                CommentShowPanel.addComment( "Line ... : JavaDoc Comment Error." );
+                Color color;
+        		Comment c;
+        		
+        		color = Color.yellow;
+        		EditorAreaPanel.addHighlight( color);        		
+        		c = new Comment( "JavaDoc Comment Error" , EditorAreaPanel.getSelectionFirst(), EditorAreaPanel.getSelectionLast(), EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()), color);
+                
+                //add comment with 5 parameters!
+        		CommentsModel.addComment(c);
+                CommentShowPanel.update();
+              //  CommentShowPanel.addComment( "Line: " + EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()) + " JavaDoc Comment Error." );
         	}
 
         });
@@ -80,8 +121,18 @@ public class NewCommentPanel extends JPanel
         styleErrorButton.setPreferredSize( new Dimension( 190, 25) );
         styleErrorButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-                EditorAreaPanel.addHighlight( Color.gray);
-                CommentShowPanel.addComment( "Line ... : Style Error." );
+                Color color;
+        		Comment c;
+        		
+        		color = Color.gray;
+        		EditorAreaPanel.addHighlight( color);  
+        		c = new Comment( "Style Error", EditorAreaPanel.getSelectionFirst(), EditorAreaPanel.getSelectionLast(), EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()), color);
+                
+        		EditorAreaPanel.addHighlight( color );
+                //add comment with 5 parameters!
+        		CommentsModel.addComment(c);
+                CommentShowPanel.update();
+             //   CommentShowPanel.addComment( "Line: " + EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()) + " Style Error." );
         	}
 
         });
@@ -93,13 +144,22 @@ public class NewCommentPanel extends JPanel
         commentError.setPreferredSize( new Dimension( 170, 25) );
         commentError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-                EditorAreaPanel.addHighlight( Color.black);
-                CommentShowPanel.addComment( "Line ... : Commment Error." );
+                Color color;
+        		Comment c;
+        		
+        		color = Color.black;
+        		EditorAreaPanel.addHighlight( color); 
+        		
+        		c = new Comment( "Commment Error", EditorAreaPanel.getSelectionFirst(), EditorAreaPanel.getSelectionLast(), EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()), color);
+                
+        		EditorAreaPanel.addHighlight( color );
+                //add comment with 5 parameters!
+        		CommentsModel.addComment(c);
+                CommentShowPanel.update();
+           //     CommentShowPanel.addComment( "Line: " + EditorAreaPanel.getLineNumber(EditorAreaPanel.getSelectionFirst()) + " Commment Error." );
         	}
 
         });
         add ( commentError );
-        
     }
-
 }
