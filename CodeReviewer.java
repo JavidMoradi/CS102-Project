@@ -10,4 +10,3 @@ public class CodeReviewer
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 }
-

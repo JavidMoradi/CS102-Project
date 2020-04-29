@@ -137,7 +137,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         } else if ( actionEvent.getActionCommand().equals( openFile.getText() ) ) // The Action Listener For The "Open File" Button
         {
-            int lineNumber;
             
             try {
                 chooser = new JFileChooser();
@@ -164,8 +163,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                        lineNumber = 1;
                         while ( scan.hasNextLine() ) // Reads the File Content
                         {
-                            fileContent += lineNumber + "  " + scan.nextLine() + "\n";
-                            lineNumber++;
+                            fileContent += scan.nextLine() + "\n";
                         }
                     }
                     displayArea.setContent( fileContent ); // Displays the contents of the file
