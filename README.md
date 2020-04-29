@@ -19,12 +19,12 @@ _Desktop application_
 
 [Group Meetings Log]
 #### Group Members
-- [member1] (group/member1_log.md)    _Javid Moradi - 21903645_
-- [member2] (group/member2_log.md)	_Atasagun Samed Şanap - 21901004_
-- [member3] (group/member2_log.md)	_Ahmad Salman - 21901004_
-- [member4] (group/member2_log.md)	_Onuralp Avcı - 21902364_
-- [member5] (group/member2_log.md)	_Tuna Öğüt - 21803492_
-- [member6] (group/member2_log.md)	_Hissam Faramawy - 21902435_
+- [member1]   _Javid Moradi - 21903645_
+- [member2] 	_Atasagun Samed Şanap - 21901004_
+- [member3] 	_Ahmad Salman - 21901004_
+- [member4] 	_Onuralp Avcı - 21902364_
+- [member5] 	_Tuna Öğüt - 21803492_
+- [member6] 	_Hissam Faramawy - 21902435_
 
 ****
 **Instructor:** _David Davenport_   **TA:**  _Pouya Ghahramanian_
