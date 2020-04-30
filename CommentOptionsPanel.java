@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -7,8 +6,11 @@ import java.awt.event.ActionListener;
 
 public class CommentOptionsPanel extends JPanel
 {
-	 public CommentOptionsPanel ()
+	EditorAreaPanel display;
+
+	 public CommentOptionsPanel ( EditorAreaPanel display )
 	    {
+	    	this.display = display;
 	        setPreferredSize( new Dimension( 300, 130) );
 	        setBackground(Color.green);
 	        setBorder( BorderFactory.createLineBorder( Color.BLUE) );
@@ -76,7 +78,7 @@ public class CommentOptionsPanel extends JPanel
 					CommentsModel.commentsBag.remove(CommentShowPanel.listFiles.getSelectedValue());
 					CommentShowPanel.update();
 				}
-	        	
+
 	        });
 	        add ( deleteCommentButton, BorderLayout.EAST );
 	    }

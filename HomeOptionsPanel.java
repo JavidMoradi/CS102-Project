@@ -1,10 +1,6 @@
-import java.awt.GraphicsEnvironment;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,11 +11,11 @@ public class HomeOptionsPanel extends JPanel
     Font displayFont;
     String fontList[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
     String[] sizes = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22" };
-    
+
     public HomeOptionsPanel( EditorAreaPanel display)
-    {        
+    {
         this.display = display;
-        
+
         setPreferredSize( new Dimension( 200, 130 ) );
         setBorder( BorderFactory.createLineBorder( Color.BLUE) );
         setBackground( Color.darkGray );
@@ -68,9 +64,9 @@ public class HomeOptionsPanel extends JPanel
         indentAll.setBackground(Color.CYAN);
         indentAll.setPreferredSize( new Dimension( 195, 25) );
         add ( indentAll );
-        
+
     }
-        
+
     class FontListener implements ActionListener {
         String fontName;
         public void actionPerformed( ActionEvent e) {
@@ -104,7 +100,7 @@ public class HomeOptionsPanel extends JPanel
             display.setContent( content);
         }
     }
-    
+
     class SizeListener implements ActionListener {
 
         String size;

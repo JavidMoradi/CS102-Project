@@ -1,27 +1,26 @@
-
 import javax.swing.*;
 import java.awt.*;
 
 public class CodeReviewerFrame extends JFrame
 {
 	EditorAreaPanel display = new EditorAreaPanel();
-    FileOptionsPanel fileOptionsPanel = new FileOptionsPanel( display);
+    //FileOptionsPanel fileOptionsPanel = new FileOptionsPanel( display );
 
     public CodeReviewerFrame ( String title )
     {
         super(title);
         setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         setPreferredSize( new Dimension( 1500, 1000 ) );
-        
 
-        
+
+
         add ( new HomeOptionsPanel ( display));
-        
-        add ( new NewCommentPanel () );
-        add ( new CommentOptionsPanel(), BorderLayout.EAST);
-        add ( new FileExplorerPanel() );
-        add ( fileOptionsPanel );
-        add( new CommentShowPanel());
+
+        add ( new NewCommentPanel ( display ) );
+        add ( new CommentOptionsPanel( display ), BorderLayout.EAST);
+        add ( new FileExplorerPanel( display ) );
+        add ( new FileOptionsPanel( display ) );
+        add( new CommentShowPanel( display ) );
 
         setLayout ( new FlowLayout( ) );
 

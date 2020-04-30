@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileOptionsPanel extends JPanel implements ActionListener {
@@ -15,24 +16,24 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     JFileChooser chooser;
     Scanner scan;
     String extension;
-    String fileName;
+    static String fileName;
     File selectedFile;
-    EditorAreaPanel displayArea;
-    String fileContent;
+    static EditorAreaPanel displayArea;
+    //EditorAreaPanel displayArea;
+    static String fileContent;
     FileWriter fileWriter;
     String filePath;
-    boolean isCreated;
+    static ArrayList<String> fileContents;
 
-    public FileOptionsPanel( EditorAreaPanel editingAreaPanel )
-    {
+    public FileOptionsPanel( EditorAreaPanel display ) {
 
         newFile = new JButton(" New File \u2795 ");
         saveFile = new JButton(" Save File \uD83D\uDCBE ");
         openFile = new JButton(" Open File ");
         closeFile = new JButton(" Close File ");
 
-        setLayout( new FlowLayout() );
-        setPreferredSize( new Dimension( 900, 550 ) );
+        setLayout(new FlowLayout());
+        setPreferredSize(new Dimension(1000, 700));
         setBackground(Color.BLUE);
         setLocation(500, 500);
 
@@ -48,97 +49,60 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         setFocusable(true);
 
-        displayArea = editingAreaPanel;
+        displayArea = new EditorAreaPanel();
         add(displayArea);
-        
 
         fileContent = "";
         selectedFile = null;
         filePath = "";
-        fileName = "";
-
+        fileContents = new ArrayList<>();
 
     }
 
-    public void actionPerformed(ActionEvent actionEvent)
-    {
-        try
-        {
-            //sets the feel to the user's respective machine
-            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-            } catch (Exception e) {
+    public void actionPerformed(ActionEvent actionEvent) {
+        try {
+            // sets the feel to the user's respective machine
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, " Error ");
         }
 
-        if ( actionEvent.getActionCommand().equals( newFile.getText() ) ) // The Action Listener For The "New File" Button
+        if (actionEvent.getActionCommand().equals(newFile.getText())) // The Action Listener For The "New File" Button
         {
             chooser = new JFileChooser();
-            chooser.setFileSelectionMode( JFileChooser.FILES_AND_DIRECTORIES) ;
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
-            if ( chooser.showOpenDialog( null ) == JFileChooser.APPROVE_OPTION )
+            if ( chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION )
             {
                 try
                 {
-                   // selectedFile = null;
-                    fileName = JOptionPane.showInputDialog( " Please Enter The Name of The New File " );
-                    filePath = chooser.getSelectedFile().getPath();
-                    
-                    System.out.println( filePath );
-                    selectedFile = new File( filePath + "/" + fileName + ".java" );
-                    isCreated = selectedFile.createNewFile();
-                    
-                    if ( isCreated )
-                    {
-                       JOptionPane.showMessageDialog(this, " The File Has Been Created Successfully ",
-                                "NOTE", JOptionPane.INFORMATION_MESSAGE);
-                       displayArea.setContent( "" );
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ",
-                                "WARNING", JOptionPane.WARNING_MESSAGE);
-                    }
-                    
-                    fileName += ".java";
-                    FileExplorerPanel.model.addElement( fileName );
+                    fileName = JOptionPane.showInputDialog(" Please Enter The Name of The New File ");
+                    filePath = chooser.getSelectedFile().getAbsolutePath();
+                    System.out.println(filePath);
+                    selectedFile = new File(filePath);
+                    // selectedFile.getParentFile().mkdirs();
+                    selectedFile.createTempFile( fileName, ".java", selectedFile );
+                    JOptionPane.showMessageDialog(this, " The File Was Created Successfully ", "NOTE",
+                            JOptionPane.INFORMATION_MESSAGE);
 
-                } catch ( IOException e )
-                {
-                    JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ",
-                                "WARNING", JOptionPane.WARNING_MESSAGE);
+                    FileExplorerPanel.model.addElement(fileName);
+                    displayArea.setContent( "" );
+
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ", "WARNING",
+                            JOptionPane.WARNING_MESSAGE);
                 }
 
             }
 
-        } else if ( actionEvent.getActionCommand().equals( saveFile.getText() ) ) // The Action Listener For The "Save File" Button
+        } else if (actionEvent.getActionCommand().equals(saveFile.getText())) // The Action Listener For The "Save File"
+                                                                              // Button
         {
-            if ( selectedFile == null )
-            {
-                JOptionPane.showMessageDialog(this, " There is no File To Save, Please Open or Create A New File ",
-                                "WARNING", JOptionPane.WARNING_MESSAGE);
-                  
-            }
-            else
-            {
-                try {
-                    
-                    fileWriter = new FileWriter( selectedFile );
-                    fileWriter.write( displayArea.getContent() );
-                    JOptionPane.showMessageDialog(this, " The File Was Saved Successfully ",
-                                "NOTE", JOptionPane.INFORMATION_MESSAGE);
-                    fileWriter.close();
-                } catch ( IOException e )
-                {
-                    JOptionPane.showMessageDialog(this, " The File Was Not Saved, Please Try Again ",
-                                "WARNING", JOptionPane.WARNING_MESSAGE);
-                }
-            }
+            saveFile();
 
-
-        } else if ( actionEvent.getActionCommand().equals( openFile.getText() ) ) // The Action Listener For The "Open File" Button
+        } else if (actionEvent.getActionCommand().equals(openFile.getText())) // The Action Listener For The "Open File"
+                                                                              // Button
         {
-            int lineNumber;
-            
             try {
                 chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -161,11 +125,9 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     } else {
                         FileExplorerPanel.model.addElement( fileName );
 
-                       lineNumber = 1;
                         while ( scan.hasNextLine() ) // Reads the File Content
                         {
-                            fileContent += lineNumber + "  " + scan.nextLine() + "\n";
-                            lineNumber++;
+                            fileContent +=  scan.nextLine() + "\n";
                         }
                     }
                     displayArea.setContent( fileContent ); // Displays the contents of the file
@@ -175,24 +137,64 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog( null, " Error " );
             }
 
-        } else if  ( actionEvent.getActionCommand().equals( closeFile.getText() ) ) // The Action Listener For The "Close File" Button
+
+        } else if (actionEvent.getActionCommand().equals(closeFile.getText())) // The Action Listener For The "Close
+                                                                               // File" Button
         {
-            if ( FileExplorerPanel.model.size() > 0 )
-            {
+            if (FileExplorerPanel.model.size() > 0) {
+//                FileExplorerPanel.model
+//                        .remove(FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue()));
+//                        fileContents.remove(FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue()));
+//                        int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
+                        //for(int i = fileContents.size(); i > index; i-- )
+                        //{
+                        //    fileContents.set(i, fileContents.get(i + 1));
+                        //}
                 FileExplorerPanel.model.remove(FileExplorerPanel.model.size() - 1);
                 displayArea.setContent( "" );
                 selectedFile = null;
-            }
-            else
-            {
-                JOptionPane.showMessageDialog( this, " There Are No Files To Close ",
-                    "WARNING", JOptionPane.WARNING_MESSAGE );
+            } else {
+                JOptionPane.showMessageDialog(this, " There Are No Files To Close ", "WARNING",
+                        JOptionPane.WARNING_MESSAGE);
             }
 
         } else {
-            
-            JOptionPane.showMessageDialog( this, " The Button You Have Pressed is Invalid ",
-                    "WARNING", JOptionPane.WARNING_MESSAGE );
+
+            JOptionPane.showMessageDialog(this, " The Button You Have Pressed is Invalid ", "WARNING",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public static String getFileContent(int index)
+     {
+        return fileContents.get(index);
+    }
+
+    public void saveFile ()
+    {
+        if (selectedFile == null) {
+            JOptionPane.showMessageDialog(this, " There is no File To Save, Please Open or Create A New File ",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+
+        } else
+            {
+            try
+            {
+                fileWriter = new FileWriter(selectedFile);
+                fileWriter.write(displayArea.getContent());
+                JOptionPane.showMessageDialog(this, " The File Was Saved Successfully ",
+                        "NOTE", JOptionPane.INFORMATION_MESSAGE);
+                fileWriter.close();
+            }
+            catch (IOException e)
+            {
+                JOptionPane.showMessageDialog(this, " The File Was Not Saved, Please Try Again ",
+                        "WARNING", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 }
+
+
+
+
