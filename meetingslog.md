@@ -23,4 +23,14 @@ We changed some parts of the UI and also changed some functionalities, such as s
 We discussed the finished parts. We realized that some members misunderstood some parts. And because of the poor regulation we had some difficulties coordinating our codes and make communication among classes. So, we talked to each other and some of us explained their part for other members.
 
 ****
+
+### Meeting ~ (01.04.2020, an hour)
+****
+**Present:** Javid, Atasagun, Hissam, Ahmad, Onur, Tuna   _**Absent:**_ none.
+
+**Discussion:** 
+Decided to remove two buttons. Replaced one of them with "find" button, but couldn't find any nice replacement for other one yet. Discussed some of the bugs and managed to fix some of them. Further project developments discussed. Decided on name of our project: "Jhub." 
+
+**ToDo:** Javid has to implement the "find" button and its functions, and he should discuss good relacement of other button with Atasagun. Other groups countinue on their part.
+
 ****
