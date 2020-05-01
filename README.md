@@ -1,5 +1,4 @@
 # CS102 Spring 2019/20 &nbsp;~ g3E
-****
 **[Computer Engineering Department, Bilkent University]** (http://w3.cs.bilkent.edu.tr/en/).  
 The information and code in this repository are submitted in partial fulfillment of the CS102 Semester Design Project. Except where explicitly stated, the work is that of the group members listed below (who are expected to follow ethical academic & professional practice).
 ****
@@ -10,7 +9,6 @@ The information and code in this repository are submitted in partial fulfillment
 ### &nbsp; &nbsp; Code Reviewer
 
 ## Project Description
-****
 _Desktop application_   
 
 ### Project Status
@@ -22,7 +20,6 @@ _Desktop application_
 + **Reflections:** _not yet!_
 
 ## Group Members, Instructor, and Assistant
-****
 |             Members                | 
 |------------------------------------|  
 |   _Javid Moradi - 21903645_        |  
