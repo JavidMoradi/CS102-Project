@@ -1,8 +1,8 @@
-# CS102 ~ Design Project ~ Spring 2019/20
+# CS102 Spring 2019/20 &nbsp;~ g3E
 [Computer Engineering Department, Bilkent University] (http://w3.cs.bilkent.edu.tr/en/).  
 The information and code in this repository are submitted in partial fulfillment of the CS102 Semester Design Project. Except where explicitly stated, the work is that of the group members listed below (who are expected to follow ethical academic & professional practice).
 ****
-## g3E ~~ Code Reviewer ~~
+## ~~ Code Reviewer ~~
 ****
 ### ~ Nyarlathoteps ~
 
@@ -17,14 +17,13 @@ _Desktop application_
 + **Implementation:** in progress
 + **Reflections:** not yet!
 
-[Group Meetings Log]
 #### Group Members
-- [member1]   _Javid Moradi - 21903645_
-- [member2] 	_Atasagun Samed Şanap - 21902435_
-- [member3] 	_Ahmad Salman - 21901004_
-- [member4] 	_Onuralp Avcı - 21902364_
-- [member5] 	_Tuna Öğüt - 21803492_
-- [member6] 	_Hissam Faramawy - 21901253_
+-   _Javid Moradi - 21903645_
+-   _Atasagun Samed Şanap - 21902435_
+-  	_Ahmad Salman - 21901004_
+-  	_Onuralp Avcı - 21902364_
+-  	_Tuna Öğüt - 21803492_
+-  	_Hissam Faramawy - 21901253_
 
 ****
 **Instructor:** _David Davenport_   **TA:**  _Pouya Ghahramanian_
