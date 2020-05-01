@@ -19,11 +19,15 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     static String fileName;
     File selectedFile;
     static EditorAreaPanel displayArea;
+    static CommentShowPanel commentShowPanel;
+    static CommentsModel commentsModel;
     //EditorAreaPanel displayArea;
     static String fileContent;
     FileWriter fileWriter;
     String filePath;
+    String allComments;
     static ArrayList<String> fileContents;
+    ArrayList<String> fileText;
 
     public FileOptionsPanel( EditorAreaPanel display ) {
 
@@ -49,13 +53,19 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         setFocusable(true);
 
+
+        commentsModel = new CommentsModel();
+
         displayArea = new EditorAreaPanel();
+        commentShowPanel = new CommentShowPanel( displayArea );
         add(displayArea);
 
         fileContent = "";
         selectedFile = null;
+        allComments = "";
         filePath = "";
         fileContents = new ArrayList<>();
+        fileText = new ArrayList<String>();
 
     }
 
@@ -69,6 +79,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         if (actionEvent.getActionCommand().equals(newFile.getText())) // The Action Listener For The "New File" Button
         {
+            boolean isCreated;
             chooser = new JFileChooser();
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
@@ -79,12 +90,21 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     fileName = JOptionPane.showInputDialog(" Please Enter The Name of The New File ");
                     filePath = chooser.getSelectedFile().getAbsolutePath();
                     System.out.println(filePath);
-                    selectedFile = new File(filePath);
-                    // selectedFile.getParentFile().mkdirs();
-                    selectedFile.createTempFile( fileName, ".java", selectedFile );
-                    JOptionPane.showMessageDialog(this, " The File Was Created Successfully ", "NOTE",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    selectedFile = new File( filePath + "/" + fileName + ".java" );
+                    isCreated = selectedFile.createNewFile();
 
+                    if ( isCreated )
+                    {
+                       JOptionPane.showMessageDialog(this, " The File Was Created Successfully ", "NOTE",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ",
+                                "WARNING", JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    fileName += ".java";
                     FileExplorerPanel.model.addElement(fileName);
                     displayArea.setContent( "" );
 
@@ -92,9 +112,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ", "WARNING",
                             JOptionPane.WARNING_MESSAGE);
                 }
-
             }
-
         } else if (actionEvent.getActionCommand().equals(saveFile.getText())) // The Action Listener For The "Save File"
                                                                               // Button
         {
@@ -127,9 +145,23 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                         while ( scan.hasNextLine() ) // Reads the File Content
                         {
-                            fileContent +=  scan.nextLine() + "\n";
+                            fileText.add( scan.nextLine() + "\n" ); // adding each line into a separate index
+                        }
+
+                        for ( int i = 0; i < fileText.size(); i++ )
+                        {
+                            if ( fileText.get(i).startsWith( "Line: " ) )
+                            {
+                                allComments += fileText.get(i);
+                            }
+                            else
+                            {
+                                fileContent += fileText.get(i);
+                            }
                         }
                     }
+
+                    commentShowPanel.setComments( allComments );
                     displayArea.setContent( fileContent ); // Displays the contents of the file
 
                 }
@@ -172,6 +204,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
     public void saveFile ()
     {
+        //commentShowPanel.setComments( commentsModel.getAllComments() );
+
         if (selectedFile == null) {
             JOptionPane.showMessageDialog(this, " There is no File To Save, Please Open or Create A New File ",
                     "WARNING", JOptionPane.WARNING_MESSAGE);
@@ -182,6 +216,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
             {
                 fileWriter = new FileWriter(selectedFile);
                 fileWriter.write(displayArea.getContent());
+
                 JOptionPane.showMessageDialog(this, " The File Was Saved Successfully ",
                         "NOTE", JOptionPane.INFORMATION_MESSAGE);
                 fileWriter.close();
@@ -194,7 +229,3 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         }
     }
 }
-
-
-
-

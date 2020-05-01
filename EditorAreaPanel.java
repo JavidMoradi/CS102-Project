@@ -7,8 +7,9 @@ import java.util.ArrayList;
 public class EditorAreaPanel extends JPanel
 {
     Font editorFont;
-    CommentsModel commentControl;
+    static CommentsModel commentControl;
     static JTextArea editorPanel;
+    //static CommentsModel commentsModel;
 
     static JScrollPane scrollPane = new JScrollPane( editorPanel );
     static int a;
@@ -22,12 +23,13 @@ public class EditorAreaPanel extends JPanel
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
         editorPanel.setRows( 28 );
-        editorPanel.setColumns( 55 );
+        editorPanel.setColumns( 58 );
         editorPanel.setWrapStyleWord( true );
         editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 19) );
         editorPanel.setForeground( Color.WHITE );
         editorPanel.setBackground( Color.black );
 
+		commentControl = new CommentsModel();
 
     //TextLineNumber tln = new TextLineNumber(textPane);
         scrollPane = new JScrollPane( editorPanel);
@@ -46,7 +48,10 @@ public class EditorAreaPanel extends JPanel
 
     public static String getContent()
     {
-        return editorPanel.getText();
+        String allContent;
+        allContent = editorPanel.getText() + commentControl.getAllComments();
+    	return allContent;
+//		return editorPanel.getText();
     }
 
     public void setEditorFont ( Font font )

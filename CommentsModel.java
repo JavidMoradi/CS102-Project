@@ -35,6 +35,18 @@ public class CommentsModel {
 		EditorAreaPanel.addNewPointer(pos);
 	}
 
+	public String getAllComments ()
+	{
+		String allComments;
+		allComments = "";
+
+		for (int i = 0; i < commentsBag.size(); i++ )
+		{
+			allComments += "\n" + commentsBag.get(i);
+		}
+		return allComments;
+	}
+
 	//public static Comment[] getAllCommentsLines( int start, int end) {
 
 //	}

@@ -18,7 +18,7 @@ public class CommentShowPanel extends JPanel
 
 	   model = new DefaultListModel();
 	   listFiles = new JList(model);
-	   listFiles.setPreferredSize( new Dimension( 500, 500 ) );
+	   listFiles.setPreferredSize( new Dimension( 500, 700 ) );
 
        JScrollPane scrollPane = new JScrollPane();
        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -59,5 +59,17 @@ public class CommentShowPanel extends JPanel
 		   	for(int i = 0; i < CommentsModel.commentsBag.size(); i++)
 		   		model.addElement(CommentsModel.commentsBag.get(i));
 	   }
+   }
+
+   public void setComments ( String allComments )
+   {
+       int numberOfLines;
+       numberOfLines = 0;
+       String[] lines = allComments.split("\r\n|\r|\n");
+       //numberOfLines = lines.length;
+       for ( int i = 1; i < lines.length; i++ )
+       {
+           model.addElement( lines[i] );
+       }
    }
 }
