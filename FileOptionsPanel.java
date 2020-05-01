@@ -190,10 +190,12 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                    if( index == 0 && fileContents.size() > 0 )
                    {
                         displayArea.setContent(getFileContent( 0 ));
+                        FileExplorerPanel.lstFiles.setSelectedIndex(0);
                    }
                    else
                    {
                       displayArea.setContent(getFileContent( index-1 ));
+                      FileExplorerPanel.lstFiles.setSelectedIndex(index - 1);
                    }
             }
             } else {
