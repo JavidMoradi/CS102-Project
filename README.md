@@ -10,21 +10,23 @@ The information and code in this repository are submitted in partial fulfillment
 _Desktop application_   
 
 ## Project Status
-+ **Group/project Selection:** completed (10.02.2020)
-+ **Requirements:** completed (20.02.2020)
-+ **UI Design:** completed (25.04.2020)
-+ **Detailed Design:** in progress
-+ **Implementation:** in progress
-+ **Reflections:** not yet!
++ **Group/project Selection:** _completed_ (10.02.2020)
++ **Requirements:** _completed_ (20.02.2020)
++ **UI Design:** _completed_ (25.04.2020)
++ **Detailed Design:** _in progress_
++ **Implementation:** _in progress_
++ **Reflections:** _not yet!_
 
-#### Group Members
--   _Javid Moradi - 21903645_
--   _Atasagun Samed Şanap - 21902435_
--  	_Ahmad Salman - 21901004_
--  	_Onuralp Avcı - 21902364_
--  	_Tuna Öğüt - 21803492_
--  	_Hissam Faramawy - 21901253_
+## Group Members, Instructor, and Assistant
+|             Members                | 
+|------------------------------------|  
+|   _Javid Moradi - 21903645_        |  
+|   _Atasagun Samed Şanap - 21902435_|  
+|  	_Ahmad Salman - 21901004_        |  
+|  	_Onuralp Avcı - 21902364_        |  
+|  	_Tuna Öğüt - 21803492_           |  
+|  	_Hissam Faramawy - 21901253_     |  
 
-****
-**Instructor:** _David Davenport_   **TA:**  _Pouya Ghahramanian_
-****
+  _Instructor_   |       _Assistant_         
+-----------------|--------------------
+_David Davenport_|_Pouya Ghahramanian_
