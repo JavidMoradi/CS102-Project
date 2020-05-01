@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,12 +19,17 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     static String fileName;
     File selectedFile;
     static EditorAreaPanel displayArea;
+    static CommentShowPanel commentShowPanel;
+    static CommentsModel commentsModel;
+    //EditorAreaPanel displayArea;
     static String fileContent;
     FileWriter fileWriter;
     String filePath;
+    String allComments;
     static ArrayList<String> fileContents;
+    ArrayList<String> fileText;
 
-    public FileOptionsPanel() {
+    public FileOptionsPanel( EditorAreaPanel display ) {
 
         newFile = new JButton(" New File \u2795 ");
         saveFile = new JButton(" Save File \uD83D\uDCBE ");
@@ -34,7 +37,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         closeFile = new JButton(" Close File ");
 
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(655, 500));
+        setPreferredSize(new Dimension(1000, 700));
         setBackground(Color.BLUE);
         setLocation(500, 500);
 
@@ -50,13 +53,19 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         setFocusable(true);
 
+
+        commentsModel = new CommentsModel();
+
         displayArea = new EditorAreaPanel();
+        commentShowPanel = new CommentShowPanel( displayArea );
         add(displayArea);
 
         fileContent = "";
         selectedFile = null;
+        allComments = "";
         filePath = "";
         fileContents = new ArrayList<>();
+        fileText = new ArrayList<String>();
 
     }
 
@@ -70,27 +79,39 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         if (actionEvent.getActionCommand().equals(newFile.getText())) // The Action Listener For The "New File" Button
         {
-            fileName = JOptionPane.showInputDialog(" Please Enter The Name of The New File ");
-
+            boolean isCreated;
             chooser = new JFileChooser();
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                try {
+            if ( chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION )
+            {
+                try
+                {
+                    fileName = JOptionPane.showInputDialog(" Please Enter The Name of The New File ");
                     filePath = chooser.getSelectedFile().getAbsolutePath();
-                    System.out.println(filePath);
-                    selectedFile = new File(filePath);
-                    // selectedFile.getParentFile().mkdirs();
-                    selectedFile.createTempFile(" Test1 ", ".java", selectedFile);
+                    selectedFile = new File( filePath + "/" + fileName + ".java" );
+                    isCreated = selectedFile.createNewFile();
+
+                    if ( isCreated )
+                    {
+                       JOptionPane.showMessageDialog(this, " The File Was Created Successfully ", "NOTE",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ",
+                                "WARNING", JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    fileName += ".java";
                     FileExplorerPanel.model.addElement(fileName);
+                    displayArea.setContent( "" );
 
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ", "WARNING",
                             JOptionPane.WARNING_MESSAGE);
                 }
-
             }
-
         } else if (actionEvent.getActionCommand().equals(saveFile.getText())) // The Action Listener For The "Save File"
                                                                               // Button
         {
@@ -99,48 +120,65 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         } else if (actionEvent.getActionCommand().equals(openFile.getText())) // The Action Listener For The "Open File"
                                                                               // Button
         {
-
             try {
                 chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                if ( chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION )
+                {
                     fileContent = "";
                     selectedFile = chooser.getSelectedFile();
 
-                    scan = new Scanner(selectedFile);
+                    scan = new Scanner ( selectedFile );
                     fileName = selectedFile.getName();
-                    extension = fileName.substring(fileName.lastIndexOf(".")); // gets the extension
+                    extension = fileName.substring( fileName.lastIndexOf(".") ); // gets the extension
 
-                    if (!(extension.equals(".java")) && !(extension.equals(".txt"))) // checks the type of the selected
-                                                                                     // file
+                    if (!( extension.equals(".java") ) && !( extension.equals(".txt") ) ) //checks the type of the selected file
                     {
-                        JOptionPane.showMessageDialog(
-                                this, " The File You Have Chosen is Invalid," + "\n"
-                                        + " Please Select A Java File (.java) " + "or A Text Document (.txt) ",
+                        JOptionPane.showMessageDialog(this, " The File You Have Chosen is Invalid," + "\n"
+                                        + " Please Select A Java File (.java) "
+                                        + "or A Text Document (.txt) ",
                                 "WARNING", JOptionPane.WARNING_MESSAGE);
                     } else {
-                        FileExplorerPanel.model.addElement(fileName);
+                        FileExplorerPanel.model.addElement( fileName );
 
-                        while (scan.hasNextLine()) {
-                            fileContent += scan.nextLine() + "\n";
+                        fileText.clear();
+                        while ( scan.hasNextLine() ) // Reads the File Content
+                        {
+                            fileText.add( scan.nextLine() + "\n" ); // adding each line into a separate index
                         }
-                    //fileContents.add(fileContent);
+
+                        for ( int i = 0; i < fileText.size(); i++ )
+                        {
+                            if ( fileText.get(i).startsWith( "Line: " ) )
+                            {
+                                allComments += fileText.get(i);
+                            }
+                            else
+                            {
+                                fileContent += fileText.get(i);
+                            }
+                        }
                     }
-                    displayArea.setContent(fileContent); // Displays the contents of the file
-                    fileContents.add(fileContent);
+
+                    fileContents.add ( fileContent );
+                    commentShowPanel.setComments( allComments );
+
+                    displayArea.setContent( fileContent ); // Displays the contents of the file
+
 
                 }
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, " Error ");
+            } catch ( IOException ex ) {
+                JOptionPane.showMessageDialog( null, " Error " );
             }
+
 
         } else if (actionEvent.getActionCommand().equals(closeFile.getText())) // The Action Listener For The "Close
                                                                                // File" Button
         {
             if (FileExplorerPanel.model.size() > 0) {
                 int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
-                FileExplorerPanel.model.remove(index);//FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue()));                       
+                FileExplorerPanel.model.remove(index);//FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue()));
                 fileContents.remove(index);//FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue()));
 
                 if(fileContents.size() == 0)
@@ -172,31 +210,33 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
     public static String getFileContent(int index)
      {
-        return fileContents.get(index);
-    }
-    
+         return fileContents.get(index);
+     }
+
     public void saveFile ()
     {
+        //commentShowPanel.setComments( commentsModel.getAllComments() );
+
         if (selectedFile == null) {
             JOptionPane.showMessageDialog(this, " There is no File To Save, Please Open or Create A New File ",
                     "WARNING", JOptionPane.WARNING_MESSAGE);
-        
-        } else {
-            try {
-            
+
+        } else
+            {
+            try
+            {
                 fileWriter = new FileWriter(selectedFile);
                 fileWriter.write(displayArea.getContent());
+
                 JOptionPane.showMessageDialog(this, " The File Was Saved Successfully ",
                         "NOTE", JOptionPane.INFORMATION_MESSAGE);
                 fileWriter.close();
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 JOptionPane.showMessageDialog(this, " The File Was Not Saved, Please Try Again ",
                         "WARNING", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
 }
-
-
-
-

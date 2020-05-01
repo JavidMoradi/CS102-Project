@@ -3,20 +3,24 @@ import java.awt.*;
 
 public class CodeReviewerFrame extends JFrame
 {
-    FileOptionsPanel fileOptionsPanel = new FileOptionsPanel();
+	EditorAreaPanel display = new EditorAreaPanel();
+    //FileOptionsPanel fileOptionsPanel = new FileOptionsPanel( display );
+
     public CodeReviewerFrame ( String title )
     {
         super(title);
         setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         setPreferredSize( new Dimension( 1500, 1000 ) );
-        
-        add ( new HomeOptionsPanel () );
-        
-        add ( new NewCommentPanel () );
-        add ( new CommentOptionsPanel(), BorderLayout.EAST);
-        add ( new FileExplorerPanel() );
-        add ( fileOptionsPanel );
-        
+
+
+
+        add ( new HomeOptionsPanel ( display));
+
+        add ( new NewCommentPanel ( display ) );
+        add ( new CommentOptionsPanel( display ), BorderLayout.EAST);
+        add ( new FileExplorerPanel( display ) );
+        add ( new FileOptionsPanel( display ) );
+        add( new CommentShowPanel( display ) );
 
         setLayout ( new FlowLayout( ) );
 
@@ -30,6 +34,5 @@ public class CodeReviewerFrame extends JFrame
         constraints.gridx = 0;
         constraints.gridy = 0;
         //add ( fileOptionsPanel, constraints );
-        
     }
 }
