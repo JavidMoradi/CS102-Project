@@ -18,7 +18,7 @@ public class CodeReviewerFrame extends JFrame
 
         add ( new NewCommentPanel ( display ) );
         add ( new CommentOptionsPanel( display ), BorderLayout.EAST);
-        add ( new FileExplorerPanel( display ) );
+        add ( new FileExplorerPanel( ) );
         add ( new FileOptionsPanel( display ) );
         add( new CommentShowPanel( display ) );
 
