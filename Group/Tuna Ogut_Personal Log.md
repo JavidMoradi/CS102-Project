@@ -1,5 +1,7 @@
 Tuna Öğüt
 
+On this page I will keep a weekly record of what I have done for the CS102 group project. This page will be submitted together with the rest of the repository, in partial fulfillment of the CS102 course requirements.
+
 1st Week ( 3/02/2020 - 9/02/2020 ) First week there were not so much things to do. I introduced with my group members. 
 
 2nd Week ( 10/02/2020 - 16/02/2020 ) In this week, we started thinking about a project which can be usefull for us first it was hard then we started to come up with ideas.
