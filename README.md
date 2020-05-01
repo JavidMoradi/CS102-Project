@@ -6,17 +6,17 @@ The information and code in this repository are submitted in partial fulfillment
 ### &nbsp; &nbsp; Nyarlathoteps  
 ****
 ## Project Name
-### &nbsp; &nbsp; [ Insert Name Here ]
+### &nbsp; &nbsp; Jhub
 
 ## Project Description
-&nbsp;  [Insert Name Here] is a desktop application that enables lab assistants to review the codes of students, and give better feedback. Students can also check their works, and their mistakes by using this program. [Insert Name Here] is an Integrated Review Environment (IRE) and only implied for giving/taking feedback on one or many java classes. Our program also employs a user-Friendly interface that improves the user experience by providing complete access to all the features with just one click.
+&nbsp;  Jhub is a desktop application that enables lab assistants to review the codes of students, and give better feedback. Students can also check their works, and their mistakes by using this program. Jhub is an Integrated Review Environment (IRE) and only implied for giving/taking feedback on one or many java classes. Our program also employs a user-Friendly interface that improves the user experience by providing complete access to all the features with just one click.
 
 ### Features
 - Integrated Review Environment
 -	Highlight a part of code depending on the type of the error
 -	Insert, delete, or find a comment
 -	Change size or type of the font
--	[ Insert new features that you will replace with “comment” and “IndentAll” ]
+-	Search for a specific line/word
 -	Close, open, save file
 -	Create a new file
 -	Load more than one class
