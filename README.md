@@ -6,12 +6,23 @@ The information and code in this repository are submitted in partial fulfillment
 ### &nbsp; &nbsp; Nyarlathoteps  
 ****
 ## Project Name
-### &nbsp; &nbsp; Code Reviewer
+### &nbsp; &nbsp; [ Insert Name Here ]
 
 ## Project Description
-_Desktop application_   
+&nbsp;  [Insert Name Here] is a desktop application that enables lab assistants to review the codes of students, and give better feedback. Students can also check their works, and their mistakes by using this program. [Insert Name Here] is an Integrated Review Environment (IRE) and only implied for giving/taking feedback on one or many java classes.
 
-### Project Status
+### Features
+- Integrated Review Environment
+-	Highlight a part of code depending on the type of the error
+-	Insert, delete, or find a comment
+-	Change size or type of the font
+-	[ Insert new features that you will replace with “comment” and “IndentAll” ]
+-	Close, open, save file
+-	Create a new file
+-	Load more than one class
+
+
+## Project Status
 + **Group/project Selection:** _completed_ (10.02.2020)
 + **Requirements:** _completed_ (20.02.2020)
 + **UI Design:** _completed_ (25.04.2020)
@@ -25,9 +36,9 @@ _Desktop application_
 |   _Javid Moradi - 21903645_        |  
 |   _Atasagun Samed Şanap - 21902435_|  
 |  	_Ahmad Salman - 21901004_        |  
+|  	_Hissam Faramawy - 21901253_     |
 |  	_Onuralp Avcı - 21902364_        |  
-|  	_Tuna Öğüt - 21803492_           |  
-|  	_Hissam Faramawy - 21901253_     |  
+|  	_Tuna Öğüt - 21803492_           |    
 
   _Instructor_   |       _Assistant_         
 -----------------|--------------------
