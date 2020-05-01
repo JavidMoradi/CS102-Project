@@ -9,7 +9,7 @@ The information and code in this repository are submitted in partial fulfillment
 ### &nbsp; &nbsp; [ Insert Name Here ]
 
 ## Project Description
-&nbsp;  [Insert Name Here] is a desktop application that enables lab assistants to review the codes of students, and give better feedback. Students can also check their works, and their mistakes by using this program. [Insert Name Here] is an Integrated Review Environment (IRE) and only implied for giving/taking feedback on one or many java classes.
+&nbsp;  [Insert Name Here] is a desktop application that enables lab assistants to review the codes of students, and give better feedback. Students can also check their works, and their mistakes by using this program. [Insert Name Here] is an Integrated Review Environment (IRE) and only implied for giving/taking feedback on one or many java classes. Our program also employs a user-Friendly interface that improves the user experience by providing complete access to all the features with just one click.
 
 ### Features
 - Integrated Review Environment
