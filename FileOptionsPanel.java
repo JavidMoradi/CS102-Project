@@ -178,8 +178,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         {
             if (FileExplorerPanel.model.size() > 0) {
                 int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
-                FileExplorerPanel.model.remove(index);//FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue()));
-                fileContents.remove(index);//FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue()));
+                FileExplorerPanel.model.remove(index);
+                fileContents.remove(index);
 
                 if(fileContents.size() == 0)
                 {
@@ -217,8 +217,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
     public void saveFile ()
     {
-        //commentShowPanel.setComments( commentsModel.getAllComments() );
-
         if (selectedFile == null) {
             JOptionPane.showMessageDialog(this, " There is no File To Save, Please Open or Create A New File ",
                     "WARNING", JOptionPane.WARNING_MESSAGE);

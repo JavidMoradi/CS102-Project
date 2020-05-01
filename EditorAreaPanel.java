@@ -49,9 +49,9 @@ public class EditorAreaPanel extends JPanel
     public static String getContent()
     {
         String allContent;
+        allContent = "";
         allContent = editorPanel.getText() + commentControl.getAllComments();
     	return allContent;
-//		return editorPanel.getText();
     }
 
     public void setEditorFont ( Font font )

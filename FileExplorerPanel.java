@@ -40,30 +40,20 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
     }
 
     @Override
-    public void valueChanged(ListSelectionEvent e) 
+    public void valueChanged(ListSelectionEvent e)
     {
-
-        if (e.getValueIsAdjusting() ) 
+        if (e.getValueIsAdjusting() )
         {
             //FileOptionsPanel.displayArea.setContent( lstFiles.getSelectedValue().toString());
             int i = model.indexOf( lstFiles.getSelectedValue() );
             FileOptionsPanel.displayArea.setContent(FileOptionsPanel.getFileContent(i));
-            
-            if(FileOptionsPanel.getFileContent(i) == null)
+
+            if( FileOptionsPanel.getFileContent(i) == null )
             {
                 FileOptionsPanel.displayArea.setContent("");
             }
-             
        }
         add(lstFiles);
-    setVisible(true);
-
+        setVisible(true);
     }
 }
-
-
-
-
-  
-    
-
