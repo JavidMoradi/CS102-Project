@@ -19,12 +19,11 @@ _Jhub is a desktop application that enables lab assistants to review the codes o
 
 #### Group Members
   _Javid Moradi - 21903645_        
-   _Atasagun Samed Şanap - 21902435_
-  	_Ahmad Salman - 21901004_          
-  	_Hissam Faramawy - 21901253_     
-  	_Onuralp Avcı - 21902364_         
-  	_Tuna Öğüt - 21803492_  
-
+  _Atasagun Samed Şanap - 21902435_       
+  _Ahmad Salman - 21901004_          
+  _Hissam Faramawy - 21901253_     
+  _Onuralp Avcı - 21902364_         
+   _Tuna Öğüt - 21803492_  
 ****
 **Instructor:** _David Davenport_   **TA:**  _Pouya Ghahramanian_
 ****
