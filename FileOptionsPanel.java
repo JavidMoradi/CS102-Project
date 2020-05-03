@@ -231,6 +231,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(this, " The File Was Saved Successfully ",
                         "NOTE", JOptionPane.INFORMATION_MESSAGE);
                 fileWriter.close();
+                int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
+                fileContents.set(index,displayArea.getContent());
             }
             catch (IOException e)
             {
