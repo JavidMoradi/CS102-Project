@@ -93,33 +93,6 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
-    /*
-    class CommentListener implements ActionListener {
-        int begin;
-        int end;
-        String content;
-        boolean isCommented;
-
-        public void actionPerformed( ActionEvent e) {
-            begin = display.getSelectionFirst();
-            end = display.getSelectionLast();
-            content = display.getContent();
-            if( begin != end) {
-                for (int newLine = begin; newLine <= end; newLine++) {
-                    if (!content.substring(newLine, newLine + 2).equals("//")) {
-                        if (content.substring(newLine - 2, newLine - 1).equals("\n")) {
-                            content = content.substring(0, newLine ) + "//" + content.substring(newLine);
-                        }
-                    } else {
-                        content = content.substring(0, newLine) + content.substring(newLine + 2);
-                    }
-                }
-            }
-            display.setContent( content);
-        }
-    }
-    */
-
     class SizeListener implements ActionListener {
 
         String size;
