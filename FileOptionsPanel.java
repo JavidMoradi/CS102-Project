@@ -40,7 +40,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         closeFile = new JButton(" Close File ");
 
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(1000, 700));
+        setPreferredSize(new Dimension(665, 550));
         setBackground(Color.BLUE);
         setLocation(500, 500);
 

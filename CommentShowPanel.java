@@ -50,6 +50,7 @@ public class CommentShowPanel extends JPanel
       //commentJTextArea.setFont(new Font("Tahoma", Font.PLAIN, 19));
       //JScrollPane scrollPane = new JScrollPane(commentJTextArea);
       //add(scrollPane);
+       setVisible(true);
    }
 
    public static void update() {

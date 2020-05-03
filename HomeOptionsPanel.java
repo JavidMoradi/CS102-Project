@@ -1,5 +1,9 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Document;
+import javax.swing.text.Highlighter;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +14,10 @@ public class HomeOptionsPanel extends JPanel
     JComboBox fontComboBox;
     Font displayFont;
     String fontList[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-    String[] sizes = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22" };
+    String[] sizes = { "16", "18", "20", "22", "24", "26", "28", "30", "32", "34" };
+    JTextField tf;
+    Highlighter.HighlightPainter myHighlightPainter = new MyHighlighPainter(Color.cyan);
+
 
     public HomeOptionsPanel( EditorAreaPanel display)
     {
@@ -33,7 +40,7 @@ public class HomeOptionsPanel extends JPanel
         JComboBox fontComboBox = new JComboBox();
         fontComboBox.setPreferredSize( new Dimension(94, 20) );
         fontComboBox.setBackground(Color.CYAN);
-        fontComboBox.setToolTipText("");
+        fontComboBox.setToolTipText("Choose type of the font");
         for (int i = 0; i < fontList.length; i++) {
             fontComboBox.addItem(fontList[i]);
             if( display.getEditorFont().getFontName().equals(fontList[i]))
@@ -45,25 +52,35 @@ public class HomeOptionsPanel extends JPanel
         JComboBox sizeComboBox = new JComboBox();
         sizeComboBox.setPreferredSize( new Dimension(94, 20) );
         sizeComboBox.setBackground(Color.CYAN);
-        sizeComboBox.setToolTipText("a");
+        sizeComboBox.setToolTipText("Choose size of the font");
         for (int i = 0; i < sizes.length; i++) {
             sizeComboBox.addItem(sizes[i]);
             if( display.getEditorFont().getSize() == Integer.parseInt(sizes[i]))
                 sizeComboBox.setSelectedItem( sizes[i]);
         }
         add( sizeComboBox );
+        sizeComboBox.setSelectedIndex(1);
         sizeComboBox.addActionListener( new SizeListener());
 
-        JButton commentingAndUncommenting = new JButton("Comment/Uncomment");
-        commentingAndUncommenting.setBackground(Color.CYAN);
-        commentingAndUncommenting.setBounds(0, 112, 101, 40);
-        add ( commentingAndUncommenting );
-        commentingAndUncommenting.addActionListener( new CommentListener());
+        tf = new JTextField();
+        tf.setBackground(Color.WHITE);
+        tf.setColumns(19);
+        tf.setToolTipText("Enter word(s) you want to search");
+        add ( tf );
 
-        JButton indentAll = new JButton("Indent All");
-        indentAll.setBackground(Color.CYAN);
-        indentAll.setPreferredSize( new Dimension( 195, 25) );
-        add ( indentAll );
+        JButton clear = new JButton("Clear");
+        clear.setBackground(Color.CYAN);
+        clear.setPreferredSize( new Dimension( 90, 40) );
+        clear.setToolTipText("Clear the text");
+        clear.addActionListener(new clearListener());
+        add ( clear );
+
+        JButton find = new JButton("Find");
+        find.setBackground(Color.CYAN);
+        find.setPreferredSize( new Dimension( 90, 40) );
+        find.setToolTipText("Find the provided word(s)");
+        find.addActionListener(new findListener());
+        add ( find );
 
     }
 
@@ -76,6 +93,7 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
+    /*
     class CommentListener implements ActionListener {
         int begin;
         int end;
@@ -100,6 +118,7 @@ public class HomeOptionsPanel extends JPanel
             display.setContent( content);
         }
     }
+    */
 
     class SizeListener implements ActionListener {
 
@@ -111,4 +130,60 @@ public class HomeOptionsPanel extends JPanel
             display.setEditorFont(displayFont.deriveFont((float)Integer.parseInt(size)));
         }
     }
+
+    class MyHighlighPainter extends DefaultHighlighter.DefaultHighlightPainter {
+        public MyHighlighPainter(Color color) {
+            super(color);
+        }
+    }
+
+    public void removeHighlights(JTextComponent textComp) {
+        Highlighter hlt = textComp.getHighlighter();
+        Highlighter.Highlight[] hlts = hlt.getHighlights();
+
+        for (int i = 0; i < hlts.length; i++) {
+            if (hlts[i].getPainter() instanceof MyHighlighPainter) {
+                hlt.removeHighlight(hlts[i]);
+            }
+        }
+    }
+
+    public void highlight (JTextComponent textComp, String pattern) {
+
+        removeHighlights(textComp);
+
+        try {
+            Highlighter hlt = textComp.getHighlighter();
+            Document doc = textComp.getDocument();
+            String text = doc.getText(0, doc.getLength());
+            int pos = 0;
+
+            while ((pos = text.toUpperCase().indexOf(pattern.toUpperCase(), pos)) >= 0) {
+                if( pattern.equals("") ) {
+                    break;
+                }
+                hlt.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
+                pos += pattern.length();
+            }
+
+        } catch ( Exception e ) {
+
+        }
+    }
+
+    class findListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            highlight(display.getTextArea(), tf.getText());
+
+        }
+    }
+
+    class clearListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Highlighter hlt = display.getTextArea().getHighlighter();
+            hlt.removeAllHighlights();
+        }
+    }
+
 }
