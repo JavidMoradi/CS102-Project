@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.StringUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,13 +23,14 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     static EditorAreaPanel displayArea;
     static CommentShowPanel commentShowPanel;
     static CommentsModel commentsModel;
-    //EditorAreaPanel displayArea;
     static String fileContent;
     FileWriter fileWriter;
     String filePath;
     String allComments;
     static ArrayList<String> fileContents;
     ArrayList<String> fileText;
+    ArrayList<Integer> allColorsAndIndexes;
+    String currentFileLineContent;
 
     public FileOptionsPanel( EditorAreaPanel display ) {
 
@@ -64,8 +67,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         selectedFile = null;
         allComments = "";
         filePath = "";
+        currentFileLineContent = "";
         fileContents = new ArrayList<>();
         fileText = new ArrayList<String>();
+        allColorsAndIndexes = new ArrayList<Integer>();
+
 
     }
 
@@ -133,7 +139,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     fileName = selectedFile.getName();
                     extension = fileName.substring( fileName.lastIndexOf(".") ); // gets the extension
 
-                    if (!( extension.equals(".java") ) && !( extension.equals(".txt") ) ) //checks the type of the selected file
+                    if ( !( extension.equals(".java") ) && !( extension.equals(".txt") ) ) //checks the type of the selected file
                     {
                         JOptionPane.showMessageDialog(this, " The File You Have Chosen is Invalid," + "\n"
                                         + " Please Select A Java File (.java) "
@@ -150,21 +156,45 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                         for ( int i = 0; i < fileText.size(); i++ )
                         {
-                            if ( fileText.get(i).startsWith( "Line: " ) )
+                            currentFileLineContent = fileText.get(i);
+
+                            if ( currentFileLineContent.startsWith( "Line: " ) ) //gets th comments stored in the file
                             {
                                 allComments += fileText.get(i);
                             }
+                            else if ( currentFileLineContent.startsWith( "java.awt.Color[" ) ) //gets the highlighting stored
+                            {
+                                // This is extracting the necessary information from the embedding of the highlighting
+                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "r=", "," ) ) ); // For the "r"
+                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "g=", "," ) ) ); // For the "g"
+                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "b=", "]" ) ) ); // For the "b"
+                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "], ", "," ) ) ); // For the first index
+                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, ",*", "*," ) ) ); // For the Last Index
+                            }
                             else
                             {
-                                fileContent += fileText.get(i);
+                                fileContent += fileText.get(i); // gets the actual code from the file
                             }
                         }
                     }
 
                     fileContents.add ( fileContent );
-                    commentShowPanel.setComments( allComments );
-
+                    commentShowPanel.setComments( allComments ); //Sets the comments saved in the comment panel
                     displayArea.setContent( fileContent ); // Displays the contents of the file
+
+                    for ( int i = 0; i < allColorsAndIndexes.size(); i += 5 )
+                    {
+                        Color tmpColor;
+
+                        int r = allColorsAndIndexes.get(i);
+                        int g = allColorsAndIndexes.get(i + 1);
+                        int b = allColorsAndIndexes.get(i + 2);
+                        tmpColor = new Color(r, g, b );
+                        int firstIndex = allColorsAndIndexes.get( i + 3 );
+                        int lastIndex = allColorsAndIndexes.get ( i + 4 );
+
+                        displayArea.addHighlight( tmpColor, firstIndex, lastIndex );
+                    }
 
 
                 }
@@ -211,9 +241,9 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     }
 
     public static String getFileContent(int index)
-     {
+    {
          return fileContents.get(index);
-     }
+    }
 
     public void saveFile ()
     {

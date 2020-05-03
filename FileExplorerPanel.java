@@ -28,9 +28,6 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane);
 
-        //model.addElement("File Name #0.java");
-        //model.addElement("File Name #1.java");
-
         lstFiles.setPreferredSize(new Dimension(180, 150));
         lstFiles.setFont(new Font("Tahoma", Font.PLAIN, 20));
         scrollPane.setViewportView(lstFiles);

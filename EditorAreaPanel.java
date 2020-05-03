@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class EditorAreaPanel extends JPanel
 {
-    Font editorFont;
+	Font editorFont;
     static CommentsModel commentControl;
     static JTextArea editorPanel;
     //static CommentsModel commentsModel;
@@ -15,8 +15,15 @@ public class EditorAreaPanel extends JPanel
     static int a;
     static int b;
 
+    int firstIndex;
+    int lastIndex;
+
     static DefaultHighlighter highlighter;
     static DefaultHighlighter.DefaultHighlightPainter painter;
+
+	static ArrayList firstIndexes;
+	static ArrayList lastIndexes;
+	static ArrayList<Color> colorsArrayList;
 
     public EditorAreaPanel ()
     {
@@ -39,6 +46,10 @@ public class EditorAreaPanel extends JPanel
 		highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
 		painter = new DefaultHighlighter.DefaultHighlightPainter( Color.RED);
 		highlighter.setDrawsLayeredHighlights(false); // this is the key line
+
+		firstIndexes = new ArrayList();
+		lastIndexes = new ArrayList();
+		colorsArrayList = new ArrayList<Color>();
     }
 
     public void setContent ( String str )
@@ -51,8 +62,24 @@ public class EditorAreaPanel extends JPanel
         String allContent;
         allContent = "";
         allContent = editorPanel.getText() + commentControl.getAllComments();
+        for ( int i = 0; i < colorsArrayList.size(); i++ )
+		{
+			allContent += "\n" + colorsArrayList.get(i) + ", " +  firstIndexes.get(i) + ",*" + lastIndexes.get(i) + "*,";
+		}
     	return allContent;
     }
+
+    public String getAllColorsAndIndexes ()
+	{
+		String allColorsAndIndexes;
+		allColorsAndIndexes = "";
+
+		for ( int i = 0; i < colorsArrayList.size(); i++ )
+		{
+			allColorsAndIndexes += "\n" + colorsArrayList.get(i) + ", " +  firstIndexes.get(i) + ", " + lastIndexes.get(i);
+		}
+		return allColorsAndIndexes;
+	}
 
     public void setEditorFont ( Font font )
     {
@@ -60,28 +87,71 @@ public class EditorAreaPanel extends JPanel
         editorPanel.setFont( editorFont);
     }
 
-    public Font getEditorFont (){
-	return editorPanel.getFont();
+    public Font getEditorFont ()
+	{
+		return editorPanel.getFont();
+	}
+
+	public static int getSelectionFirst()
+	{
+		return editorPanel.getSelectionStart();
+	}
+
+	public static int getSelectionLast()
+	{
+		return editorPanel.getSelectionEnd();
+	}
+
+	public ArrayList getFirstIndexes ()
+	{
+		return firstIndexes;
+	}
+
+	public ArrayList getLastIndexes ()
+	{
+		return lastIndexes;
+	}
+
+	public ArrayList<Color> getColorsArrayList ()
+	{
+		return colorsArrayList;
+	}
+
+    public static void addHighlight(Color color)
+	{
+		painter = new DefaultHighlighter.DefaultHighlightPainter(color);
+		a = editorPanel.getSelectionStart();
+		b = editorPanel.getSelectionEnd();
+
+		try {
+			highlighter.addHighlight(a, b, painter);
+
+			firstIndexes.add(a);
+			lastIndexes.add(b);
+			colorsArrayList.add(color);
+
+		}
+		catch (BadLocationException exeption)
+		{
+			// TODO Auto-generated catch block
+			exeption.printStackTrace();
+		}
     }
 
-    public static int getSelectionFirst (){
-	return editorPanel.getSelectionStart();
-    }
-
-    public static int getSelectionLast (){
-	return editorPanel.getSelectionEnd();
-    }
-
-    public static void addHighlight(Color color) {
-	painter = new DefaultHighlighter.DefaultHighlightPainter(color);
-	a = editorPanel.getSelectionStart();
-	b = editorPanel.getSelectionEnd();
-	try {
- 	    highlighter.addHighlight(a, b, painter);
-  	} catch (BadLocationException exeption) {
-	// TODO Auto-generated catch block
-  		exeption.printStackTrace();
-  		}
+    public void addHighlight( Color color, int firstIndex, int lastIndex )
+	{
+		painter = new DefaultHighlighter.DefaultHighlightPainter(color);
+		this.firstIndex = firstIndex;
+		this.lastIndex = lastIndex;
+		try
+		{
+			highlighter.addHighlight(firstIndex, lastIndex, painter);
+		}
+		catch (BadLocationException exeption)
+		{
+			// TODO Auto-generated catch block
+			exeption.printStackTrace();
+		}
     }
 
     public static JScrollPane getJScrollPane() {
