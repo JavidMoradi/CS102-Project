@@ -10,9 +10,9 @@ public class CodeReviewer {
     // Main method
     public static void main(String[] args) throws IOException {
 
-        playMusic("openingsong.wav");
         CodeReviewerFrame frame = new CodeReviewerFrame(" Jhub ");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        playMusic("openingsong.wav");
         
     }
 
