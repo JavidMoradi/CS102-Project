@@ -2,8 +2,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -63,6 +62,13 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         commentShowPanel = new CommentShowPanel( displayArea );
         add(displayArea);
 
+        EditorAreaPanel.editorPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                saveFileWithoutMessage();
+            }
+        });
+
         fileContent = "";
         selectedFile = null;
         allComments = "";
@@ -98,20 +104,24 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     selectedFile = new File( filePath + "/" + fileName + ".java" );
                     isCreated = selectedFile.createNewFile();
 
-                    if ( isCreated )
+                    if ( !isCreated )
                     {
-                       JOptionPane.showMessageDialog(this, " The File Was Created Successfully ", "NOTE",
-                            JOptionPane.INFORMATION_MESSAGE);
+
+                       JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ",
+                                "WARNING", JOptionPane.WARNING_MESSAGE);
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ",
-                                "WARNING", JOptionPane.WARNING_MESSAGE);
-                    }
-
-                    fileName += ".java";
+                        JOptionPane.showMessageDialog(this, " The File Was Created Successfully ", "NOTE",
+                            JOptionPane.INFORMATION_MESSAGE);
+                        fileName += ".java";
                     FileExplorerPanel.model.addElement(fileName);
-                    displayArea.setContent( "" );
+
+                    fileContent = "";
+                    displayArea.setContent( fileContent );
+                    fileContents.add(fileContent);
+                    FileExplorerPanel.lstFiles.setSelectedIndex( fileContents.size() - 1 );
+                    }
 
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(this, " The File Could Not Be Created, Please Try Again ", "WARNING",
@@ -147,6 +157,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                 "WARNING", JOptionPane.WARNING_MESSAGE);
                     } else {
                         FileExplorerPanel.model.addElement( fileName );
+                        FileExplorerPanel.lstFiles.setSelectedIndex( fileContents.size() );
 
                         fileText.clear();
                         while ( scan.hasNextLine() ) // Reads the File Content
@@ -271,4 +282,17 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
             }
         }
     }
+
+    public void saveFileWithoutMessage()
+    {
+
+            try
+            {
+                fileWriter = new FileWriter(selectedFile);
+                fileWriter.write(displayArea.getContent());
+                fileWriter.close();
+                int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
+                fileContents.set(index, displayArea.getContent());
+            } catch (IOException e) {}
+        }
 }
