@@ -9,6 +9,9 @@ public class CommentShowPanel extends JPanel
    static JList listFiles;
    CommentsModel commentsModel;
    EditorAreaPanel display;
+   
+   public Comment lastSelectedComment;
+   static boolean touchedForTheFirstTime;
 
    public CommentShowPanel( EditorAreaPanel display )
    {
@@ -32,8 +35,23 @@ public class CommentShowPanel extends JPanel
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			// TODO Auto-generated method stub
-			if( (Comment)listFiles.getSelectedValue() != null)
-				CommentsModel.pointTheComment( (Comment)listFiles.getSelectedValue());
+            		if( (Comment)listFiles.getSelectedValue() != null)
+            		{
+                		if(touchedForTheFirstTime)
+                		{
+                    		display.addHighlight( new Color( 255,255,255,120), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
+                    		lastSelectedComment = (Comment)CommentShowPanel.listFiles.getSelectedValue();
+                    		touchedForTheFirstTime = false;
+                		}
+                		else
+                		{
+                    		display.addHighlight( lastSelectedComment.getColor(), lastSelectedComment.getStartIndex(), lastSelectedComment.getEndIndex());
+                    		display.addHighlight( new Color( 255,255,255,120), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
+                    		lastSelectedComment = (Comment)CommentShowPanel.listFiles.getSelectedValue();
+                    
+                		}
+
+           		 }
 		}
        });
 
