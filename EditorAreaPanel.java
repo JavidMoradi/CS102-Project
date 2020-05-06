@@ -255,5 +255,10 @@ public class EditorAreaPanel extends JPanel
 	{
     	return editorPanel;
 	}
+	
+	public static void removeHighlights() {
+		Highlighter hlt = editorPanel.getHighlighter();
+		hlt.removeAllHighlights();
+  }
 
 }
