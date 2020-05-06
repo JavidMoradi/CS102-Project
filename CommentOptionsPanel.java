@@ -75,8 +75,17 @@ public class CommentOptionsPanel extends JPanel
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
+
+					//another way to remove highlight which is adding a black highlight
+					//display.addHighlight( new Color( 0,0,0,255), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
+					
 					CommentsModel.commentsBag.remove(CommentShowPanel.listFiles.getSelectedValue());
+					
+					display.removeHighlights();
+					display.reHighlight(CommentsModel.commentsBag);
+
 					CommentShowPanel.update();
+					CommentShowPanel.touchedForTheFirstTime = true;
 				}
 
 	        });
