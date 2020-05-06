@@ -49,6 +49,7 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
             {
                 FileOptionsPanel.displayArea.setContent("");
             }
+            
        }
         add(lstFiles);
         setVisible(true);
