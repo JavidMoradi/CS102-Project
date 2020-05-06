@@ -12,7 +12,8 @@ public class CodeReviewerFrame extends JFrame
         setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         setPreferredSize( new Dimension( 1500, 1000 ) );
 
-
+	ImageIcon img = new ImageIcon("icon.png");
+        setIconImage(img.getImage());
 
         add ( new HomeOptionsPanel ( display));
 

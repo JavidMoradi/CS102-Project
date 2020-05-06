@@ -12,19 +12,19 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 
 5th Week ( 2/03/2020 - 8/03/2020 )The new idea for the project did not took much time to find we discussed on the new idea and decided to go with it. Unfortunately this idea was not approved by our teacher and he assigned a new project for us that was the time the project topic has been finally decided. 
 
-6th Week ( 9/03/2020 - 15/03/2020 )
+6th Week ( 9/03/2020 - 15/03/2020 )This week we speak about what should we need to do the project and how to implement them. Did not started the project yet.
 
-7th Week ( 16/03/2020 - 22/03/2020 ) 
+7th Week ( 16/03/2020 - 22/03/2020 ) School break.
 
-8th Week ( 23/03/2020 - 29/03/2020 )
+8th Week ( 23/03/2020 - 29/03/2020 )Inıtially we have started to planning the project. Shared our ideas about design and we tried to have a distribution of work. First I was at another part of the project. However someone else wanted that part so I get the file explorer panel and file options panel.
 
-9th Week ( 30/03/2020 - 5/04/2020 )
+9th Week ( 30/03/2020 - 5/04/2020 ) I did not actually start coding that week. just tried to think about it.
 
-10th Week ( 6/04/2020 - 12/04/2020 )
+10th Week ( 6/04/2020 - 12/04/2020 )I started working with Ahmet he mostly worked on the file options panel and I worked on the explorer panel and tried to integrate my panel to Ahmet's panel and text area panel.
 
-11th Week ( 13/04/2020 - 19/04/2020 )
+11th Week ( 13/04/2020 - 19/04/2020 )Even if it seemed to hard and there were so much problems one by one we eliminated them and had a program that genereally works even though there were still lots of bugs and errors.
 
-12th Week ( 20/04/2020 - 26/04/2020 )
+12th Week ( 20/04/2020 - 26/04/2020 )I kept triying to solve those errors and bugs. 
 
 13th Week ( 27/04/2020 - 3/05/2020 )
 

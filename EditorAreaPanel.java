@@ -1,7 +1,9 @@
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.security.Key;
 import java.util.ArrayList;
 
 public class EditorAreaPanel extends JPanel
@@ -30,9 +32,9 @@ public class EditorAreaPanel extends JPanel
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
         editorPanel.setRows( 28 );
-        editorPanel.setColumns( 58 );
+        editorPanel.setColumns( 35 );
         editorPanel.setWrapStyleWord( true );
-        editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 19) );
+        editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 18) );
         editorPanel.setForeground( Color.WHITE );
         editorPanel.setBackground( Color.black );
 
@@ -248,4 +250,15 @@ public class EditorAreaPanel extends JPanel
 	       	}
     	}
     }
+
+	public JTextArea getTextArea()
+	{
+    	return editorPanel;
+	}
+	
+	public static void removeHighlights() {
+		Highlighter hlt = editorPanel.getHighlighter();
+		hlt.removeAllHighlights();
+  }
+
 }
