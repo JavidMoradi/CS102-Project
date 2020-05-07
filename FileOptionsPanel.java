@@ -3,11 +3,8 @@ import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class FileOptionsPanel extends JPanel implements ActionListener {
     JButton newFile;
@@ -30,6 +27,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     ArrayList<String> fileText;
     ArrayList<Integer> allColorsAndIndexes;
     String currentFileLineContent;
+    ArrayList commentsArrayList;
+    ArrayList<Integer> indexesArrayList;
+    FileWriter writer;
+    Set set;
+    ArrayList<Color> colorsArrayList;
 
     public FileOptionsPanel( EditorAreaPanel display ) {
 
@@ -64,8 +66,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         EditorAreaPanel.editorPanel.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
-                saveFileWithoutMessage();
+            public void keyPressed(KeyEvent e)
+            {
+                for ( int i = 0; i < 1; i++ ) {
+                    saveFileWithoutMessage();
+                }
             }
         });
 
@@ -77,6 +82,9 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         fileContents = new ArrayList<>();
         fileText = new ArrayList<String>();
         allColorsAndIndexes = new ArrayList<Integer>();
+        commentsArrayList = new ArrayList ();
+        indexesArrayList = new ArrayList<Integer>();
+        colorsArrayList = new ArrayList<Color>();
 
 
     }
@@ -103,6 +111,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
                     selectedFile = new File( filePath + "/" + fileName + ".java" );
                     isCreated = selectedFile.createNewFile();
+//                    writer = new FileWriter( selectedFile );
+//                    set = new HashSet();
 
                     if ( !isCreated )
                     {
@@ -113,14 +123,14 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     else
                     {
                         JOptionPane.showMessageDialog(this, " The File Was Created Successfully ", "NOTE",
-                            JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.INFORMATION_MESSAGE);
                         fileName += ".java";
-                    FileExplorerPanel.model.addElement(fileName);
+                        FileExplorerPanel.model.addElement(fileName);
 
-                    fileContent = "";
-                    displayArea.setContent( fileContent );
-                    fileContents.add(fileContent);
-                    FileExplorerPanel.lstFiles.setSelectedIndex( fileContents.size() - 1 );
+                        fileContent = "";
+                        displayArea.setContent(fileContent);
+                        fileContents.add(fileContent);
+                        FileExplorerPanel.lstFiles.setSelectedIndex(fileContents.size() - 1);
                     }
 
                 } catch (IOException e) {
@@ -148,6 +158,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     scan = new Scanner ( selectedFile );
                     fileName = selectedFile.getName();
                     extension = fileName.substring( fileName.lastIndexOf(".") ); // gets the extension
+//                    writer = new FileWriter( selectedFile );
+//                    set = new HashSet();
 
                     if ( !( extension.equals(".java") ) && !( extension.equals(".txt") ) ) //checks the type of the selected file
                     {
@@ -169,28 +181,49 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         {
                             currentFileLineContent = fileText.get(i);
 
-                            if ( currentFileLineContent.startsWith( "Line: " ) ) //gets th comments stored in the file
+                            int lineNumber = 0;
+                            String commentType = "";
+                            int firstSelection = 0;
+                            int lastSelection = 0;
+                            int previousElement;
+
+                            if ( currentFileLineContent.startsWith( "Line: " ) ) //gets the comments stored in the file
                             {
+                                commentType = StringUtils.substringAfterLast( currentFileLineContent, ". " );
+                                lineNumber = Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "Line: ", "." ) );
+
+                                commentsArrayList.add( commentType );
+                                commentsArrayList.add( lineNumber );
+
                                 allComments += fileText.get(i);
                             }
                             else if ( currentFileLineContent.startsWith( "java.awt.Color[" ) ) //gets the highlighting stored
                             {
+                                firstSelection = Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "], ", "," ) );
+                                lastSelection = Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, ",*", "*," ) );
+
+                                indexesArrayList.add(firstSelection);
+                                indexesArrayList.add(lastSelection);
+
                                 // This is extracting the necessary information from the embedding of the highlighting
-                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "r=", "," ) ) ); // For the "r"
-                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "g=", "," ) ) ); // For the "g"
-                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "b=", "]" ) ) ); // For the "b"
-                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "], ", "," ) ) ); // For the first index
-                                allColorsAndIndexes.add( Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, ",*", "*," ) ) ); // For the Last Index
+                                for ( int j = 0; j < 1; j++ ) {
+                                    allColorsAndIndexes.add(Integer.parseInt(StringUtils.substringBetween(currentFileLineContent, "r=", ","))); // For the "r"
+                                    allColorsAndIndexes.add(Integer.parseInt(StringUtils.substringBetween(currentFileLineContent, "g=", ","))); // For the "g"
+                                    allColorsAndIndexes.add(Integer.parseInt(StringUtils.substringBetween(currentFileLineContent, "b=", "]"))); // For the "b"
+                                    allColorsAndIndexes.add(Integer.parseInt(StringUtils.substringBetween(currentFileLineContent, "], ", ","))); // For the first index
+                                    allColorsAndIndexes.add(Integer.parseInt(StringUtils.substringBetween(currentFileLineContent, ",*", "*,"))); // For the Last Index
+                                }
                             }
                             else
                             {
                                 fileContent += fileText.get(i); // gets the actual code from the file
                             }
+//
                         }
                     }
 
                     fileContents.add ( fileContent );
-                    commentShowPanel.setComments( allComments ); //Sets the comments saved in the comment panel
+//                    commentShowPanel.setComments( allComments ); //Sets the comments saved in the comment panel
                     displayArea.setContent( fileContent ); // Displays the contents of the file
 
                     for ( int i = 0; i < allColorsAndIndexes.size(); i += 5 )
@@ -203,8 +236,30 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         tmpColor = new Color(r, g, b );
                         int firstIndex = allColorsAndIndexes.get( i + 3 );
                         int lastIndex = allColorsAndIndexes.get ( i + 4 );
+                        colorsArrayList.add( tmpColor );
+                        colorsArrayList.add( tmpColor );
 
                         displayArea.addHighlight( tmpColor, firstIndex, lastIndex );
+                    }
+                    // This Filters out the duplicate entries in terms of indexes
+                    for ( int currentElement = 0; currentElement < indexesArrayList.size() - 2; currentElement +=2 )
+                    {
+                        if ( indexesArrayList.get( currentElement ) == indexesArrayList.get( currentElement + 2 ) && indexesArrayList.get( currentElement + 1 ) == indexesArrayList.get( currentElement + 3 ))
+                        {
+                            indexesArrayList.remove( indexesArrayList.get( currentElement ) );
+                            indexesArrayList.remove( indexesArrayList.get( currentElement + 2 ) );
+                        }
+
+                    }
+                    System.out.println( indexesArrayList );
+
+                    for ( int k = 0; k < commentsArrayList.size(); k += 2 )
+                    {
+                        Comment comment;
+                        comment = new Comment( (String) commentsArrayList.get(k), indexesArrayList.get(k), indexesArrayList.get(k + 1), (int) commentsArrayList.get(k + 1), colorsArrayList.get(k) );
+                        //System.out.println( indexesArrayList.get(k) + "," + indexesArrayList.get(k + 1) + "," + (int) commentsArrayList.get(k + 1) );
+                        CommentsModel.addComment(comment);
+                        CommentShowPanel.update();
                     }
 
 
@@ -285,7 +340,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
     public void saveFileWithoutMessage()
     {
-
             try
             {
                 fileWriter = new FileWriter(selectedFile);

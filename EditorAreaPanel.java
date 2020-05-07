@@ -67,6 +67,7 @@ public class EditorAreaPanel extends JPanel
         for ( int i = 0; i < colorsArrayList.size(); i++ )
 		{
 			allContent += "\n" + colorsArrayList.get(i) + ", " +  firstIndexes.get(i) + ",*" + lastIndexes.get(i) + "*,";
+			System.out.println( colorsArrayList.size() + ", " + colorsArrayList.get(i) );
 		}
     	return allContent;
     }
@@ -222,11 +223,12 @@ public class EditorAreaPanel extends JPanel
     	text = editorPanel.getText();
 
     	 System.out.println("entered");
-    	for( int i = 0; i < text.length() - 2; i++) {
-    		currentSubString = text.substring(i, i+2);
-    		 if(currentSubString.equals(">>")) {
-    			 System.out.println("found");
-    			 editorPanel.replaceRange("", i, i+2);
+    	for( int i = 0; i < text.length() - 2; i++ ) {
+    		currentSubString = text.substring( i, i + 2 );
+    		 if( currentSubString.equals(">>" ) )
+    		 {
+    			 System.out.println( "found" );
+    			 editorPanel.replaceRange( "", i, i + 2 );
     		 }
     	}
     }

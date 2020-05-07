@@ -14,6 +14,13 @@ public class Comment {
 		this.line = line;
 		this.c = c;
 	}
+
+	public Comment (String comment, int start, int end, int line){
+		this.comment = comment;
+		this.start = start;
+		this.end = end;
+		this.line = line;
+	}
 	
 	public String getType() {
 		return comment;

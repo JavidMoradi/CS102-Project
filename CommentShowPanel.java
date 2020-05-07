@@ -40,14 +40,20 @@ public class CommentShowPanel extends JPanel
             		{
                 		if(touchedForTheFirstTime)
                 		{
-                    		display.addHighlight( new Color( 255,255,255,120), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
+                            display.addHighlight( new Color( 255,255,255,120),
+                                    ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(),
+                                    ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
                     		lastSelectedComment = (Comment)CommentShowPanel.listFiles.getSelectedValue();
                     		touchedForTheFirstTime = false;
                 		}
                 		else
                 		{
-                    		display.addHighlight( lastSelectedComment.getColor(), lastSelectedComment.getStartIndex(), lastSelectedComment.getEndIndex());
-                    		display.addHighlight( new Color( 255,255,255,120), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
+                            display.addHighlight( lastSelectedComment.getColor(),
+                                    lastSelectedComment.getStartIndex(),
+                                    lastSelectedComment.getEndIndex());
+                            display.addHighlight( new Color( 255,255,255,120),
+                                    ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(),
+                                    ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
                     		lastSelectedComment = (Comment)CommentShowPanel.listFiles.getSelectedValue();
                     
                 		}
@@ -86,7 +92,7 @@ public class CommentShowPanel extends JPanel
        int numberOfLines;
        numberOfLines = 0;
        String[] lines = allComments.split("\r\n|\r|\n");
-       //numberOfLines = lines.length;
+       model.removeAllElements();
        for ( int i = 1; i < lines.length; i++ )
        {
            model.addElement( lines[i] );
