@@ -15,7 +15,7 @@ public class NewCommentPanel extends JPanel
     public NewCommentPanel ( EditorAreaPanel display )
     {
         this.display = display;
-        setPreferredSize( new Dimension( 400, 130) );
+        setPreferredSize( new Dimension( 370, 130) );
         setBackground( Color.GREEN);
         setBorder( BorderFactory.createLineBorder( Color.BLUE) );
 
