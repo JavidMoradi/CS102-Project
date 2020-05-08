@@ -1,17 +1,11 @@
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.*;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.*;
+import java.beans.*;
 import java.util.HashMap;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
+import javax.swing.text.*;
 
 /**
  *  This class will display line numbers for a related text component. The text
@@ -35,22 +29,24 @@ public class TextLineNumber extends JPanel
 
 	//  Text component this TextTextLineNumber component is in sync with
 
-	private final JTextComponent component;
+	private static JTextComponent component;
 
 	//  Properties that can be changed
 
 	private boolean updateFont;
+	public static boolean called;
 	private int borderGap;
 	private Color currentLineForeground;
-	private float digitAlignment;
-	private int minimumDisplayDigits;
+	private static float digitAlignment;
+	private static int minimumDisplayDigits;
 
 	//  Keep history information to reduce the number of times the component
 	//  needs to be repainted
 
-    private int lastDigits;
-    private int lastHeight;
-    private int lastLine;
+    private static int lastDigits;
+    private static int lastHeight;
+    private static int lastLine;
+    private static int calledLine;
 
 	private HashMap<String, FontMetrics> fonts;
 
@@ -76,6 +72,9 @@ public class TextLineNumber extends JPanel
 	{
 		this.component = component;
 
+		called = false;
+		calledLine = 0;
+		
 		setFont( component.getFont() );
 
 		setBorderGap( 5 );
@@ -210,6 +209,7 @@ public class TextLineNumber extends JPanel
 	 */
 	private void setPreferredWidth()
 	{
+		System.out.println( "");
 		Element root = component.getDocument().getDefaultRootElement();
 		int lines = root.getElementCount();
 		int digits = Math.max(String.valueOf(lines).length(), minimumDisplayDigits);
@@ -230,6 +230,7 @@ public class TextLineNumber extends JPanel
 			setSize( d );
 		}
 	}
+
 	/**
 	 *  Draw the line numbers
 	 */
@@ -285,7 +286,10 @@ public class TextLineNumber extends JPanel
 		int caretPosition = component.getCaretPosition();
 		Element root = component.getDocument().getDefaultRootElement();
 
-		return root.getElementIndex(rowStartOffset) == root.getElementIndex(caretPosition);
+		if (root.getElementIndex( rowStartOffset ) == root.getElementIndex(caretPosition))
+			return true;
+		else
+			return false;
 	}
 
 	/*
@@ -319,6 +323,7 @@ public class TextLineNumber extends JPanel
 		throws BadLocationException
 	{
 		//  Get the bounding rectangle of the row
+
 
 		Rectangle r = component.modelToView( rowStartOffset );
 		int lineHeight = fontMetrics.getHeight();
@@ -362,6 +367,7 @@ public class TextLineNumber extends JPanel
 			}
 		}
 
+		
 		return y - descent;
 	}
 
@@ -373,18 +379,29 @@ public class TextLineNumber extends JPanel
 	{
 		//  Get the line the caret is positioned on
 
+		System.out.println("CartUpdating");
 		int caretPosition = component.getCaretPosition();
 		Element root = component.getDocument().getDefaultRootElement();
 		int currentLine = root.getElementIndex( caretPosition );
 
 		//  Need to repaint so the correct line number can be highlighted
+		
+		//if( called) {
+		//	lastLine = calledLine;
+		//	getParent().repaint();
+		//	repaint();
+			
+		//}
 
 		if (lastLine != currentLine)
 		{
 //			repaint();
-			getParent().repaint();
+			
 			lastLine = currentLine;
 		}
+		
+		getParent().repaint();
+		
 	}
 
 //
@@ -412,13 +429,14 @@ public class TextLineNumber extends JPanel
 	 *  A document change may affect the number of displayed lines of text.
 	 *  Therefore the lines numbers will also change.
 	 */
-	private void documentChanged()
+	protected void documentChanged()
 	{
 		//  View of the component has not been updated at the time
 		//  the DocumentEvent is fired
-
+		System.out.println( "called");
 		SwingUtilities.invokeLater(new Runnable()
 		{
+			
 			@Override
 			public void run()
 			{
@@ -427,8 +445,10 @@ public class TextLineNumber extends JPanel
 					int endPos = component.getDocument().getLength();
 					Rectangle rect = component.modelToView(endPos);
 
+				
 					if (rect != null && rect.y != lastHeight)
 					{
+						System.out.println( "entered");
 						setPreferredWidth();
 //						repaint();
 						getParent().repaint();
@@ -463,3 +483,4 @@ public class TextLineNumber extends JPanel
 		}
 	}
 }
+
