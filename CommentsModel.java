@@ -1,5 +1,3 @@
-package project102;
-
 import java.util.ArrayList;
 
 public class CommentsModel {
