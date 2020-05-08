@@ -1,7 +1,11 @@
+package project102;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class CommentShowPanel extends JPanel
 {
@@ -57,8 +61,11 @@ public class CommentShowPanel extends JPanel
                     		lastSelectedComment = (Comment)CommentShowPanel.listFiles.getSelectedValue();
                     
                 		}
-
            		 }
+            		//set the selection indexes for the cartUpdate in the TextLineNumber class to take place
+            		EditorAreaPanel.editorPanel.setSelectionStart(lastSelectedComment.getStartIndex());
+            		EditorAreaPanel.editorPanel.setSelectionEnd(lastSelectedComment.getEndIndex());
+            		
 		}
        });
 
@@ -82,11 +89,11 @@ public class CommentShowPanel extends JPanel
 
 	   if( model != null) {
 		   model.removeAllElements();
-		   	for(int i = 0; i < CommentsModel.commentsBag.size(); i++)
+		   	for(int i = CommentsModel.commentsBag.size() - 1; i >= 0; i--)
 		   		model.addElement(CommentsModel.commentsBag.get(i));
 	   }
    }
-
+   
    public void setComments ( String allComments )
    {
        int numberOfLines;
