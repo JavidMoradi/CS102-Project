@@ -3,6 +3,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.io.File;
+import java.util.*;
 
 
 public class FileExplorerPanel extends JPanel implements ListSelectionListener {
@@ -12,6 +13,7 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
     public static JList lstFiles;
     int index;
     File selectedFile;
+    ArrayList<Integer> someColorsAndIndexes;
 
 
     public FileExplorerPanel() {
@@ -49,6 +51,22 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
             {
                 FileOptionsPanel.displayArea.setContent("");
             }
+
+            someColorsAndIndexes = FileOptionsPanel.getStaticAllColorsAndIndexes();
+            System.out.println(someColorsAndIndexes);
+//            for (int f = 0; f < allColorsAndIndexes.size(); f += 5)
+//            {
+//                Color tmpColor;
+//
+//                int r = allColorsAndIndexes.get(f);
+//                int g = allColorsAndIndexes.get(f + 1);
+//                int b = allColorsAndIndexes.get(f + 2);
+//                tmpColor = new Color(r, g, b);
+//                int firstIndex = allColorsAndIndexes.get(f + 3);
+//                int lastIndex = allColorsAndIndexes.get(f + 4);
+//
+//                FileOptionsPanel.displayArea.addHighlight(tmpColor, firstIndex, lastIndex);
+//            }
             
        }
         add(lstFiles);

@@ -209,7 +209,6 @@ public class TextLineNumber extends JPanel
 	 */
 	private void setPreferredWidth()
 	{
-		System.out.println( "");
 		Element root = component.getDocument().getDefaultRootElement();
 		int lines = root.getElementCount();
 		int digits = Math.max(String.valueOf(lines).length(), minimumDisplayDigits);
@@ -379,7 +378,6 @@ public class TextLineNumber extends JPanel
 	{
 		//  Get the line the caret is positioned on
 
-		System.out.println("CartUpdating");
 		int caretPosition = component.getCaretPosition();
 		Element root = component.getDocument().getDefaultRootElement();
 		int currentLine = root.getElementIndex( caretPosition );
@@ -433,7 +431,6 @@ public class TextLineNumber extends JPanel
 	{
 		//  View of the component has not been updated at the time
 		//  the DocumentEvent is fired
-		System.out.println( "called");
 		SwingUtilities.invokeLater(new Runnable()
 		{
 			
@@ -448,7 +445,6 @@ public class TextLineNumber extends JPanel
 				
 					if (rect != null && rect.y != lastHeight)
 					{
-						System.out.println( "entered");
 						setPreferredWidth();
 //						repaint();
 						getParent().repaint();

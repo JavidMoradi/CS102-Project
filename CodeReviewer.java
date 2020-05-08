@@ -12,27 +12,29 @@ public class CodeReviewer {
 
         CodeReviewerFrame frame = new CodeReviewerFrame(" Jhub ");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        playMusic("openingsong.wav");
-        
+//        playMusic("openingsong.wav");
+
     }
 
-    public static void playMusic(String musicLocation) {
-        try {
-            File musicPath = new File(musicLocation);
-            if (musicPath.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                clip.start();
-
-            } else {
-                System.out.println("null");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
+//    public static void playMusic(String musicLocation) {
+//        try {
+//            File musicPath = new File(musicLocation);
+//            if (musicPath.exists()) {
+//                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+//                Clip clip = AudioSystem.getClip();
+//                clip.open(audioInput);
+//                clip.start();
+//
+//            } else {
+//                System.out.println("null");
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//        }
+//    }
+}
 
 
 
