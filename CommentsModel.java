@@ -1,3 +1,5 @@
+package project102;
+
 import java.util.ArrayList;
 
 public class CommentsModel {
@@ -11,29 +13,67 @@ public class CommentsModel {
 
 	public static void addComment( Comment c) {
 		commentsBag.add(c);
+		commentsBagChanged(); 
 	}
 
-	public static void removeComment( Comment c) {
+	public static boolean removeComment( Comment c) {
 		int x = 0;
+		boolean found;
+		found = false;
 
 		for(int i = 0; i < commentsBag.size(); i++) {
 			if( commentsBag.get(i) == c)
 				x = i;
+			found = true;
+			
+			EditorAreaPanel.removeHighlights();
+			EditorAreaPanel.reHighlight( commentsBag);
 		}
 
 		commentsBag.remove(x);
+		
+		commentsBagChanged(); 
+		
+		return found;
+		
 	}
+	
+	// Sort comments based on line number from biggest to lowest
+	public static void commentsBagChanged() {
+				Comment temp;
+				int maxLine;
+				int maxIndex;
+				
+				temp = null;
+				maxIndex = 0;
+				
+				
+				for( int i = 0; i < commentsBag.size(); i++) {
+					for( int j = i + 1; j < commentsBag.size(); j++) {
+						if( commentsBag.get(j).getLine() > commentsBag.get( maxIndex).getLine()) {
+							maxIndex = j;
+						}
+					}
+					temp = commentsBag.get(maxIndex);
+					commentsBag.set(maxIndex, commentsBag.get(i));
+					commentsBag.set( i, temp);
+					maxIndex = i + 1;
+				}
+				
+				CommentShowPanel.update();
 
-	public static void pointTheComment( Comment c) {
-		int pos;
-		String s;
-
-		System.out.println(c);
-		pos = EditorAreaPanel.getPos( c.getLine());
-		System.out.println( pos);
-
-		EditorAreaPanel.addNewPointer(pos);
+	
 	}
+	
+	
+	// public static void pointTheComment( Comment c) {
+	//	int pos;
+//		String s;
+
+	//	pos = EditorAreaPanel.getPos( c.getLine());
+//
+	//	EditorAreaPanel.addNewPointer(pos);
+//	}
 
 	public String getAllComments ()
 	{
