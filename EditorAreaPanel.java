@@ -11,6 +11,7 @@ public class EditorAreaPanel extends JPanel
 	Font editorFont;
     static CommentsModel commentControl;
     static JTextArea editorPanel;
+    static TextLineNumber textLineNumber;
     //static CommentsModel commentsModel;
 
     static JScrollPane scrollPane = new JScrollPane( editorPanel );
@@ -31,7 +32,7 @@ public class EditorAreaPanel extends JPanel
     {
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
-        editorPanel.setRows( 28 );
+        editorPanel.setRows( 22 );
         editorPanel.setColumns( 35 );
         editorPanel.setWrapStyleWord( true );
         editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 18) );
@@ -40,10 +41,12 @@ public class EditorAreaPanel extends JPanel
 
 		commentControl = new CommentsModel();
 
+		
     //TextLineNumber tln = new TextLineNumber(textPane);
         scrollPane = new JScrollPane( editorPanel);
-        TextLineNumber tln = new TextLineNumber(editorPanel);
-        scrollPane.setRowHeaderView( tln );
+        textLineNumber = new TextLineNumber(editorPanel);
+        
+        scrollPane.setRowHeaderView( textLineNumber );
         add ( scrollPane );
 		highlighter = (DefaultHighlighter) editorPanel.getHighlighter();
 		painter = new DefaultHighlighter.DefaultHighlightPainter( Color.RED);
