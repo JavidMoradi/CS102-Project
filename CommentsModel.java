@@ -41,11 +41,11 @@ public class CommentsModel {
 				Comment temp;
 				int maxLine;
 				int maxIndex;
-				
+
 				temp = null;
 				maxIndex = 0;
-				
-				
+
+
 				for( int i = 0; i < commentsBag.size(); i++) {
 					for( int j = i + 1; j < commentsBag.size(); j++) {
 						if( commentsBag.get(j).getLine() > commentsBag.get( maxIndex).getLine()) {

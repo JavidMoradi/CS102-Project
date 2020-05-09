@@ -29,8 +29,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
     String currentFileLineContent;
     ArrayList commentsArrayList;
     ArrayList<Integer> indexesArrayList;
-    FileWriter writer;
-    Set set;
     ArrayList<Color> colorsArrayList;
     ArrayList<Comment> commentArrayList;
     static ArrayList<Integer> staticAllColorsAndIndexes;
@@ -115,8 +113,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     filePath = chooser.getSelectedFile().getAbsolutePath();
                     selectedFile = new File( filePath + "/" + fileName + ".java" );
                     isCreated = selectedFile.createNewFile();
-//                    writer = new FileWriter( selectedFile );
-//                    set = new HashSet();
 
                     if ( !isCreated )
                     {
@@ -246,41 +242,92 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         int firstIndex = allColorsAndIndexes.get( i + 3 );
                         int lastIndex = allColorsAndIndexes.get ( i + 4 );
                         colorsArrayList.add( tmpColor );
-                        colorsArrayList.add( tmpColor );
+//                        colorsArrayList.add( tmpColor );
 
                         displayArea.addHighlight( tmpColor, firstIndex, lastIndex );
                     }
 
-                    // This Filters out the duplicate entries in terms of indexes
+                    // This Filters out the duplicate entries in terms of indexes present in the file
                     for ( int currentElement = 0; currentElement < indexesArrayList.size() - 2; currentElement +=2 )
                     {
                         if ( indexesArrayList.get( currentElement ) == indexesArrayList.get( currentElement + 2 ) && indexesArrayList.get( currentElement + 1 ) == indexesArrayList.get( currentElement + 3 ))
                         {
                             indexesArrayList.remove( indexesArrayList.get( currentElement ) );
                             indexesArrayList.remove( indexesArrayList.get( currentElement + 2 ) );
-                            colorsArrayList.remove( colorsArrayList.get ( currentElement ) );
-                            colorsArrayList.remove( colorsArrayList.get ( currentElement + 2 ) );
                         }
                     }
+
+                    colorsArrayList.add ( new Color ( 10, 10, 10 ) ); // Adding a Dummy value
+
+                    // =======================================================================================
+                    // The Problem is here, if two different comments are after each other but have the same color
+                    // it is counted as a duplicate and this removed
+                    // Still Under Development
+                    // =======================================================================================
+
+                    // This Filters out the duplicate entries in terms the colors present in the file
+                    for ( int thisCurrentElement = 0; thisCurrentElement < colorsArrayList.size() - 1; thisCurrentElement++ )
+                    {
+                        if ( !( colorsArrayList.get( thisCurrentElement ).equals( colorsArrayList.get( thisCurrentElement + 1 ) ) ) )
+                        {
+                            Color chosenColor;
+                            chosenColor = colorsArrayList.get( thisCurrentElement);
+                            colorsArrayList.add(thisCurrentElement, chosenColor);
+                            thisCurrentElement++;
+                        }
+                        else
+                        {
+                            thisCurrentElement++;
+                        }
+                    }
+                    colorsArrayList.remove ( colorsArrayList.size() - 1 );
 
 //                    System.out.println( commentsArrayList.size() );
 //                    System.out.println( commentsArrayList );
 //                    System.out.println( indexesArrayList.size() );
 //                    System.out.println( indexesArrayList + " And the Color is " + colorsArrayList );
-//                    System.out.println( colorsArrayList.size() );
+                    System.out.println( colorsArrayList.size() );
                     System.out.println( colorsArrayList );
                     for ( int h = 0; h < indexesArrayList.size(); h += 2)
                     {
-                        System.out.println( indexesArrayList.get(h) + ", " + indexesArrayList.get(h + 1) + " And the Color is " + colorsArrayList.get(h + 1) );
+                        System.out.println( indexesArrayList.get(h) + ", " + indexesArrayList.get(h + 1) + " And the Color is " + colorsArrayList.get(h ) );
                     }
                     for ( int k = 0; k < commentsArrayList.size(); k += 2 )
                     {
+                        String currentCommentType;
+                        int currentFirstIndex;
+                        int currentLastIndex;
+                        int currentLineNumber;
+                        Color currentColor;
+
+                        currentCommentType = (String) commentsArrayList.get(k);
+                        currentFirstIndex = indexesArrayList.get(k);
+                        currentLastIndex = indexesArrayList.get(k + 1);
+                        currentLineNumber = (int) commentsArrayList.get(k + 1);
+                        currentColor = colorsArrayList.get(k + 1);
+
                         Comment comment;
-                        comment = new Comment( (String) commentsArrayList.get(k), indexesArrayList.get(k), indexesArrayList.get(k + 1), (int) commentsArrayList.get(k + 1), colorsArrayList.get(k + 1) );
-//                        commentArrayList.add( comment );
-                        CommentsModel.addComment(comment);
-                        CommentShowPanel.update();
+                        comment = new Comment( currentCommentType, currentFirstIndex, currentLastIndex, currentLineNumber, currentColor );
+                        commentArrayList.add( comment );
+//                        CommentsModel.addComment(comment);
+//                        CommentShowPanel.update();
                     }
+
+                    Collections.sort(commentArrayList, new Comparator<Comment>() {
+                        @Override
+                        public int compare(Comment comment1, Comment comment2)
+                        {
+                            return Integer.valueOf( comment2.start ).compareTo( comment1.start ); //sorting it in Ascending order
+                        }
+                    });
+
+//                    for ( int p = 0; p < commentArrayList.size(); p++ )
+//                    {
+////                        System.out.println( commentArrayList.get( p ) );
+//                        CommentsModel.addComment( commentArrayList.get( p ) );
+//                        CommentShowPanel.update();
+//                    }
+
                     allColorsAndIndexes.clear(); // Clearing the ArrayList of Elements Added Previously
                     commentsArrayList.clear(); // Clearing the ArrayList of Elements Added Previously
                     colorsArrayList.clear();
