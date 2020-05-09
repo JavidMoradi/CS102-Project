@@ -12,7 +12,7 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 
 3rd Week ( 17/02/2020 - 23/02/2020) we met to discuss how we are going to conducte our project and also prepared for the presentation.
 
-4th Week ( 24/03/2020 - 01/03/2020 ) we did the presentation but the idea got rejected by Mr Davenport becasue it was not quiet applicible.
+4th Week ( 24/02/2020 - 01/03/2020 ) we did the presentation but the idea got rejected by Mr Davenport becasue it was not quiet applicible.
 
 5th Week ( 2/03/2020 - 8/03/2020 ) We gathered to think of more ideas and I and other two members suggested 3 ideas in total and asked Mr Davenport for his opinion. He liked one of them but most of the members thought it is hard to actually build.
 
