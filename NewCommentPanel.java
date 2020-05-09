@@ -15,12 +15,12 @@ public class NewCommentPanel extends JPanel
     public NewCommentPanel ( EditorAreaPanel display )
     {
         this.display = display;
-        setPreferredSize( new Dimension( 370, 130) );
+        setPreferredSize( new Dimension( 400, 130) );
         setBackground( Color.GREEN);
         setBorder( BorderFactory.createLineBorder( Color.BLUE) );
 
         JLabel insertLabel = new JLabel( "REVIEW OPTIONS" );
-        insertLabel.setPreferredSize( new Dimension(400, 25));
+        insertLabel.setPreferredSize( new Dimension(370, 25));
         insertLabel.setFont( new Font( "Tahoma", Font.BOLD, 14 ) );
         insertLabel.setForeground( Color.BLUE );
         insertLabel.setBorder( new LineBorder( new Color(0, 0, 0) ) );
