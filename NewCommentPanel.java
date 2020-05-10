@@ -15,14 +15,14 @@ public class NewCommentPanel extends JPanel
     public NewCommentPanel ( EditorAreaPanel display )
     {
         this.display = display;
-        setPreferredSize( new Dimension( 400, 130) );
-        setBackground( Color.GREEN);
-        setBorder( BorderFactory.createLineBorder( Color.BLUE) );
+        setPreferredSize( new Dimension( 200, 130) );
+        setBackground( Color.darkGray);
+        setBorder( BorderFactory.createLineBorder( Color.BLACK) );
 
-        JLabel insertLabel = new JLabel( "REVIEW OPTIONS" );
-        insertLabel.setPreferredSize( new Dimension(370, 25));
-        insertLabel.setFont( new Font( "Tahoma", Font.BOLD, 14 ) );
-        insertLabel.setForeground( Color.BLUE );
+        JLabel insertLabel = new JLabel( "ERROR REVIEW OPTIONS" );
+        insertLabel.setPreferredSize( new Dimension(640, 20));
+        insertLabel.setFont( new Font( "Tahoma", Font.BOLD, 18 ) );
+        insertLabel.setForeground( Color.BLACK );
         insertLabel.setBorder( new LineBorder( new Color(0, 0, 0) ) );
         insertLabel.setOpaque( true );
         insertLabel.setBackground( Color.WHITE );
@@ -47,8 +47,9 @@ public class NewCommentPanel extends JPanel
         JButton wrongIndentationError = new JButton("Wrong Indentation");
         Color wrongIndentationColor = Color.RED;
         wrongIndentationError.setBackground(wrongIndentationColor);
-        wrongIndentationError.setForeground( Color.WHITE );
-        wrongIndentationError.setPreferredSize( new Dimension( 190, 25) );
+        wrongIndentationError.setForeground( Color.BLACK );
+        wrongIndentationError.setPreferredSize( new Dimension( 210, 40) );
+        wrongIndentationError.setFont(new Font("Microsoft Tai Le", Font.BOLD, 18));
         wrongIndentationError.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Comment c;
@@ -65,8 +66,9 @@ public class NewCommentPanel extends JPanel
         JButton inefficientError = new JButton("Inefficient Code");
         Color inefficientErrorColor = Color.BLUE;
         inefficientError.setBackground(inefficientErrorColor);
-        inefficientError.setForeground( Color.WHITE );
-        inefficientError.setPreferredSize( new Dimension( 170, 25) );
+        inefficientError.setForeground( Color.BLACK );
+        inefficientError.setPreferredSize( new Dimension( 210, 40) );
+        inefficientError.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
         inefficientError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 
@@ -86,11 +88,12 @@ public class NewCommentPanel extends JPanel
         add ( inefficientError );
         errorColors.add( inefficientErrorColor);
 
-        JButton namingConventionError = new JButton("Naming Conventions Error");
+        JButton namingConventionError = new JButton("Naming Conventions");
         Color namingConventionColor = Color.MAGENTA;
         namingConventionError.setBackground( namingConventionColor);
-        namingConventionError.setForeground( Color.WHITE );
-        namingConventionError.setPreferredSize( new Dimension( 190, 25) );
+        namingConventionError.setForeground( Color.BLACK );
+        namingConventionError.setPreferredSize( new Dimension( 210, 40) );
+        namingConventionError.setFont(new Font("Microsoft Tai Le", Font.BOLD, 17));
         namingConventionError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 
@@ -108,11 +111,12 @@ public class NewCommentPanel extends JPanel
         add ( namingConventionError );
         errorColors.add(namingConventionColor);
 
-        JButton javaDocError = new JButton("JavaDoc Error");
+        JButton javaDocError = new JButton("JavaDoc");
         Color javaDocColor = new Color(24, 147, 196);
         javaDocError.setBackground(javaDocColor);
-        javaDocError.setForeground( Color.WHITE );
-        javaDocError.setPreferredSize( new Dimension( 170, 25) );
+        javaDocError.setForeground( Color.BLACK );
+        javaDocError.setPreferredSize( new Dimension( 210, 40) );
+        javaDocError.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
         javaDocError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		Comment c;
@@ -128,11 +132,12 @@ public class NewCommentPanel extends JPanel
         add ( javaDocError );
         errorColors.add(javaDocColor);
 
-        JButton styleErrorButton = new JButton("Blank Line/Space Error");
+        JButton styleErrorButton = new JButton("Blank Line/Space");
         Color styleColor = Color.GRAY;
         styleErrorButton.setBackground( styleColor);
-        styleErrorButton.setForeground( Color.WHITE );
-        styleErrorButton.setPreferredSize( new Dimension( 190, 25) );
+        styleErrorButton.setForeground( Color.BLACK );
+        styleErrorButton.setPreferredSize( new Dimension( 210, 40) );
+        styleErrorButton.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
         styleErrorButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 Comment c;
@@ -151,8 +156,9 @@ public class NewCommentPanel extends JPanel
         JButton commentError = new JButton("Comment Error");
         Color commentErrorColor = new Color( 29, 171, 34 );
         commentError.setBackground(commentErrorColor);
-        commentError.setForeground( Color.WHITE );
-        commentError.setPreferredSize( new Dimension( 170, 25) );
+        commentError.setForeground( Color.BLACK );
+        commentError.setPreferredSize( new Dimension( 210, 40) );
+        commentError.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
         commentError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		Comment c;
