@@ -38,26 +38,27 @@ public class CommentsModel {
 	
 	// Sort comments based on line number from biggest to lowest
 	public static void commentsBagChanged() {
-				Comment temp;
-				int maxLine;
-				int maxIndex;
+//				Comment temp;
+//				int maxLine;
+//				int maxIndex;
+//
+//				temp = null;
+//				maxIndex = 0;
+//
+//
+//				for( int i = 0; i < commentsBag.size(); i++) {
+//					for( int j = i + 1; j < commentsBag.size(); j++) {
+//						if( commentsBag.get(j).getLine() > commentsBag.get( maxIndex).getLine()) {
+//							maxIndex = j;
+//						}
+//					}
+//					temp = commentsBag.get(maxIndex);
+//					commentsBag.set(maxIndex, commentsBag.get(i));
+//					commentsBag.set( i, temp);
+//					maxIndex = i + 1;
+//				}
 
-				temp = null;
-				maxIndex = 0;
 
-
-				for( int i = 0; i < commentsBag.size(); i++) {
-					for( int j = i + 1; j < commentsBag.size(); j++) {
-						if( commentsBag.get(j).getLine() > commentsBag.get( maxIndex).getLine()) {
-							maxIndex = j;
-						}
-					}
-					temp = commentsBag.get(maxIndex);
-					commentsBag.set(maxIndex, commentsBag.get(i));
-					commentsBag.set( i, temp);
-					maxIndex = i + 1;
-				}
-				
 				CommentShowPanel.update();
 
 	

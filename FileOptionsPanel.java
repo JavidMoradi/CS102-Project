@@ -258,52 +258,10 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         int firstIndex = allColorsAndIndexes.get( i + 3 );
                         int lastIndex = allColorsAndIndexes.get ( i + 4 );
                         colorsArrayList.add( tmpColor );
-//                        colorsArrayList.add( tmpColor );
+                        colorsArrayList.add( tmpColor );
 
                         displayArea.addHighlight( tmpColor, firstIndex, lastIndex );
                     }
-
-                    // This Filters out the duplicate entries in terms of indexes present in the file
-                    for ( int currentElement = 0; currentElement < indexesArrayList.size() - 2; currentElement +=2 )
-                    {
-                        if ( indexesArrayList.get( currentElement ) == indexesArrayList.get( currentElement + 2 ) && indexesArrayList.get( currentElement + 1 ) == indexesArrayList.get( currentElement + 3 ))
-                        {
-                            indexesArrayList.remove( indexesArrayList.get( currentElement ) );
-                            indexesArrayList.remove( indexesArrayList.get( currentElement + 2 ) );
-                        }
-                    }
-
-                    colorsArrayList.add ( new Color ( 10, 10, 10 ) ); // Adding a Dummy value
-
-                    // =======================================================================================
-                    // The Problem is here, if two different comments are after each other but have the same color
-                    // it is counted as a duplicate and this removed
-                    // Still Under Development
-                    // =======================================================================================
-
-                    // This Filters out the duplicate entries in terms the colors present in the file
-                    for ( int thisCurrentElement = 0; thisCurrentElement < colorsArrayList.size() - 1; thisCurrentElement++ )
-                    {
-                        if ( !( colorsArrayList.get( thisCurrentElement ).equals( colorsArrayList.get( thisCurrentElement + 1 ) ) ) )
-                        {
-                            Color chosenColor;
-                            chosenColor = colorsArrayList.get( thisCurrentElement);
-                            colorsArrayList.add(thisCurrentElement, chosenColor);
-                            thisCurrentElement++;
-                        }
-                        else
-                        {
-                            thisCurrentElement++;
-                        }
-                    }
-                    colorsArrayList.remove ( colorsArrayList.size() - 1 );
-
-//                    System.out.println( commentsArrayList.size() );
-//                    System.out.println( commentsArrayList );
-//                    System.out.println( indexesArrayList.size() );
-//                    System.out.println( indexesArrayList + " And the Color is " + colorsArrayList );
-                    System.out.println( colorsArrayList.size() );
-                    System.out.println( colorsArrayList );
                     for ( int h = 0; h < indexesArrayList.size(); h += 2)
                     {
                         System.out.println( indexesArrayList.get(h) + ", " + indexesArrayList.get(h + 1) + " And the Color is " + colorsArrayList.get(h ) );
@@ -325,18 +283,20 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         Comment comment;
                         comment = new Comment( currentCommentType, currentFirstIndex, currentLastIndex, currentLineNumber, currentColor );
                         commentArrayList.add( comment );
-//                        CommentsModel.addComment(comment);
-//                        CommentShowPanel.update();
+                        CommentsModel.addComment(comment);
+                        CommentShowPanel.update();
                     }
 
-                    Collections.sort(commentArrayList, new Comparator<Comment>() {
-                        @Override
-                        public int compare(Comment comment1, Comment comment2)
-                        {
-                            return Integer.valueOf( comment2.start ).compareTo( comment1.start ); //sorting it in Ascending order
-                        }
-                    });
+                    //This is Supposed to be for sorting the array list to match what the user is seeing, but it doesn't work for some reason
 
+//                    Collections.sort(commentArrayList, new Comparator<Comment>() {
+//                        @Override
+//                        public int compare(Comment comment1, Comment comment2)
+//                        {
+//                            return Integer.valueOf( comment1.start ).compareTo( comment2.start ); //sorting it in Ascending order
+//                        }
+//                    });
+//
 //                    for ( int p = 0; p < commentArrayList.size(); p++ )
 //                    {
 ////                        System.out.println( commentArrayList.get( p ) );
@@ -366,7 +326,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                 if(fileContents.size() == 0)
                 {
                    displayArea.setContent("");
-//                   CommentShowPanel.model.removeAllElements();
+                   CommentShowPanel.model.removeAllElements(); // Still Under Development
                 }
                 else
                 {
@@ -445,7 +405,13 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                 fileWriter.close();
                 int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
                 fileContents.set(index, EditorAreaPanel.getContent());
-            } catch (IOException e) {}
+            } catch (IOException e) {
+
+                JOptionPane.showMessageDialog(this,
+                        " The Auto-Saving Feature Is Not Working, Please Close The Program And Re-open It ",
+                        "WARNING",
+                        JOptionPane.WARNING_MESSAGE);
+            }
     }
 
     public static ArrayList<Integer> getStaticAllColorsAndIndexes()

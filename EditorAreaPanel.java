@@ -70,7 +70,6 @@ public class EditorAreaPanel extends JPanel
         for ( int i = 0; i < colorsArrayList.size(); i++ )
 		{
 			allContent += "\n" + colorsArrayList.get(i) + ", " +  firstIndexes.get(i) + ",*" + lastIndexes.get(i) + "*,";
-			System.out.println( colorsArrayList.size() + ", " + colorsArrayList.get(i) );
 		}
     	return allContent;
     }

@@ -72,7 +72,6 @@ public class NewCommentPanel extends JPanel
         inefficientError.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 
-                display.addHighlight( inefficientErrorColor);
         		Comment c;
 
         		display.addHighlight( inefficientErrorColor );

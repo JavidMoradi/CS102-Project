@@ -39,7 +39,7 @@ public class CommentShowPanel extends JPanel
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			// TODO Auto-generated method stub
-            		if( (Comment)listFiles.getSelectedValue() != null)
+            		if((Comment)listFiles.getSelectedValue() != null)
             		{
                 		if(touchedForTheFirstTime)
                 		{
@@ -64,6 +64,7 @@ public class CommentShowPanel extends JPanel
             		//set the selection indexes for the cartUpdate in the TextLineNumber class to take place
             		EditorAreaPanel.editorPanel.setSelectionStart(lastSelectedComment.getStartIndex());
             		EditorAreaPanel.editorPanel.setSelectionEnd(lastSelectedComment.getEndIndex());
+            		//update();
             		
 		}
        });

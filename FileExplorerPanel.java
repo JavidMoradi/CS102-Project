@@ -56,8 +56,9 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
                 FileOptionsPanel.displayArea.setContent("");
             }
 
-            someColorsAndIndexes = FileOptionsPanel.getStaticAllColorsAndIndexes();
-            System.out.println(someColorsAndIndexes);
+//            someColorsAndIndexes = FileOptionsPanel.getStaticAllColorsAndIndexes();
+//            System.out.println(someColorsAndIndexes);
+//            System.out.println( FileOptionsPanel.fileName );
 //            for (int f = 0; f < allColorsAndIndexes.size(); f += 5)
 //            {
 //                Color tmpColor;
