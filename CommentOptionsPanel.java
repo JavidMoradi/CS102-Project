@@ -11,14 +11,14 @@ public class CommentOptionsPanel extends JPanel
 	 public CommentOptionsPanel ( EditorAreaPanel display )
 	    {
 	    	this.display = display;
-	        setPreferredSize( new Dimension( 300, 130) );
-	        setBackground(Color.green);
-	        setBorder( BorderFactory.createLineBorder( Color.BLUE) );
+	        setPreferredSize( new Dimension( 533, 130) );
+	        setBackground(Color.darkGray);
+	        setBorder( BorderFactory.createLineBorder( Color.BLACK) );
 
 	        JLabel commentOptionsLabel = new JLabel( "COMMENT OPTIONS" );
-	        commentOptionsLabel.setPreferredSize( new Dimension(300, 25));
-	        commentOptionsLabel.setFont( new Font( "Tahoma", Font.BOLD, 14 ) );
-	        commentOptionsLabel.setForeground( Color.BLUE );
+	        commentOptionsLabel.setPreferredSize( new Dimension(450, 20));
+	        commentOptionsLabel.setFont( new Font( "Tahoma", Font.BOLD, 18 ) );
+	        commentOptionsLabel.setForeground( Color.BLACK );
 	        commentOptionsLabel.setBorder( new LineBorder( new Color(0, 0, 0) ) );
 	        commentOptionsLabel.setOpaque( true );
 	        commentOptionsLabel.setBackground( Color.WHITE );
@@ -27,9 +27,11 @@ public class CommentOptionsPanel extends JPanel
 	        add ( commentOptionsLabel );
 
 	        JButton insertCommentButton = new JButton("Insert A Comment");
-	        insertCommentButton.setBackground(Color.blue);
-	        insertCommentButton.setForeground( Color.WHITE );
-	        insertCommentButton.setPreferredSize( new Dimension( 280, 25) );
+	        insertCommentButton.setBackground(new Color(164, 129, 255));
+	        insertCommentButton.setForeground( Color.BLACK );
+		insertCommentButton.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
+		insertCommentButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	        insertCommentButton.setPreferredSize( new Dimension( 210, 40) );
 	        insertCommentButton.addActionListener((ActionListener) new ActionListener() {
 
 				@Override
@@ -54,6 +56,7 @@ public class CommentOptionsPanel extends JPanel
 	        });
 	        add ( insertCommentButton, BorderLayout.EAST );
 
+		/*
 	        JButton nextCommentButton = new JButton("Next Comment");
 	        nextCommentButton.setBackground(Color.blue);
 	        nextCommentButton.setForeground( Color.WHITE );
@@ -65,11 +68,14 @@ public class CommentOptionsPanel extends JPanel
 	        previousCommentButton.setForeground( Color.WHITE );
 	        previousCommentButton.setPreferredSize( new Dimension( 150, 30) );
 	        add ( previousCommentButton, BorderLayout.EAST );
+		*/
 
 	        JButton deleteCommentButton = new JButton("Delete Comment");
-	        deleteCommentButton.setBackground(Color.blue);
-	        deleteCommentButton.setForeground( Color.WHITE );
-	        deleteCommentButton.setPreferredSize( new Dimension( 280, 25) );
+			deleteCommentButton.setBackground(new Color(164, 129, 255));
+			deleteCommentButton.setForeground(Color.BLACK);
+			deleteCommentButton.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
+			deleteCommentButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	        deleteCommentButton.setPreferredSize( new Dimension( 210, 40) );
 	        deleteCommentButton.addActionListener( new ActionListener() {
 
 				@Override
