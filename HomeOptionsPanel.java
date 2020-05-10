@@ -23,7 +23,7 @@ public class HomeOptionsPanel extends JPanel
     {
         this.display = display;
 
-        setPreferredSize( new Dimension( 200, 130 ) );
+        setPreferredSize( new Dimension( 280, 130 ) );
         setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 255)));
         setBackground(Color.DARK_GRAY);
 
