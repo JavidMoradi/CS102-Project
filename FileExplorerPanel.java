@@ -17,7 +17,8 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
 
 
     public FileExplorerPanel() {
-        setPreferredSize(new Dimension(200, 220));
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(280, 220));
 
         model = new DefaultListModel();
         lstFiles = new JList(model);
@@ -30,12 +31,15 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane);
 
-        lstFiles.setPreferredSize(new Dimension(180, 150));
+        lstFiles.setPreferredSize(new Dimension(250, 150));
         lstFiles.setFont(new Font("Tahoma", Font.PLAIN, 20));
         scrollPane.setViewportView(lstFiles);
-        lstFiles.setBackground(new Color(204, 0, 102));
+        lstFiles.setBackground(Color.darkGray);
+        setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 255)));
 
         fileName = new JTextField(10);
+        add(lstFiles, BorderLayout.CENTER);
+        lstFiles.setForeground(Color.WHITE);
     }
 
     @Override
