@@ -5,6 +5,8 @@ public class CodeReviewerFrame extends JFrame
 {
 	EditorAreaPanel display = new EditorAreaPanel();
     //FileOptionsPanel fileOptionsPanel = new FileOptionsPanel( display );
+    JPanel p = new JPanel();
+    JPanel panel = new JPanel();
 
     public CodeReviewerFrame ( String title )
     {
@@ -15,15 +17,19 @@ public class CodeReviewerFrame extends JFrame
 	ImageIcon img = new ImageIcon("icon.png");
         setIconImage(img.getImage());
 
-        add ( new HomeOptionsPanel ( display));
+        setLayout(new BorderLayout());
 
-        add ( new NewCommentPanel ( display ) );
-        add ( new CommentOptionsPanel( display ), BorderLayout.EAST);
-        add ( new FileExplorerPanel( ) );
-        add ( new FileOptionsPanel( display ) );
-        add( new CommentShowPanel( display ) );
+        p.setLayout(new BorderLayout());
+        p.add(new HomeOptionsPanel(display), BorderLayout.LINE_START);
+        p.add(new NewCommentPanel(display),BorderLayout.CENTER);
+        p.add(new CommentOptionsPanel(display), BorderLayout.LINE_END);
+        add(p, BorderLayout.PAGE_START);
 
-        setLayout ( new FlowLayout( ) );
+        panel.setLayout(new BorderLayout());
+        panel.add(new FileExplorerPanel(), BorderLayout.LINE_START);
+        panel.add(new FileOptionsPanel(display), BorderLayout.CENTER);
+        panel.add(new CommentShowPanel(display), BorderLayout.LINE_END);
+        add(panel, BorderLayout.CENTER);
 
         pack();
         setVisible(true);
