@@ -42,7 +42,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(665, 550));
-        setBackground(Color.BLUE);
+        setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 255)));
+        setBackground(Color.darkGray);
         setLocation(500, 500);
 
         newFile.addActionListener(this);
@@ -51,9 +52,24 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         closeFile.addActionListener(this);
 
         add(newFile);
+        newFile.setForeground(Color.BLACK);
+        newFile.setBackground(new Color(164, 129, 255));
+        // newFile.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         add(saveFile);
+        saveFile.setForeground(Color.BLACK);
+        saveFile.setBackground(new Color(164, 129, 255));
+        // saveFile.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         add(openFile);
+        openFile.setForeground(Color.BLACK);
+        openFile.setBackground(new Color(164, 129, 255));
+        // openFile.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         add(closeFile);
+        closeFile.setForeground(Color.BLACK);
+        closeFile.setBackground(new Color(164, 129, 255));
+        // closeFile.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         setFocusable(true);
 
