@@ -16,7 +16,7 @@ public class HomeOptionsPanel extends JPanel
     String fontList[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
     String[] sizes = { "16", "18", "20", "22", "24", "26", "28", "30", "32", "34" };
     JTextField tf;
-    Highlighter.HighlightPainter myHighlightPainter = new MyHighlighPainter(Color.cyan);
+    Highlighter.HighlightPainter myHighlightPainter = new MyHighlighPainter(Color.red);
 
 
     public HomeOptionsPanel( EditorAreaPanel display)
@@ -24,13 +24,13 @@ public class HomeOptionsPanel extends JPanel
         this.display = display;
 
         setPreferredSize( new Dimension( 200, 130 ) );
-        setBorder( BorderFactory.createLineBorder( Color.BLUE) );
-        setBackground( Color.darkGray );
+        setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 255)));
+        setBackground(Color.DARK_GRAY);
 
         JLabel homeLabel = new JLabel("HOME");
         homeLabel.setPreferredSize(new Dimension(200, 20));
-        homeLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-        homeLabel.setForeground(Color.BLUE);
+        homeLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+        homeLabel.setForeground(Color.BLACK);
         homeLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
         homeLabel.setOpaque(true);
         homeLabel.setBackground(Color.WHITE);
@@ -38,49 +38,61 @@ public class HomeOptionsPanel extends JPanel
         add( homeLabel );
 
         JComboBox fontComboBox = new JComboBox();
-        fontComboBox.setPreferredSize( new Dimension(94, 20) );
-        fontComboBox.setBackground(Color.CYAN);
+        fontComboBox.setPreferredSize( new Dimension(181, 25) );
+        fontComboBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        fontComboBox.setBackground(new Color(164, 129, 255));
         fontComboBox.setToolTipText("Choose type of the font");
         for (int i = 0; i < fontList.length; i++) {
             fontComboBox.addItem(fontList[i]);
             if( display.getEditorFont().getFontName().equals(fontList[i]))
                 fontComboBox.setSelectedItem( fontList[i]);
         }
+        fontComboBox.setForeground(Color.black);
+        fontComboBox.setFont(new Font("Microsoft Tai Le",Font.BOLD, 13));
         add ( fontComboBox );
         fontComboBox.addActionListener(new FontListener());
 
         JComboBox sizeComboBox = new JComboBox();
-        sizeComboBox.setPreferredSize( new Dimension(94, 20) );
-        sizeComboBox.setBackground(Color.CYAN);
+        sizeComboBox.setPreferredSize( new Dimension(50, 25) );
+        sizeComboBox.setBackground(new Color(164, 129, 255));
         sizeComboBox.setToolTipText("Choose size of the font");
         for (int i = 0; i < sizes.length; i++) {
             sizeComboBox.addItem(sizes[i]);
             if( display.getEditorFont().getSize() == Integer.parseInt(sizes[i]))
                 sizeComboBox.setSelectedItem( sizes[i]);
         }
+        sizeComboBox.setForeground(Color.BLACK);
+        sizeComboBox.setFont(new Font("Microsoft Tai Le", Font.BOLD, 13));
+        sizeComboBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         add( sizeComboBox );
         sizeComboBox.setSelectedIndex(1);
         sizeComboBox.addActionListener( new SizeListener());
 
         tf = new JTextField();
         tf.setBackground(Color.WHITE);
-        tf.setColumns(19);
+        tf.setColumns(23);
         tf.setToolTipText("Enter word(s) you want to search");
         add ( tf );
 
         JButton clear = new JButton("Clear");
-        clear.setBackground(Color.CYAN);
-        clear.setPreferredSize( new Dimension( 90, 40) );
+        clear.setBackground(new Color(164, 129, 255));
+        clear.setForeground(Color.BLACK);
+        clear.setFont(new Font("Microsoft Tai Le", Font.BOLD, 13));
+        clear.setPreferredSize( new Dimension( 115, 25) );
         clear.setToolTipText("Clear the text");
+        clear.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         clear.addActionListener(new clearListener());
         add ( clear );
 
         JButton find = new JButton("Find");
-        find.setBackground(Color.CYAN);
-        find.setPreferredSize( new Dimension( 90, 40) );
+        find.setBackground(new Color(164, 129, 255));
+        find.setForeground(Color.BLACK);
+        find.setFont(new Font("Microsoft Tai Le", Font.BOLD, 13));
+        find.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        find.setPreferredSize(new Dimension(115, 25));
         find.setToolTipText("Find the provided word(s)");
         find.addActionListener(new findListener());
-        add ( find );
+        add(find);
 
     }
 
