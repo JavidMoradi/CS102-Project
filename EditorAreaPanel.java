@@ -32,10 +32,10 @@ public class EditorAreaPanel extends JPanel
     {
         editorPanel = new JTextArea();
         editorPanel.setVisible( true );
-        editorPanel.setRows( 22 );
+        editorPanel.setRows( 28 );
         editorPanel.setColumns( 35 );
         editorPanel.setWrapStyleWord( true );
-        editorPanel.setFont(new Font ("Tahoma", Font.PLAIN, 18) );
+        editorPanel.setFont(new Font ("Microsoft Tai Le", Font.PLAIN, 18) );
         editorPanel.setForeground( Color.WHITE );
         editorPanel.setBackground( Color.black );
 
