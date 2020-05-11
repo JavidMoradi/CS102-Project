@@ -19,7 +19,7 @@ public class CommentShowPanel extends JPanel
    public CommentShowPanel( EditorAreaPanel display )
    {
    	   touchedForTheFirstTime = true;
-	   commentsModel = new CommentsModel();
+	   commentsModel = new CommentsModel( display);
 
 	   this.display = display;
 
