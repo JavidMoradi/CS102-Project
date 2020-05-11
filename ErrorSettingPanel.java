@@ -82,8 +82,7 @@ public class ErrorSettingPanel extends JPanel {
     private class ApplyListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Color change =  commentPanel.getColors().get(selectedErrorPos);
-            change = selectedColor;
+            commentPanel.editColor( selectedErrorPos, selectedColor);
         }
     }
 }
