@@ -53,7 +53,13 @@ public class NewCommentPanel extends JPanel
         wrongIndentationError.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Comment c;
-                c = new Comment( "Wrong Indentation", display.getSelectionFirst(), display.getSelectionLast(), display.getLineNumber(display.getSelectionFirst()), wrongIndentationColor);
+                c = new Comment( "Wrong Indentation",
+                        display.getSelectionFirst(),
+                        display.getSelectionLast(),
+                        display.getLineNumber(display.getSelectionFirst()),
+                        wrongIndentationColor,
+                        FileOptionsPanel.theFileName);
+
                 display.addHighlight( wrongIndentationColor );
                 //add comment with 5 parameters!
                 CommentsModel.addComment(c);
@@ -75,8 +81,15 @@ public class NewCommentPanel extends JPanel
         		Comment c;
 
         		display.addHighlight( inefficientErrorColor );
+                System.out.println( FileOptionsPanel.theFileName );
 
-        		c = new Comment( "Inefficient Code Error", display.getSelectionFirst(), display.getSelectionLast(), display.getLineNumber(display.getSelectionFirst()), inefficientErrorColor);
+        		c = new Comment( "Inefficient Code Error",
+                        display.getSelectionFirst(),
+                        display.getSelectionLast(),
+                        display.getLineNumber(display.getSelectionFirst()),
+                        inefficientErrorColor,
+                        FileOptionsPanel.theFileName
+                        );
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -99,7 +112,12 @@ public class NewCommentPanel extends JPanel
         		Comment c;
 
         		display.addHighlight( namingConventionColor);
-        		c = new Comment( "Naming Convention Error", display.getSelectionFirst(), display.getSelectionLast(), display.getLineNumber(display.getSelectionFirst()), namingConventionColor);
+        		c = new Comment( "Naming Convention Error",
+                        display.getSelectionFirst(),
+                        display.getSelectionLast(),
+                        display.getLineNumber(display.getSelectionFirst()),
+                        namingConventionColor,
+                        FileOptionsPanel.theFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -120,7 +138,12 @@ public class NewCommentPanel extends JPanel
         	public void actionPerformed(ActionEvent e) {
         		Comment c;
         		display.addHighlight( javaDocColor);
-        		c = new Comment( "JavaDoc Comment Error" , display.getSelectionFirst(), display.getSelectionLast(), display.getLineNumber(display.getSelectionFirst()), javaDocColor);
+        		c = new Comment( "JavaDoc Comment Error" ,
+                        display.getSelectionFirst(),
+                        display.getSelectionLast(),
+                        display.getLineNumber(display.getSelectionFirst()),
+                        javaDocColor,
+                        FileOptionsPanel.theFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -140,7 +163,12 @@ public class NewCommentPanel extends JPanel
         styleErrorButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 Comment c;
-        		c = new Comment( "Style Error", display.getSelectionFirst(), display.getSelectionLast(), display.getLineNumber(display.getSelectionFirst()), styleColor);
+        		c = new Comment( "Style Error",
+                        display.getSelectionFirst(),
+                        display.getSelectionLast(),
+                        display.getLineNumber(display.getSelectionFirst()),
+                        styleColor,
+                        FileOptionsPanel.theFileName);
 
         		display.addHighlight( styleColor );
                 //add comment with 5 parameters!
@@ -162,7 +190,12 @@ public class NewCommentPanel extends JPanel
         	public void actionPerformed(ActionEvent e) {
         		Comment c;
 
-        		c = new Comment( "Commment Error", display.getSelectionFirst(), display.getSelectionLast(), display.getLineNumber(display.getSelectionFirst()), commentErrorColor);
+        		c = new Comment( "Commment Error",
+                        display.getSelectionFirst(),
+                        display.getSelectionLast(),
+                        display.getLineNumber(display.getSelectionFirst()),
+                        commentErrorColor,
+                        FileOptionsPanel.theFileName);
 
         		display.addHighlight( commentErrorColor );
                 //add comment with 5 parameters!
