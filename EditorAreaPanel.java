@@ -253,7 +253,26 @@ public class EditorAreaPanel extends JPanel
 	       	exeption.printStackTrace();
 	       	}
     	}
-    }
+	}
+	public static void reHighlight( Comment comment)
+	{
+	int a;
+	int b;
+	Color color;
+	a = comment.getStartIndex();
+    b = comment.getEndIndex();
+	color = comment.getColor();
+	painter = new DefaultHighlighter.DefaultHighlightPainter( color);
+	    	try {
+	     	    highlighter.addHighlight(a, b, painter);
+	      	} catch (BadLocationException exeption) {
+	    	// TODO Auto-generated catch block
+	       	exeption.printStackTrace();
+	       	}
+	
+
+
+	}
 
 	public JTextArea getTextArea()
 	{

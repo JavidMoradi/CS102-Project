@@ -14,6 +14,7 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
     int index;
     File selectedFile;
     ArrayList<Integer> someColorsAndIndexes;
+    static String FileNamesForComments;
 
 
     public FileExplorerPanel() {
@@ -55,7 +56,20 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
             {
                 FileOptionsPanel.displayArea.setContent("");
             }
+            FileNamesForComments = model.getElementAt(model.indexOf( lstFiles.getSelectedValue() )).toString();
+            System.out.println( FileNamesForComments);
+            
 
+            for(int k = 0; k <  CommentsModel.commentsBag.size(); k++)
+            {
+                if(CommentsModel.commentsBag.get(k).toString().contains((CharSequence)model.getElementAt(i).toString()))
+                {
+                    EditorAreaPanel.reHighlight(CommentsModel.commentsBag.get(k));
+                    //EditorAreaPanel.reHighlight(CommentShowPanel.model.get(k));
+                    System.out.println(CommentsModel.commentsBag.get(k).toString());
+
+                }
+            }
 //            someColorsAndIndexes = FileOptionsPanel.getStaticAllColorsAndIndexes();
 //            System.out.println(someColorsAndIndexes);
 //            System.out.println( FileOptionsPanel.fileName );

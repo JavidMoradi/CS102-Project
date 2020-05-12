@@ -1,4 +1,5 @@
 import org.apache.commons.lang3.StringUtils;
+import org.omg.CORBA.COMM_FAILURE;
 
 import javax.swing.*;
 import java.awt.*;
@@ -148,6 +149,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                 JOptionPane.INFORMATION_MESSAGE);
 //                        fileName += ".java";
                         FileExplorerPanel.model.addElement(fileName);
+                        FileExplorerPanel.FileNamesForComments = fileName;
 
                         fileContent = "";
                         displayArea.setContent(fileContent);
@@ -194,6 +196,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         fileName = fileName.substring( 0, fileName.indexOf(".") ); // removing th .Java from the file name
 
                         FileExplorerPanel.model.addElement( fileName );
+                        FileExplorerPanel.FileNamesForComments = fileName;
                         FileExplorerPanel.lstFiles.setSelectedIndex( fileContents.size() );
 
                         fileText.clear();
@@ -223,7 +226,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                 commentsArrayList.add( lineNumber );
 
                                 fileNamesArrayList.add( theFileName );
-                                fileNamesArrayList.add( theFileName );
+                               
 
                                 allComments += fileText.get(i);
                             }
@@ -281,6 +284,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     {
                         System.out.println( indexesArrayList.get(h) + ", " + indexesArrayList.get(h + 1) + " And the Color is " + colorsArrayList.get(h ) );
                     }
+                    
                     for ( int k = 0; k < commentsArrayList.size(); k += 2 )
                     {
                         String currentCommentType;
@@ -295,15 +299,16 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         currentLastIndex = indexesArrayList.get(k + 1);
                         currentLineNumber = (int) commentsArrayList.get(k + 1);
                         currentColor = colorsArrayList.get(k + 1);
-                        currentFileName = fileNamesArrayList.get( k );
+                        currentFileName =  fileNamesArrayList.get(k);
 
                         Comment comment;
-                        comment = new Comment( currentCommentType, currentFirstIndex, currentLastIndex, currentLineNumber, currentColor, currentFileName );
+                        comment = new Comment( currentCommentType, currentFirstIndex, currentLastIndex, currentLineNumber, currentColor, FileExplorerPanel.FileNamesForComments );
                         commentArrayList.add( comment );
                         CommentsModel.addComment(comment);
                         CommentShowPanel.update();
                     }
-
+                   
+                   
                     //This is Supposed to be for sorting the array list to match what the user is seeing, but it doesn't work for some reason
 
 //                    Collections.sort(commentArrayList, new Comparator<Comment>() {
@@ -337,13 +342,15 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         {
             if (FileExplorerPanel.model.size() > 0) {
                 int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
-                FileExplorerPanel.model.remove(index);
+                FileExplorerPanel.model.remove(index); 
                 fileContents.remove(index);
 
+
+                
                 if(fileContents.size() == 0)
                 {
                    displayArea.setContent("");
-                   CommentShowPanel.model.removeAllElements(); // Still Under Development
+                   //CommentShowPanel.model.removeAllElements(); // Still Under Development
                 }
                 else
                 {
@@ -354,7 +361,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                        for ( int z = 0; z < commentArrayList.size(); z++ )
                        {
-                           CommentsModel.removeComment( commentArrayList.get(z) );
+                           //CommentsModel.removeComment( commentArrayList.get(z) );
                        }
 
                    }
@@ -365,10 +372,20 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                        for ( int z = 0; z < commentArrayList.size(); z++ )
                        {
-                           CommentsModel.removeComment( commentArrayList.get(z) );
+                          // CommentsModel.removeComment( commentArrayList.get(z) );
                        }
                    }
             }
+            for(int k = 0; k <=  CommentShowPanel.model.size(); k++)
+                {
+                    if(CommentShowPanel.model.get(k).toString().contains((CharSequence)FileExplorerPanel.FileNamesForComments))
+                    {
+                        CommentShowPanel.model.remove(k);
+                        CommentsModel.commentsBag.remove(k);
+
+    
+                    }
+                }
             } else {
                 JOptionPane.showMessageDialog(this, " There Are No Files To Close ", "WARNING",
                         JOptionPane.WARNING_MESSAGE);
