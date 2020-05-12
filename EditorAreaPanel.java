@@ -1,3 +1,5 @@
+package project102;
+
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -253,26 +255,7 @@ public class EditorAreaPanel extends JPanel
 	       	exeption.printStackTrace();
 	       	}
     	}
-	}
-	public static void reHighlight( Comment comment)
-	{
-	int a;
-	int b;
-	Color color;
-	a = comment.getStartIndex();
-    b = comment.getEndIndex();
-	color = comment.getColor();
-	painter = new DefaultHighlighter.DefaultHighlightPainter( color);
-	    	try {
-	     	    highlighter.addHighlight(a, b, painter);
-	      	} catch (BadLocationException exeption) {
-	    	// TODO Auto-generated catch block
-	       	exeption.printStackTrace();
-	       	}
-	
-
-
-	}
+    }
 
 	public JTextArea getTextArea()
 	{
@@ -284,4 +267,9 @@ public class EditorAreaPanel extends JPanel
 		hlt.removeAllHighlights();
   }
 
+	
+	public static void setFocus( Comment c) {
+		editorPanel.setSelectionStart( c.getStartIndex());
+		editorPanel.setSelectionEnd( c.getEndIndex());
+	}
 }
