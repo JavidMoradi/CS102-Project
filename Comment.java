@@ -1,3 +1,4 @@
+
 import java.awt.*;
 
 
@@ -50,6 +51,6 @@ public class Comment {
 	
 	public String toString()
 	{
-		return "File Name: " + fileName + " .Line: " + line + ". " + comment;
+		return "Line: " + line + ". " + comment;
 	}
 }
