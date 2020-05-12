@@ -26,6 +26,6 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 
 12th Week ( 20/04/2020 - 26/04/2020 )I kept triying to solve those errors and bugs. 
 
-13th Week ( 27/04/2020 - 3/05/2020 )
+13th Week ( 27/04/2020 - 3/05/2020 ) New bugs occured about comments so ı have started to work on comments and highlighting them automatically
 
 14th Week ( 2/03/2020 - 8/03/2020 )
