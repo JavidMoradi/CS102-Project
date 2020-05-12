@@ -39,7 +39,7 @@ public class EditorAreaPanel extends JPanel
         editorPanel.setForeground( Color.WHITE );
         editorPanel.setBackground( Color.black );
 
-		commentControl = new CommentsModel();
+		commentControl = new CommentsModel( this);
 
 		
     //TextLineNumber tln = new TextLineNumber(textPane);

@@ -2,16 +2,17 @@ import java.util.ArrayList;
 
 public class CommentsModel {
 	static ArrayList<Comment> commentsBag;
+	static EditorAreaPanel display;
 
-	public CommentsModel(){
+	public CommentsModel( EditorAreaPanel display){
 		commentsBag = new ArrayList<Comment>();
-
-
+		this.display = display;
 	}
 
 	public static void addComment( Comment c) {
 		commentsBag.add(c);
 		commentsBagChanged(); 
+		display.addHighlight( c.getColor() );
 	}
 
 	public static boolean removeComment( Comment c) {

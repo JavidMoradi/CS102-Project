@@ -77,7 +77,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         setFocusable(true);
 
 
-        commentsModel = new CommentsModel();
+        commentsModel = new CommentsModel( display);
 
         displayArea = new EditorAreaPanel();
         commentShowPanel = new CommentShowPanel( displayArea );
