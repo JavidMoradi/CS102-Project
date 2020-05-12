@@ -1,4 +1,5 @@
 
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -48,6 +49,8 @@ public class CommentShowPanel extends JPanel
                                     ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
                     		lastSelectedComment = (Comment)CommentShowPanel.listFiles.getSelectedValue();
                     		touchedForTheFirstTime = false;
+                    		
+                    		EditorAreaPanel.setFocus( lastSelectedComment);
                 		}
                 		else
                 		{
@@ -58,12 +61,12 @@ public class CommentShowPanel extends JPanel
                                     ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(),
                                     ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
                     		lastSelectedComment = (Comment)CommentShowPanel.listFiles.getSelectedValue();
-                    
+                    	
+                    		EditorAreaPanel.setFocus( lastSelectedComment);
                 		}
            		 }
             		//set the selection indexes for the cartUpdate in the TextLineNumber class to take place
-            		EditorAreaPanel.editorPanel.setSelectionStart(lastSelectedComment.getStartIndex());
-            		EditorAreaPanel.editorPanel.setSelectionEnd(lastSelectedComment.getEndIndex());
+            		
             		//update();
             		
 		}
