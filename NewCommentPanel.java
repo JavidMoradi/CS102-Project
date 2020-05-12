@@ -90,16 +90,14 @@ public class NewCommentPanel extends JPanel
         	public void actionPerformed(ActionEvent e) {
 
         		Comment c;
-
-        		display.addHighlight( inefficientErrorColor );
-                System.out.println( FileExplorerPanel.FileNamesForComments);
+                System.out.println( FileOptionsPanel.theFileName );
 
         		c = new Comment( "Inefficient Code Error",
                         display.getSelectionFirst(),
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
-                        inefficientErrorColor,
-                        FileExplorerPanel.FileNamesForComments
+                        errorColors.get(1),
+                        FileOptionsPanel.theFileName
                         );
 
                 //add comment with 5 parameters!
@@ -124,8 +122,8 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionFirst(),
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
-                        namingConventionColor,
-                        FileExplorerPanel.FileNamesForComments);
+                        errorColors.get(2),
+                        FileOptionsPanel.theFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -148,8 +146,8 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionFirst(),
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
-                        javaDocColor,
-                        FileExplorerPanel.FileNamesForComments);
+                        errorColors.get(3),
+                        FileOptionsPanel.theFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -172,8 +170,8 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionFirst(),
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
-                        styleColor,
-                        FileExplorerPanel.FileNamesForComments);
+                        errorColors.get(4),
+                        FileOptionsPanel.theFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -197,8 +195,8 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionFirst(),
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
-                        commentErrorColor,
-                        FileExplorerPanel.FileNamesForComments);
+                        errorColors.get(5),
+                        FileOptionsPanel.theFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
