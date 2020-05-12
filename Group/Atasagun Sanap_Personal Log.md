@@ -26,6 +26,6 @@ On this page I will keep a weekly record of what I have done for the CS102 group
   
 12th Week ( 20/04/2020 - 26/04/2020 ) We worked on the panels and the feature of the panels. I personally worked on the Home Panel where there is the comment/uncomment and font features.
 
-13th Week ( 27/04/2020 - 3/05/2020 )
+13th Week ( 27/04/2020 - 3/05/2020 ) Worked on the error settings panel to change the color of the errors in the program.
 
-14th Week ( 2/03/2020 - 8/03/2020 )
+14th Week ( 2/03/2020 - 8/03/2020 ) Worked on the error settings panel. It works perfectly but there needs to be a saving mechanism to be added now.
