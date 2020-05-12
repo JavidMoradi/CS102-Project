@@ -15,12 +15,15 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
     File selectedFile;
     ArrayList<Integer> someColorsAndIndexes;
     static String FileNamesForComments;
+    static String selectedFileName;
 
 
     public FileExplorerPanel() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(280, 220));
 
+        selectedFileName = null;
+        
         model = new DefaultListModel();
         lstFiles = new JList(model);
         lstFiles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -48,6 +51,8 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
     {
         if (e.getValueIsAdjusting() )
         {
+            selectedFileName =  (String) lstFiles.getSelectedValue();
+            
             //FileOptionsPanel.displayArea.setContent( lstFiles.getSelectedValue().toString());
             int i = model.indexOf( lstFiles.getSelectedValue() );
             FileOptionsPanel.displayArea.setContent(FileOptionsPanel.getFileContent(i));
