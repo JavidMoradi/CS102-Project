@@ -242,17 +242,20 @@ public class EditorAreaPanel extends JPanel
     	Color color;
 
     	for( int i = 0; i < commentsBag.size(); i++) {
-    		a = commentsBag.get(i).getStartIndex();
-    		b = commentsBag.get(i).getEndIndex();
-    		color = commentsBag.get(i).getColor();
-
-	    	painter = new DefaultHighlighter.DefaultHighlightPainter( color);
-	    	try {
-	     	    highlighter.addHighlight(a, b, painter);
-	      	} catch (BadLocationException exeption) {
-	    	// TODO Auto-generated catch block
-	       	exeption.printStackTrace();
-	       	}
+    		if( commentsBag.get(i).fileName.equals( FileExplorerPanel.selectedFileName) || FileExplorerPanel.selectedFileName == null) {
+    			System.out.println("Equals(highlight)");
+	    		a = commentsBag.get(i).getStartIndex();
+	    		b = commentsBag.get(i).getEndIndex();
+	    		color = commentsBag.get(i).getColor();
+	
+		    	painter = new DefaultHighlighter.DefaultHighlightPainter( color);
+		    	try {
+		     	    highlighter.addHighlight(a, b, painter);
+		      	} catch (BadLocationException exeption) {
+		    	// TODO Auto-generated catch block
+		       	exeption.printStackTrace();
+		       	}
+    	}
     	}
     }
 
@@ -270,5 +273,10 @@ public class EditorAreaPanel extends JPanel
 	public static void setFocus( Comment c) {
 		editorPanel.setSelectionStart( c.getStartIndex());
 		editorPanel.setSelectionEnd( c.getEndIndex());
+	}
+	
+	public static void setFocus( int index) {
+		editorPanel.setSelectionStart( index);
+		editorPanel.setSelectionEnd( index);
 	}
 }
