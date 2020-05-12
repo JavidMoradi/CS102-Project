@@ -1,5 +1,4 @@
 
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -92,8 +91,12 @@ public class CommentShowPanel extends JPanel
 
 	   if( model != null) {
 		   model.removeAllElements();
-		   	for(int i = CommentsModel.commentsBag.size() - 1; i >= 0; i--)
-		   		model.addElement(CommentsModel.commentsBag.get(i));
+		   	for(int i = CommentsModel.commentsBag.size() - 1; i >= 0; i--) {
+		   		if( CommentsModel.commentsBag.get(i).fileName.equals( FileExplorerPanel.selectedFileName) || FileExplorerPanel.selectedFileName == null ) {
+		   			System.out.println("Equals(update)");
+		   			model.addElement(CommentsModel.commentsBag.get(i));
+		   		}
+		   	}
 	   }
    }
    
