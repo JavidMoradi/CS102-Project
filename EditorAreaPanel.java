@@ -242,8 +242,10 @@ public class EditorAreaPanel extends JPanel
     	Color color;
 
     	for( int i = 0; i < commentsBag.size(); i++) {
-    		if( commentsBag.get(i).fileName.equals( FileExplorerPanel.selectedFileName) || FileExplorerPanel.selectedFileName == null) {
-    			System.out.println("Equals(highlight)");
+    		System.out.println(" >>" + FileExplorerPanel.selectedFileName);
+    		System.out.println(" >>" + commentsBag.get(i).fileName);
+    		if( FileExplorerPanel.selectedFileName == null || commentsBag.get(i).fileName.equals( FileExplorerPanel.selectedFileName)) {
+    			//System.out.println("Equals(highlight)");
 	    		a = commentsBag.get(i).getStartIndex();
 	    		b = commentsBag.get(i).getEndIndex();
 	    		color = commentsBag.get(i).getColor();
