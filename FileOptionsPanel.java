@@ -108,8 +108,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         commentArrayList = new ArrayList<Comment>();
         staticAllColorsAndIndexes = new ArrayList<Integer>();
         fileNamesArrayList = new ArrayList<String>();
-
-
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
@@ -133,6 +131,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                 {
                     fileName = JOptionPane.showInputDialog(" Please Enter The Name of The New File ");
                     theFileName = fileName;
+                    
+
                     filePath = chooser.getSelectedFile().getAbsolutePath();
                     selectedFile = new File( filePath + "/" + fileName + ".java" );
                     isCreated = selectedFile.createNewFile();
@@ -149,10 +149,10 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                 JOptionPane.INFORMATION_MESSAGE);
 //                        fileName += ".java";
                         FileExplorerPanel.model.addElement(fileName);
-                        FileExplorerPanel.FileNamesForComments = fileName;
 
                         fileContent = "";
                         displayArea.setContent(fileContent);
+                        displayArea.setFocus(0);
                         fileContents.add(fileContent);
                         FileExplorerPanel.lstFiles.setSelectedIndex(fileContents.size() - 1);
                     }
@@ -171,6 +171,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                                                               // Button
         {
             try {
+             
                 chooser = new JFileChooser();
 
                 chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -180,12 +181,15 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     fileContent = "";
                     selectedFile = chooser.getSelectedFile();
 
+                    System.out.println( selectedFile);
+                    
                     scan = new Scanner ( selectedFile );
                     fileName = selectedFile.getName();
                     theFileName = fileName;
                     extension = fileName.substring( fileName.lastIndexOf(".") ); // gets the extension
-                    theFileName = theFileName.substring( 0, theFileName.indexOf(".") ); // removing th .Java from the file name
+                   theFileName = theFileName.substring( 0, theFileName.indexOf(".") ); // removing th .Java from the file name
 
+                   
                     if ( !( extension.equals(".java") ) && !( extension.equals(".txt") ) ) //checks the type of the selected file
                     {
                         JOptionPane.showMessageDialog(this, " The File You Have Chosen is Invalid," + "\n"
@@ -196,7 +200,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         fileName = fileName.substring( 0, fileName.indexOf(".") ); // removing th .Java from the file name
 
                         FileExplorerPanel.model.addElement( fileName );
-                        FileExplorerPanel.FileNamesForComments = fileName;
                         FileExplorerPanel.lstFiles.setSelectedIndex( fileContents.size() );
 
                         fileText.clear();
@@ -204,8 +207,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         {
                             fileText.add( scan.nextLine() + "\n" ); // adding each line into a separate index
                         }
-
-
 
                         for ( int i = 0; i < fileText.size(); i++ )
                         {
@@ -218,7 +219,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                             if ( currentFileLineContent.startsWith( "File Name:" ) )//"Line: " ) ) //gets the comments stored in the file
                             {
-                                theFileName = StringUtils.substringBetween( currentFileLineContent, "File Name: ", ".java" );
+                             
+                             theFileName = StringUtils.substringBetween( currentFileLineContent, "File Name: ", ".java" );
                                 commentType = StringUtils.substringAfterLast( currentFileLineContent, ". " );
                                 lineNumber = Integer.parseInt( StringUtils.substringBetween( currentFileLineContent, "Line: ", "." ) );
 
@@ -226,9 +228,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                                 commentsArrayList.add( lineNumber );
 
                                 fileNamesArrayList.add( theFileName );
-                               
+                                fileNamesArrayList.add( theFileName );
 
                                 allComments += fileText.get(i);
+                                
+                                
                             }
                             else if ( currentFileLineContent.startsWith( "java.awt.Color[" ) ) //gets the highlighting stored
                             {
@@ -264,7 +268,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                     fileContents.add ( fileContent );
                     displayArea.setContent( fileContent ); // Displays the contents of the file
-
+                    displayArea.setFocus(0);
+                    
                     for ( int i = 0; i < allColorsAndIndexes.size(); i += 5 )
                     {
                         Color tmpColor;
@@ -284,7 +289,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                     {
                         System.out.println( indexesArrayList.get(h) + ", " + indexesArrayList.get(h + 1) + " And the Color is " + colorsArrayList.get(h ) );
                     }
-                    
                     for ( int k = 0; k < commentsArrayList.size(); k += 2 )
                     {
                         String currentCommentType;
@@ -299,16 +303,15 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
                         currentLastIndex = indexesArrayList.get(k + 1);
                         currentLineNumber = (int) commentsArrayList.get(k + 1);
                         currentColor = colorsArrayList.get(k + 1);
-                        currentFileName =  fileNamesArrayList.get(k);
+                        currentFileName = fileNamesArrayList.get( k );
 
                         Comment comment;
-                        comment = new Comment( currentCommentType, currentFirstIndex, currentLastIndex, currentLineNumber, currentColor, FileExplorerPanel.FileNamesForComments );
+                        comment = new Comment( currentCommentType, currentFirstIndex, currentLastIndex, currentLineNumber, currentColor, currentFileName );
                         commentArrayList.add( comment );
                         CommentsModel.addComment(comment);
                         CommentShowPanel.update();
                     }
-                   
-                   
+
                     //This is Supposed to be for sorting the array list to match what the user is seeing, but it doesn't work for some reason
 
 //                    Collections.sort(commentArrayList, new Comparator<Comment>() {
@@ -342,15 +345,13 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
         {
             if (FileExplorerPanel.model.size() > 0) {
                 int index = FileExplorerPanel.model.indexOf(FileExplorerPanel.lstFiles.getSelectedValue());
-                FileExplorerPanel.model.remove(index); 
+                FileExplorerPanel.model.remove(index);
                 fileContents.remove(index);
 
-
-                
                 if(fileContents.size() == 0)
                 {
                    displayArea.setContent("");
-                   //CommentShowPanel.model.removeAllElements(); // Still Under Development
+                   CommentShowPanel.model.removeAllElements(); // Still Under Development
                 }
                 else
                 {
@@ -361,7 +362,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                        for ( int z = 0; z < commentArrayList.size(); z++ )
                        {
-                           //CommentsModel.removeComment( commentArrayList.get(z) );
+                           CommentsModel.removeComment( commentArrayList.get(z) );
                        }
 
                    }
@@ -372,20 +373,10 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
 
                        for ( int z = 0; z < commentArrayList.size(); z++ )
                        {
-                          // CommentsModel.removeComment( commentArrayList.get(z) );
+                           CommentsModel.removeComment( commentArrayList.get(z) );
                        }
                    }
             }
-            for(int k = 0; k <=  CommentShowPanel.model.size(); k++)
-                {
-                    if(CommentShowPanel.model.get(k).toString().contains((CharSequence)FileExplorerPanel.FileNamesForComments))
-                    {
-                        CommentShowPanel.model.remove(k);
-                        CommentsModel.commentsBag.remove(k);
-
-    
-                    }
-                }
             } else {
                 JOptionPane.showMessageDialog(this, " There Are No Files To Close ", "WARNING",
                         JOptionPane.WARNING_MESSAGE);
@@ -397,6 +388,9 @@ public class FileOptionsPanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, " The Button You Have Pressed is Invalid ", "WARNING",
                     JOptionPane.WARNING_MESSAGE);
         }
+        
+        //by default, the new file is the selected file
+        FileExplorerPanel.selectedFileName = theFileName;
     }
 
     public static String getFileContent(int index)
