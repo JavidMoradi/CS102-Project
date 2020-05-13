@@ -51,7 +51,7 @@ public class InsertACommentPanel extends JPanel {
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
                         selectedColor,
-                        FileOptionsPanel.theFileName);
+                        FileExplorerPanel.selectedFileName);
 
                 //add comment with 5 parameters!
                 CommentsModel.addComment(c);
