@@ -21,7 +21,6 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
     public FileExplorerPanel() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(280, 220));
-
         selectedFileName = null;
         
         model = new DefaultListModel();
@@ -61,20 +60,23 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
             {
                 FileOptionsPanel.displayArea.setContent("");
             }
-            FileNamesForComments = model.getElementAt(model.indexOf( lstFiles.getSelectedValue() )).toString();
-            System.out.println( FileNamesForComments);
             
+             EditorAreaPanel.setFocus( 0);
+           /// FileNamesForComments = model.getElementAt(model.indexOf( lstFiles.getSelectedValue() )).toString();
+           /// System.out.println( FileNamesForComments);
+            
+            ///
+//                        for(int k = 0; k <  CommentsModel.commentsBag.size(); k++)
+//            {
+//                if(CommentsModel.commentsBag.get(k).toString().contains((CharSequence)model.getElementAt(i).toString()))
+//                {
+//                    EditorAreaPanel.reHighlight(CommentsModel.commentsBag.get(k));
+//                    //EditorAreaPanel.reHighlight(CommentShowPanel.model.get(k));
+//                    System.out.println(CommentsModel.commentsBag.get(k).toString());
+//
+//                }
+//            }
 
-            for(int k = 0; k <  CommentsModel.commentsBag.size(); k++)
-            {
-                if(CommentsModel.commentsBag.get(k).toString().contains((CharSequence)model.getElementAt(i).toString()))
-                {
-                    EditorAreaPanel.reHighlight(CommentsModel.commentsBag.get(k));
-                    //EditorAreaPanel.reHighlight(CommentShowPanel.model.get(k));
-                    System.out.println(CommentsModel.commentsBag.get(k).toString());
-
-                }
-            }
 //            someColorsAndIndexes = FileOptionsPanel.getStaticAllColorsAndIndexes();
 //            System.out.println(someColorsAndIndexes);
 //            System.out.println( FileOptionsPanel.fileName );
@@ -93,6 +95,9 @@ public class FileExplorerPanel extends JPanel implements ListSelectionListener {
 //            }
             
        }
+        EditorAreaPanel.reHighlight( CommentsModel.commentsBag);
+        CommentShowPanel.update();
+        
         add(lstFiles);
         setVisible(true);
     }
