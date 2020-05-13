@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -71,11 +72,12 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
                         errorColors.get(0),
-                        FileOptionsPanel.theFileName);
+                        FileExplorerPanel.selectedFileName);
 
                 //add comment with 5 parameters!
                 CommentsModel.addComment(c);
                 CommentShowPanel.update();
+               // EditorAreaPanel.reHighlight( CommentsModel.commentsBag);
             }
         });
         add ( wrongIndentationError );
@@ -97,7 +99,7 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
                         errorColors.get(1),
-                        FileOptionsPanel.theFileName
+                        FileExplorerPanel.selectedFileName
                         );
 
                 //add comment with 5 parameters!
@@ -123,7 +125,7 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
                         errorColors.get(2),
-                        FileOptionsPanel.theFileName);
+                        FileExplorerPanel.selectedFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -147,7 +149,7 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
                         errorColors.get(3),
-                        FileOptionsPanel.theFileName);
+                        FileExplorerPanel.selectedFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -171,7 +173,7 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
                         errorColors.get(4),
-                        FileOptionsPanel.theFileName);
+                        FileExplorerPanel.selectedFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -196,7 +198,7 @@ public class NewCommentPanel extends JPanel
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
                         errorColors.get(5),
-                        FileOptionsPanel.theFileName);
+                        FileExplorerPanel.selectedFileName);
 
                 //add comment with 5 parameters!
         		CommentsModel.addComment(c);
@@ -206,7 +208,6 @@ public class NewCommentPanel extends JPanel
         });
         add ( commentError );
         errorButtons.add(commentError);
-
     }
     
     public void editColor(int pos, Color color) {
