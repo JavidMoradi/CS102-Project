@@ -39,6 +39,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener
     ArrayList<Color> colorsArrayList;
     ArrayList<Comment> commentArrayList;
     ArrayList<String> fileNamesArrayList;
+    static String theFilteredFileName;
 
     public FileOptionsPanel ( EditorAreaPanel display )
     {
@@ -104,6 +105,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener
         filePath = "";
         currentFileLineContent = "";
         theFileName = "";
+        theFilteredFileName = "";
         fileContents = new ArrayList<> ();
         fileText = new ArrayList<String> ();
         allColorsAndIndexes = new ArrayList<Integer> ();
@@ -190,7 +192,6 @@ public class FileOptionsPanel extends JPanel implements ActionListener
         {
             try
             {
-
                 chooser = new JFileChooser ();
 
                 chooser.setFileSelectionMode ( JFileChooser.FILES_ONLY );
@@ -206,7 +207,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener
                     fileName = selectedFile.getName ();
                     theFileName = fileName;
                     extension = fileName.substring ( fileName.lastIndexOf ( "." ) ); // gets the extension
-                    theFileName = theFileName.substring ( 0, theFileName.indexOf ( "." ) ); // removing th .Java from the file name
+                    theFileName = theFileName.substring ( 0, theFileName.indexOf ( "." ) ); // removing the .Java from the file name
+                    System.out.println ( " The Unfiltered File Name: " + theFileName );
 
 
                     if ( ! ( extension.equals ( ".java" ) ) && ! ( extension.equals ( ".txt" ) ) ) //checks the type of the selected file
@@ -240,9 +242,11 @@ public class FileOptionsPanel extends JPanel implements ActionListener
                             if ( currentFileLineContent.startsWith ( "Line: " ) )//"Line: " ) ) //gets the comments stored in the file
                             {
 
-                                theFileName = StringUtils.substringBetween ( currentFileLineContent, "File Name: ", ".java" );
+//                                theFilteredFileName = StringUtils.substringBetween ( currentFileLineContent, "File Name: ", ".java" );
                                 commentType = StringUtils.substringAfterLast ( currentFileLineContent, ". " );
                                 lineNumber = Integer.parseInt ( StringUtils.substringBetween ( currentFileLineContent, "Line: ", "." ) );
+
+//                                System.out.println ( "The Filtered File Name: " +  theFilteredFileName );
 
                                 commentsArrayList.add ( commentType );
                                 commentsArrayList.add ( lineNumber );
@@ -302,10 +306,10 @@ public class FileOptionsPanel extends JPanel implements ActionListener
 
                         displayArea.addHighlight ( tmpColor, firstIndex, lastIndex );
                     }
-                    for ( int h = 0; h < indexesArrayList.size (); h += 2 )
-                    {
-                        System.out.println ( indexesArrayList.get ( h ) + ", " + indexesArrayList.get ( h + 1 ) + " And the Color is " + colorsArrayList.get ( h ) );
-                    }
+//                    for ( int h = 0; h < indexesArrayList.size (); h += 2 )
+//                    {
+//                        System.out.println ( indexesArrayList.get ( h ) + ", " + indexesArrayList.get ( h + 1 ) + " And the Color is " + colorsArrayList.get ( h ) );
+//                    }
                     for ( int k = 0; k < commentsArrayList.size (); k += 2 )
                     {
                         String currentCommentType;
@@ -321,6 +325,8 @@ public class FileOptionsPanel extends JPanel implements ActionListener
                         currentLineNumber = (int) commentsArrayList.get ( k + 1 );
                         currentColor = colorsArrayList.get ( k + 1 );
                         currentFileName = fileNamesArrayList.get ( k );
+
+                        System.out.println ( currentFileName );
 
                         Comment comment;
                         comment = new Comment ( currentCommentType, currentFirstIndex, currentLastIndex, currentLineNumber, currentColor, currentFileName );
