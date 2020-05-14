@@ -5,32 +5,39 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
-public class CodeReviewer {
+public class CodeReviewer
+{
 
     // Main method
-    public static void main(String[] args) throws IOException {
+    public static void main ( String[] args ) throws IOException
+    {
 
-        CodeReviewerFrame frame = new CodeReviewerFrame(" Jhub ");
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        playMusic("openingsong.wav");
+        CodeReviewerFrame frame = new CodeReviewerFrame ( " Jhub " );
+        frame.setExtendedState ( JFrame.MAXIMIZED_BOTH );
+        playMusic ( "openingsong.wav" );
 
     }
 
-    public static void playMusic(String musicLocation) {
-        try {
-            File musicPath = new File(musicLocation);
-            if (musicPath.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                clip.start();
+    public static void playMusic ( String musicLocation )
+    {
+        try
+        {
+            File musicPath = new File ( musicLocation );
+            if ( musicPath.exists () )
+            {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream ( musicPath );
+                Clip clip = AudioSystem.getClip ();
+                clip.open ( audioInput );
+                clip.start ();
 
-            } else {
-                System.out.println("null");
+            } else
+            {
+                System.out.println ( "null" );
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch ( Exception e )
+        {
+            e.printStackTrace ();
 
         }
     }

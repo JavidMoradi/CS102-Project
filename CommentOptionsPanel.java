@@ -6,42 +6,44 @@ import java.awt.event.ActionListener;
 
 public class CommentOptionsPanel extends JPanel
 {
-	EditorAreaPanel display;
-	InsertACommentFrame insertACommentFrame;
+    EditorAreaPanel display;
+    InsertACommentFrame insertACommentFrame;
 
-	 public CommentOptionsPanel ( EditorAreaPanel display )
-	    {
-	    	this.display = display;
-	        setPreferredSize( new Dimension( 533, 130) );
-	        setBackground(Color.darkGray);
-	        setBorder( BorderFactory.createLineBorder( Color.BLACK) );
+    public CommentOptionsPanel ( EditorAreaPanel display )
+    {
+        this.display = display;
+        setPreferredSize ( new Dimension ( 533, 130 ) );
+        setBackground ( Color.darkGray );
+        setBorder ( BorderFactory.createLineBorder ( Color.BLACK ) );
 
-	        JLabel commentOptionsLabel = new JLabel( "COMMENT OPTIONS" );
-	        commentOptionsLabel.setPreferredSize( new Dimension(450, 20));
-	        commentOptionsLabel.setFont( new Font( "Tahoma", Font.BOLD, 18 ) );
-	        commentOptionsLabel.setForeground( Color.BLACK );
-	        commentOptionsLabel.setBorder( new LineBorder( new Color(0, 0, 0) ) );
-	        commentOptionsLabel.setOpaque( true );
-	        commentOptionsLabel.setBackground( Color.WHITE );
-	        commentOptionsLabel.setHorizontalAlignment( SwingConstants.CENTER );
-	        commentOptionsLabel.setBounds( 200, 36, 201, 40 );
-	        add ( commentOptionsLabel );
+        JLabel commentOptionsLabel = new JLabel ( "COMMENT OPTIONS" );
+        commentOptionsLabel.setPreferredSize ( new Dimension ( 450, 20 ) );
+        commentOptionsLabel.setFont ( new Font ( "Tahoma", Font.BOLD, 18 ) );
+        commentOptionsLabel.setForeground ( Color.BLACK );
+        commentOptionsLabel.setBorder ( new LineBorder ( new Color ( 0, 0, 0 ) ) );
+        commentOptionsLabel.setOpaque ( true );
+        commentOptionsLabel.setBackground ( Color.WHITE );
+        commentOptionsLabel.setHorizontalAlignment ( SwingConstants.CENTER );
+        commentOptionsLabel.setBounds ( 200, 36, 201, 40 );
+        add ( commentOptionsLabel );
 
-	        JButton insertCommentButton = new JButton("Insert A Comment");
-	        insertCommentButton.setBackground(new Color(164, 129, 255));
-	        insertCommentButton.setForeground( Color.BLACK );
-		insertCommentButton.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
-		insertCommentButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	        insertCommentButton.setPreferredSize( new Dimension( 210, 40) );
-	        insertCommentButton.addActionListener((ActionListener) new ActionListener() {
+        JButton insertCommentButton = new JButton ( "Insert A Comment" );
+        insertCommentButton.setBackground ( new Color ( 164, 129, 255 ) );
+        insertCommentButton.setForeground ( Color.BLACK );
+        insertCommentButton.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
+        insertCommentButton.setBorder ( BorderFactory.createLineBorder ( Color.BLACK ) );
+        insertCommentButton.setPreferredSize ( new Dimension ( 210, 40 ) );
+        insertCommentButton.addActionListener ( (ActionListener) new ActionListener ()
+        {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-	                	insertACommentFrame = new InsertACommentFrame(display);
-				}
+            @Override
+            public void actionPerformed ( ActionEvent e )
+            {
+                insertACommentFrame = new InsertACommentFrame ( display );
+            }
 
-	        });
-	        add ( insertCommentButton, BorderLayout.EAST );
+        } );
+        add ( insertCommentButton, BorderLayout.EAST );
 
 		/*
 	        JButton nextCommentButton = new JButton("Next Comment");
@@ -57,31 +59,33 @@ public class CommentOptionsPanel extends JPanel
 	        add ( previousCommentButton, BorderLayout.EAST );
 		*/
 
-	        JButton deleteCommentButton = new JButton("Delete Comment");
-			deleteCommentButton.setBackground(new Color(164, 129, 255));
-			deleteCommentButton.setForeground(Color.BLACK);
-			deleteCommentButton.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
-			deleteCommentButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	        deleteCommentButton.setPreferredSize( new Dimension( 210, 40) );
-	        deleteCommentButton.addActionListener( new ActionListener() {
+        JButton deleteCommentButton = new JButton ( "Delete Comment" );
+        deleteCommentButton.setBackground ( new Color ( 164, 129, 255 ) );
+        deleteCommentButton.setForeground ( Color.BLACK );
+        deleteCommentButton.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
+        deleteCommentButton.setBorder ( BorderFactory.createLineBorder ( Color.BLACK ) );
+        deleteCommentButton.setPreferredSize ( new Dimension ( 210, 40 ) );
+        deleteCommentButton.addActionListener ( new ActionListener ()
+        {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
+            @Override
+            public void actionPerformed ( ActionEvent e )
+            {
+                // TODO Auto-generated method stub
 
-					//another way to remove highlight which is adding a black highlight
-					//display.addHighlight( new Color( 0,0,0,255), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
-					
-					CommentsModel.commentsBag.remove(CommentShowPanel.listFiles.getSelectedValue());
-					
-					display.removeHighlights();
-					display.reHighlight(CommentsModel.commentsBag);
+                //another way to remove highlight which is adding a black highlight
+                //display.addHighlight( new Color( 0,0,0,255), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
 
-					CommentShowPanel.update();
-					CommentShowPanel.touchedForTheFirstTime = true;
-				}
+                CommentsModel.commentsBag.remove ( CommentShowPanel.listFiles.getSelectedValue () );
 
-	        });
-	        add ( deleteCommentButton, BorderLayout.EAST );
-	    }
+                display.removeHighlights ();
+                display.reHighlight ( CommentsModel.commentsBag );
+
+                CommentShowPanel.update ();
+                CommentShowPanel.touchedForTheFirstTime = true;
+            }
+
+        } );
+        add ( deleteCommentButton, BorderLayout.EAST );
+    }
 }
