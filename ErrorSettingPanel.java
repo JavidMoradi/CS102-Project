@@ -6,6 +6,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ErrorSettingPanel extends JPanel
 {
@@ -13,14 +14,16 @@ public class ErrorSettingPanel extends JPanel
     static Color selectedColor;
     static int selectedErrorPos;
     String[] ERRORS = { "Wrong Indentation", "Inefficient Code", "Naming Conventions Error", "JavaDoc Error", "Blank Line/Space Error", "Comment Error" };
-    Color[] colorsArray = { Color.RED, Color.BLUE, Color.MAGENTA, new Color ( 24, 147, 196 ), Color.gray, new Color ( 29, 171, 34 ) };
     JColorChooser colorChooser;
     String selectedError;
     DefaultListModel model;
     JList errorTypes;
     JScrollPane scrollPane;
+    JTextField renameField;
+    JLabel rename;
     JButton applyButton;
 
+    ColorAndText colorAndText;
     NewCommentPanel commentPanel;
 
     public ErrorSettingPanel ( NewCommentPanel commentPanel )
@@ -40,7 +43,7 @@ public class ErrorSettingPanel extends JPanel
 
         scrollPane = new JScrollPane ( errorTypes );
         scrollPane.setPreferredSize ( new Dimension ( 200, 200 ) );
-        this.add ( scrollPane, BorderLayout.WEST );
+        add ( scrollPane, BorderLayout.WEST );
 
 
         errorTypes.setPreferredSize ( new Dimension ( 180, 150 ) );
@@ -48,19 +51,33 @@ public class ErrorSettingPanel extends JPanel
         scrollPane.setViewportView ( errorTypes );
         errorTypes.setBackground ( new Color ( 204, 0, 102 ) );
 
+
+        colorAndText = new ColorAndText();
+        colorAndText.setPreferredSize( new Dimension( 600, 360));
+        add( colorAndText, BorderLayout.EAST);
+
         applyButton = new JButton ( "Apply" );
         applyButton.setPreferredSize ( new Dimension ( 100, 40 ) );
-        this.add ( applyButton, BorderLayout.SOUTH );
+        add ( applyButton, BorderLayout.SOUTH );
         applyButton.addActionListener ( new ApplyListener () );
-
-
-        colorChooser = new JColorChooser ();
-        add ( colorChooser, BorderLayout.EAST );
-        colorChooser.getSelectionModel ().addChangeListener ( new ColorChangeListener () );
 
 
     }
 
+    private class ColorAndText extends JPanel {
+        public ColorAndText() {
+            colorChooser = new JColorChooser ();
+            add ( colorChooser, BorderLayout.NORTH );
+            colorChooser.getSelectionModel ().addChangeListener ( new ColorChangeListener () );
+
+            rename = new JLabel( "Rename your error: ");
+            add(rename, BorderLayout.WEST);
+
+            renameField = new JTextField();
+            renameField.setPreferredSize( new Dimension(300,30));
+            add( renameField, BorderLayout.SOUTH);
+        }
+    }
 
     private class ErrorSelectionListener implements ListSelectionListener
     {
@@ -87,7 +104,12 @@ public class ErrorSettingPanel extends JPanel
         @Override
         public void actionPerformed ( ActionEvent e )
         {
-            commentPanel.editColor ( selectedErrorPos, selectedColor );
+            try {
+                commentPanel.editColor ( selectedErrorPos, selectedColor );
+                commentPanel.editErrorName( selectedErrorPos, renameField.getText());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 }
