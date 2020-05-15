@@ -3,227 +3,159 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 
-public class NewCommentPanel extends JPanel
-{
+
+public class NewCommentPanel extends JPanel {
+    Dimension ERRORBUTTONDIMENSION = new Dimension(210, 40);
+    Font ERRORFONT = new Font("Microsoft Tai Le", Font.BOLD, 18);
+
     static ArrayList<Color> errorColors;
     static ArrayList<JButton> errorButtons;
+    static ArrayList<String> errorNames;
+    int errorNumber;
+
+    File errors;
+    FileReader errorsRead;
+    BufferedReader bufferedReader;
+
     EditorAreaPanel display;
     ErrorSettingsFrame errorSettings;
-    NewCommentPanel thisPanel;
 
-    public NewCommentPanel ( EditorAreaPanel display )
-    {
+    public NewCommentPanel(EditorAreaPanel display) throws IOException {
+
         this.display = display;
-        setPreferredSize ( new Dimension ( 200, 130 ) );
-        setBackground ( Color.darkGray );
-        setBorder ( BorderFactory.createLineBorder ( Color.BLACK ) );
+        setPreferredSize(new Dimension(200, 130));
+        setBackground(Color.darkGray);
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        errorColors = new ArrayList<Color> ();
-        errorButtons = new ArrayList<JButton> ();
+        JLabel insertLabel = new JLabel("ERROR REVIEW OPTIONS");
+        insertLabel.setPreferredSize(new Dimension(640, 20));
+        insertLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+        insertLabel.setForeground(Color.BLACK);
+        insertLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
+        insertLabel.setOpaque(true);
+        insertLabel.setBackground(Color.WHITE);
+        insertLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        insertLabel.setBounds(200, 36, 201, 40);
+        add(insertLabel);
 
-        errorColors.add ( Color.RED );
-        errorColors.add ( Color.BLUE );
-        errorColors.add ( Color.MAGENTA );
-        errorColors.add ( new Color ( 24, 147, 196 ) );
-        errorColors.add ( Color.GRAY );
-        errorColors.add ( new Color ( 29, 171, 34 ) );
-
-
-        JLabel insertLabel = new JLabel ( "ERROR REVIEW OPTIONS" );
-        insertLabel.setPreferredSize ( new Dimension ( 640, 20 ) );
-        insertLabel.setFont ( new Font ( "Tahoma", Font.BOLD, 18 ) );
-        insertLabel.setForeground ( Color.BLACK );
-        insertLabel.setBorder ( new LineBorder ( new Color ( 0, 0, 0 ) ) );
-        insertLabel.setOpaque ( true );
-        insertLabel.setBackground ( Color.WHITE );
-        insertLabel.setHorizontalAlignment ( SwingConstants.CENTER );
-        insertLabel.setBounds ( 200, 36, 201, 40 );
-        add ( insertLabel );
-
-
-        JButton errorSettingsButton = new JButton ();
-        errorSettingsButton.setBackground ( Color.GRAY );
-        errorSettingsButton.setForeground ( Color.WHITE );
-        errorSettingsButton.setPreferredSize ( new Dimension ( 15, 15 ) );
-        add ( errorSettingsButton );
-        thisPanel = this;
-        errorSettingsButton.addActionListener ( new ActionListener ()
-        {
-            public void actionPerformed ( ActionEvent e )
-            {
-                errorSettings = new ErrorSettingsFrame ( thisPanel );
+        JButton errorSettingsButton = new JButton();
+        errorSettingsButton.setBackground(Color.GRAY);
+        errorSettingsButton.setForeground(Color.WHITE);
+        errorSettingsButton.setPreferredSize(new Dimension(15, 15));
+        add(errorSettingsButton);
+        NewCommentPanel thisPanel = this;
+        errorSettingsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                errorSettings = new ErrorSettingsFrame(thisPanel);
             }
-        } );
+        });
 
+        errorColors = new ArrayList<Color>();
+        errorButtons = new ArrayList<JButton>();
+        errorNames = new ArrayList<String>();
+        errorNumber = 0;
+        errors = new File("errors.txt");
 
-        JButton wrongIndentationError = new JButton ( "Wrong Indentation" );
-        wrongIndentationError.setBackground ( errorColors.get ( 0 ) );
-        wrongIndentationError.setForeground ( Color.BLACK );
-        wrongIndentationError.setPreferredSize ( new Dimension ( 210, 40 ) );
-        wrongIndentationError.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 18 ) );
-        wrongIndentationError.addActionListener ( new ActionListener ()
-        {
-            public void actionPerformed ( ActionEvent e )
-            {
-                Comment c;
-                c = new Comment ( "Wrong Indentation",
-                        display.getSelectionFirst (),
-                        display.getSelectionLast (),
-                        display.getLineNumber ( display.getSelectionFirst () ),
-                        errorColors.get ( 0 ),
-                        FileExplorerPanel.selectedFileName );
+        if (!errors.exists()) {
+            errors.createNewFile();
+            FileWriter defaultErrors = new FileWriter("errors.txt", true);
+            defaultErrors.write("Wrong Indentation,255,0,0\n" +
+                                    "Inefficient Code,0,0,255\n" +
+                                    "Naming Conventions,255,0,255\n" +
+                                    "JavaDoc,24,147,196\n" +
+                                    "Blank Line/Space,102,102,102\n" +
+                                    "Comment Error,29,171,34\n");
+            defaultErrors.close();
+        }
 
-                //add comment with 5 parameters!
-                CommentsModel.addComment ( c );
-                CommentShowPanel.update ();
-                // EditorAreaPanel.reHighlight( CommentsModel.commentsBag);
-            }
-        } );
-        add ( wrongIndentationError );
-        errorButtons.add ( wrongIndentationError );
+        errorsRead = new FileReader(errors);
+        bufferedReader = new BufferedReader(errorsRead);
+        String errorLine;
+        while ((errorLine = bufferedReader.readLine()) != null) {
 
-        JButton inefficientError = new JButton ( "Inefficient Code" );
-        inefficientError.setBackground ( errorColors.get ( 1 ) );
-        inefficientError.setForeground ( Color.BLACK );
-        inefficientError.setPreferredSize ( new Dimension ( 210, 40 ) );
-        inefficientError.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
-        inefficientError.addActionListener ( new ActionListener ()
-        {
-            public void actionPerformed ( ActionEvent e )
-            {
+            String[] errorComponents = errorLine.split(",");
+            int red, green, blue;
+            Color errorColor;
+            JButton errorButton;
+            String errorName;
 
-                Comment c;
-                System.out.println ( FileOptionsPanel.theFileName );
+            //errors are drawn from the line
+            errorName = errorComponents[0];
+            errorNames.add(errorName);
 
-                c = new Comment ( "Inefficient Code Error",
-                        display.getSelectionFirst (),
-                        display.getSelectionLast (),
-                        display.getLineNumber ( display.getSelectionFirst () ),
-                        errorColors.get ( 1 ),
-                        FileExplorerPanel.selectedFileName
-                );
+            //errorcolor is created
+            red = Integer.parseInt(errorComponents[1]);
+            green = Integer.parseInt(errorComponents[2]);
+            blue = Integer.parseInt(errorComponents[3]);
+            errorColor = new Color(red, green, blue);
+            errorColors.add(errorColor);
 
-                //add comment with 5 parameters!
-                CommentsModel.addComment ( c );
-                CommentShowPanel.update ();
-                // CommentShowPanel.addComment( "Line: " + display.getLineNumber(display.getSelectionFirst()) + " Inefficient Code Error." );
-            }
-        } );
-        add ( inefficientError );
-        errorButtons.add ( inefficientError );
+            //errorbutton is created
+            errorButton = new JButton(errorNames.get(errorNumber));
+            errorButton.setBackground(errorColors.get(errorNumber));
+            errorButton.setForeground(Color.BLACK);
+            errorButton.setPreferredSize(ERRORBUTTONDIMENSION);
+            errorButton.setFont(ERRORFONT);
+            errorButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Comment errorComment;
+                    errorComment = new Comment(errorNames.get(errorNumber),
+                            display.getSelectionFirst(),
+                            display.getSelectionLast(),
+                            display.getLineNumber(display.getSelectionFirst()),
+                            errorColors.get(errorNumber),
+                            FileExplorerPanel.selectedFileName);
+                    CommentsModel.addComment(errorComment);
+                    CommentShowPanel.update();
+                }
+            });
+            add ( errorButton );
+            errorButtons.add ( errorButton );
 
-        JButton namingConventionError = new JButton ( "Naming Conventions" );
-        namingConventionError.setBackground ( errorColors.get ( 2 ) );
-        namingConventionError.setForeground ( Color.BLACK );
-        namingConventionError.setPreferredSize ( new Dimension ( 210, 40 ) );
-        namingConventionError.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 17 ) );
-        namingConventionError.addActionListener ( new ActionListener ()
-        {
-            public void actionPerformed ( ActionEvent e )
-            {
-
-                Comment c;
-                c = new Comment ( "Naming Convention Error",
-                        display.getSelectionFirst (),
-                        display.getSelectionLast (),
-                        display.getLineNumber ( display.getSelectionFirst () ),
-                        errorColors.get ( 2 ),
-                        FileExplorerPanel.selectedFileName );
-
-                //add comment with 5 parameters!
-                CommentsModel.addComment ( c );
-                CommentShowPanel.update ();
-                //  CommentShowPanel.addComment( "Line: " + display.getLineNumber(display.getSelectionFirst()) + " Nameing Convention Error." );
-            }
-        } );
-        add ( namingConventionError );
-        errorButtons.add ( namingConventionError );
-
-        JButton javaDocError = new JButton ( "JavaDoc" );
-        javaDocError.setBackground ( errorColors.get ( 3 ) );
-        javaDocError.setForeground ( Color.BLACK );
-        javaDocError.setPreferredSize ( new Dimension ( 210, 40 ) );
-        javaDocError.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
-        javaDocError.addActionListener ( new ActionListener ()
-        {
-            public void actionPerformed ( ActionEvent e )
-            {
-                Comment c;
-                c = new Comment ( "JavaDoc Comment Error",
-                        display.getSelectionFirst (),
-                        display.getSelectionLast (),
-                        display.getLineNumber ( display.getSelectionFirst () ),
-                        errorColors.get ( 3 ),
-                        FileExplorerPanel.selectedFileName );
-
-                //add comment with 5 parameters!
-                CommentsModel.addComment ( c );
-                CommentShowPanel.update ();
-                //  CommentShowPanel.addComment( "Line: " + display.getLineNumber(display.getSelectionFirst()) + " JavaDoc Comment Error." );
-            }
-        } );
-        add ( javaDocError );
-        errorButtons.add ( javaDocError );
-
-        JButton styleErrorButton = new JButton ( "Blank Line/Space" );
-        styleErrorButton.setBackground ( errorColors.get ( 4 ) );
-        styleErrorButton.setForeground ( Color.BLACK );
-        styleErrorButton.setPreferredSize ( new Dimension ( 210, 40 ) );
-        styleErrorButton.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
-        styleErrorButton.addActionListener ( new ActionListener ()
-        {
-            public void actionPerformed ( ActionEvent e )
-            {
-                Comment c;
-                c = new Comment ( "Style Error",
-                        display.getSelectionFirst (),
-                        display.getSelectionLast (),
-                        display.getLineNumber ( display.getSelectionFirst () ),
-                        errorColors.get ( 4 ),
-                        FileExplorerPanel.selectedFileName );
-
-                //add comment with 5 parameters!
-                CommentsModel.addComment ( c );
-                CommentShowPanel.update ();
-                //   CommentShowPanel.addComment( "Line: " + display.getLineNumber(display.getSelectionFirst()) + " Style Error." );
-            }
-        } );
-        add ( styleErrorButton );
-        errorButtons.add ( styleErrorButton );
-
-        JButton commentError = new JButton ( "Comment Error" );
-        commentError.setBackground ( errorColors.get ( 5 ) );
-        commentError.setForeground ( Color.BLACK );
-        commentError.setPreferredSize ( new Dimension ( 210, 40 ) );
-        commentError.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
-        commentError.addActionListener ( new ActionListener ()
-        {
-            public void actionPerformed ( ActionEvent e )
-            {
-                Comment c;
-
-                c = new Comment ( "Commment Error",
-                        display.getSelectionFirst (),
-                        display.getSelectionLast (),
-                        display.getLineNumber ( display.getSelectionFirst () ),
-                        errorColors.get ( 5 ),
-                        FileExplorerPanel.selectedFileName );
-
-                //add comment with 5 parameters!
-                CommentsModel.addComment ( c );
-                CommentShowPanel.update ();
-                //     CommentShowPanel.addComment( "Line: " + display.getLineNumber(display.getSelectionFirst()) + " Commment Error." );
-            }
-        } );
-        add ( commentError );
-        errorButtons.add ( commentError );
+            errorNumber++;
+        }
+        errorsRead.close();
     }
 
-    public void editColor ( int pos, Color color )
-    {
-        errorColors.set ( pos, color );
-        errorButtons.get ( pos ).setBackground ( color );
+    public void addErrorButton( String newErrorName, Color color) throws IOException {
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("errors.txt", true)));
+        out.println( "newErrorName" + "," + color.getRed() + "," + color.getGreen() + "," + color.getBlue());
+        errorNames.add( newErrorName);
+        errorColors.add( color);
+
+        JButton errorButton = new JButton(errorNames.get(errorNumber));
+        errorButton.setBackground(errorColors.get(errorNumber));
+        errorButton.setForeground(Color.BLACK);
+        errorButton.setPreferredSize(ERRORBUTTONDIMENSION);
+        errorButton.setFont(ERRORFONT);
+        errorButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Comment errorComment;
+                errorComment = new Comment(errorNames.get(errorNumber),
+                        display.getSelectionFirst(),
+                        display.getSelectionLast(),
+                        display.getLineNumber(display.getSelectionFirst()),
+                        errorColors.get(errorNumber),
+                        FileExplorerPanel.selectedFileName);
+                CommentsModel.addComment(errorComment);
+                CommentShowPanel.update();
+            }
+        });
+        add ( errorButton );
+        errorButtons.add ( errorButton );
+        errorNumber++;
+    }
+
+    public void editColor(int pos, Color color) {
+        errorColors.set(pos, color);
+        errorButtons.get(pos).setBackground(color);
+    }
+
+    public void editErrorName(int pos, String errorName) {
+        errorNames.set(pos, errorName);
+        errorButtons.get(pos).setText(errorName);
     }
 }
