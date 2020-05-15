@@ -4,7 +4,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class NewCommentPanel extends JPanel {
@@ -56,7 +60,7 @@ public class NewCommentPanel extends JPanel {
         errorColors = new ArrayList<Color>();
         errorButtons = new ArrayList<JButton>();
         errorNames = new ArrayList<String>();
-        errorNumber = 0;
+
         errors = new File("errors.txt");
 
         if (!errors.exists()) {
@@ -73,9 +77,9 @@ public class NewCommentPanel extends JPanel {
 
         errorsRead = new FileReader(errors);
         bufferedReader = new BufferedReader(errorsRead);
+        errorNumber = 0;
         String errorLine;
         while ((errorLine = bufferedReader.readLine()) != null) {
-
             String[] errorComponents = errorLine.split(",");
             int red, green, blue;
             Color errorColor;
@@ -102,11 +106,13 @@ public class NewCommentPanel extends JPanel {
             errorButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Comment errorComment;
-                    errorComment = new Comment(errorNames.get(errorNumber),
+                    String errorName = ((JButton) e.getSource()).getText();
+                    Color errorColor = errorColors.get( errorNames.indexOf( errorName));
+                    errorComment = new Comment(errorName,
                             display.getSelectionFirst(),
                             display.getSelectionLast(),
                             display.getLineNumber(display.getSelectionFirst()),
-                            errorColors.get(errorNumber),
+                            errorColor,
                             FileExplorerPanel.selectedFileName);
                     CommentsModel.addComment(errorComment);
                     CommentShowPanel.update();
@@ -114,7 +120,6 @@ public class NewCommentPanel extends JPanel {
             });
             add ( errorButton );
             errorButtons.add ( errorButton );
-
             errorNumber++;
         }
         errorsRead.close();
@@ -134,11 +139,13 @@ public class NewCommentPanel extends JPanel {
         errorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Comment errorComment;
-                errorComment = new Comment(errorNames.get(errorNumber),
+                String errorName = ((JButton) e.getSource()).getText();
+                Color errorColor = errorColors.get( errorNames.indexOf( errorName));
+                errorComment = new Comment( errorName,
                         display.getSelectionFirst(),
                         display.getSelectionLast(),
                         display.getLineNumber(display.getSelectionFirst()),
-                        errorColors.get(errorNumber),
+                        errorColor,
                         FileExplorerPanel.selectedFileName);
                 CommentsModel.addComment(errorComment);
                 CommentShowPanel.update();
@@ -147,15 +154,34 @@ public class NewCommentPanel extends JPanel {
         add ( errorButton );
         errorButtons.add ( errorButton );
         errorNumber++;
+        out.close();
     }
 
-    public void editColor(int pos, Color color) {
+    public void editColor(int pos, Color color) throws IOException {
         errorColors.set(pos, color);
         errorButtons.get(pos).setBackground(color);
+
+        ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("errors.txt"), StandardCharsets.UTF_8));
+        String errorName;
+        errorName = fileContent.get(pos).split(",")[0];
+
+        fileContent.set(pos, errorName + "," + color.getRed() + "," + color.getGreen() + "," + color.getBlue());
+        Files.write(Paths.get("errors.txt"), fileContent, StandardCharsets.UTF_8);
     }
 
-    public void editErrorName(int pos, String errorName) {
+    public void editErrorName(int pos, String errorName) throws IOException {
         errorNames.set(pos, errorName);
         errorButtons.get(pos).setText(errorName);
+
+        ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("errors.txt"), StandardCharsets.UTF_8));
+        int red, green, blue;
+        red = Integer.parseInt( fileContent.get(pos).split(",")[1]);
+        green = Integer.parseInt(fileContent.get(pos).split(",")[2]);
+        blue = Integer.parseInt(fileContent.get(pos).split(",")[3]);
+
+        fileContent.set(pos, errorName + "," + red + "," + green + "," + blue);
+        Files.write(Paths.get("errors.txt"), fileContent, StandardCharsets.UTF_8);
     }
+
+
 }
