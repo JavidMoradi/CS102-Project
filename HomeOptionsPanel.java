@@ -14,7 +14,7 @@ public class HomeOptionsPanel extends JPanel
     JComboBox fontComboBox;
     Font displayFont;
     String fontList[] = GraphicsEnvironment.getLocalGraphicsEnvironment ().getAvailableFontFamilyNames ();
-    String[] sizes = { "16", "18", "20", "22", "24", "26", "28", "30", "32", "34" };
+    String[] sizes = { "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34" };
     JTextField tf;
     Highlighter.HighlightPainter myHighlightPainter = new MyHighlighPainter ( Color.red );
 
@@ -67,7 +67,6 @@ public class HomeOptionsPanel extends JPanel
         sizeComboBox.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 13 ) );
         sizeComboBox.setBorder ( BorderFactory.createLineBorder ( Color.BLACK ) );
         add ( sizeComboBox );
-        sizeComboBox.setSelectedIndex ( 1 );
         sizeComboBox.addActionListener ( new SizeListener () );
 
         tf = new JTextField ();
