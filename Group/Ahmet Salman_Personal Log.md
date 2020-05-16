@@ -15,7 +15,7 @@ In this week, we started brainstorming trying to decide on an idea for the group
 At this point in time, we have reached a consensus regarding the project idea, we have decided on a scheduler, so we were waiting for your (Professor David) / the TA's approval on the Idea, however we managed to receive feedback from you before the TA. You gave us a number of things we have to keep in mind and some other issues we have to find a solution to prior to Starting to build the project.
 
 
-4th Week ( 24/03/2020 - 01/03/2020 )
+4th Week ( 24/02/2020 - 01/03/2020 )
 During this week, we had our idea proposal presentation, this Was a great opportunity to get a direct insight into what You, along with the TAs, think about out project idea, There were a number of problems, some of them being Very integral, such as the lack of clearance for the Students to access the university's database, which Was crucial for the project.
 
 5th Week ( 2/03/2020 - 8/03/2020 )
@@ -46,6 +46,5 @@ In this week, my friend finished his file explorer part which allowed me to star
 13th Week ( 27/04/2020 - 3/05/2020 )
 At this point we are running out of time, we only have 2 weeks left In this semester, so I requested all the features that have been finalized To be committed to GitHub, and I started extending the file management Mechanism into them, it was getting easier, but still challenging  Nonetheless, however now I feel more familiar with how to manipulate Files in Java, and how to make sure everything runs smoothly, during this Week I was able to start saving the comments written in our program, which Was done in a twisted way to some extent, but it works
 
-14th Week ( 2/03/2020 - 8/03/2020 )
-
-****
+14th Week ( 4/05/2020 - 10/05/2020 )
+During this last week, i was particularily working on the bugs that arose as a result of the development process. For instance, there were a number of bugs that were related to opening/managing multiple files at once, one such problem is that when opening a file, adding comment, closing the file, and opening it again. The indexes for the highlighting get resetted to 0, and there are many many many more
