@@ -13,7 +13,7 @@ _Jhub is a desktop application that enables lab assistants to review the codes o
 + **Group/project Selection:** _completed_ (10.02.2020)
 + **Requirements:** _completed_ (20.02.2020)
 + **UI Design:** _completed_ (25.04.2020)
-+ **Detailed Design:** _in progress_
++ **Detailed Design:** _completed_ (14.05.2020)
 + **Implementation:** _in progress_
 + **Reflections:** _not yet!_
 
