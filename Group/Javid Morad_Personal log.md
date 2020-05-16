@@ -45,6 +45,6 @@ I managed to provide a change size function, and I was about to provide an auto-
 Find some good replacements for our remaining part. I updated README layout, as well as, the scheme of the meetings and personal logs.
 
 ### ~ week #14 ( 2/05/2020 - 8/05/2020 ) ~
-
+In this week I mostly focused on the design of the project, and I do believe that I managed to provide something reasonable both for myself and rest of the group; however, my professor mentioned that the design may look goodb, but it is not satisfactory, as well as, it may not seem as it used to be in older versions of JDK. Also, I have to make a better layout management. 
 
 ****
