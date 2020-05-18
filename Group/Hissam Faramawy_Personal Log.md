@@ -37,12 +37,13 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 15th Week ( 9/03/2020 - 16/03/2020 ) I fixed a bug that happens when a comment is selected from the ShowCommentPanel and a new Comment is added at the same time. Later on, I and Onur gathered to divide more work. He took the part of making the "Insert A Comment" Button actually function, and he finished it at the same day. I took the responsiblity of making the organization of the CommentShowPanel; that's it, to show the file-related comments, when a different file is selected. I finished that part by the end of the day. Also, I fixed a bug that makes the JText Area scroll down to the bottom of the text every time a different file is selected. Now it shows the Text from the top when alternating between files as well as when openning a new file. 
 
 16th Week ( 17/03/2020 - /03/2020 ) During the last week and this week I and Ahemd had been meeting to fix some serious bugs. In about 4 days we finished fixing the following bugs ( Some of them ocurred after fixing aother bugs!): 
+
    -all comments of all files were mixed and shown in comments-show panel >> now the comments shown are changing according to the selected file
-   -
+   
    -When saving files for the second time the program was saving the comments' indexes as 0 >> now it save them with their correct indexs
-   -
+   
    -When opennig a saved file with certain conditions, the highlighting mechanisme was not acting as intended >> now the highlight mechanisme is working well.
-   -
+   
 There remained one last bug which occurs when opennig two saved files, and I fixed it at the end. What remained now is to put the last touches and record the project Demo! in this week and the previous one,  our team had lots of work. 
    
  
