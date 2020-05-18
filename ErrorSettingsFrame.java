@@ -1,23 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class ErrorSettingsFrame extends JFrame
-{
+public class ErrorSettingsFrame extends JFrame {
 
     ErrorSettingPanel settings;
+    Dimension size;
+    Toolkit toolkit;
 
-    public ErrorSettingsFrame ( NewCommentPanel commentPanel )
-    {
-        super ();
-        setPreferredSize ( new Dimension ( 1080, 720 ) );
-        settings = new ErrorSettingPanel ( commentPanel );
-        add ( settings );
+    public ErrorSettingsFrame(NewCommentPanel commentPanel) {
+        super();
+        settings = new ErrorSettingPanel(commentPanel);
+        add(settings);
 
-        setLayout ( new FlowLayout () );
+        toolkit = getToolkit();
+        size = toolkit.getScreenSize();
+        setLocation((size.width / 2 - getWidth() / 2) - 350, (size.height / 2 - getHeight() / 2) - 250);
 
-        pack ();
-        setVisible ( true );
+        setLayout(new FlowLayout());
+
+        pack();
+        setVisible(true);
     }
-
 
 }

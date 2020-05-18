@@ -21,7 +21,7 @@ public class CommentShowPanel extends JPanel
 
         model = new DefaultListModel ();
         listFiles = new JList ( model );
-        listFiles.setPreferredSize ( new Dimension ( 500, 700 ) );
+        listFiles.setPreferredSize ( new Dimension ( 497, 700 ) );
 
         JScrollPane scrollPane = new JScrollPane ();
         scrollPane.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
