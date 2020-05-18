@@ -18,7 +18,7 @@ public class EditorAreaPanel extends JPanel
     static DefaultHighlighter.DefaultHighlightPainter painter;
     static ArrayList firstIndexes;
     static ArrayList lastIndexes;
-    static ArrayList<Color> colorsArrayList;
+    static ArrayList <Color> colorsArrayList;
     Font editorFont;
     int firstIndex;
     int lastIndex;
@@ -27,7 +27,7 @@ public class EditorAreaPanel extends JPanel
     {
         editorPanel = new JTextArea ();
         editorPanel.setVisible ( true );
-        editorPanel.setRows ( 28 );
+        editorPanel.setRows ( 25 );
         editorPanel.setColumns ( 35 );
         editorPanel.setWrapStyleWord ( true );
         editorPanel.setFont ( new Font ( "Microsoft Tai Le", Font.PLAIN, 18 ) );
@@ -43,13 +43,13 @@ public class EditorAreaPanel extends JPanel
 
         scrollPane.setRowHeaderView ( textLineNumber );
         add ( scrollPane );
-        highlighter = (DefaultHighlighter) editorPanel.getHighlighter ();
+        highlighter = ( DefaultHighlighter ) editorPanel.getHighlighter ();
         painter = new DefaultHighlighter.DefaultHighlightPainter ( Color.RED );
         highlighter.setDrawsLayeredHighlights ( false ); // this is the key line
 
         firstIndexes = new ArrayList ();
         lastIndexes = new ArrayList ();
-        colorsArrayList = new ArrayList<Color> ();
+        colorsArrayList = new ArrayList <Color> ();
     }
 
     public static String getContent ()
@@ -57,9 +57,12 @@ public class EditorAreaPanel extends JPanel
         String allContent;
         allContent = "";
         allContent = editorPanel.getText () + commentControl.getAllComments ( FileOptionsPanel.theFileName );
-        for ( int i = 0; i < colorsArrayList.size (); i++ )
+        for ( int i = CommentsModel.commentsBag.size () - 1; i >= 0; i-- )//int i = 0; i < colorsArrayList.size (); i++ )
         {
-            allContent += "\n" + colorsArrayList.get ( i ) + ", " + firstIndexes.get ( i ) + ",*" + lastIndexes.get ( i ) + "*,";
+//            allContent += "\n" + colorsArrayList.get ( i ) + ", " + firstIndexes.get ( i ) + ",*" + lastIndexes.get ( i ) + "*,";
+            allContent += "\n" + colorsArrayList.get ( i ) + ", " +
+                    CommentsModel.commentsBag.get ( i ).start + ",*" +
+                    CommentsModel.commentsBag.get ( i ).end + "*,";
         }
         return allContent;
     }
@@ -118,7 +121,9 @@ public class EditorAreaPanel extends JPanel
         {
             currentSubString = text.substring ( i, i + 1 );
             if ( currentSubString.equals ( "\n" ) )
+            {
                 lineNumber++;
+            }
         }
         return lineNumber;
     }
@@ -139,30 +144,34 @@ public class EditorAreaPanel extends JPanel
         {
             currentSubString = text.substring ( i, i + 1 );
             if ( currentSubString.equals ( "\n" ) )
+            {
                 count--;
+            }
             if ( count == 2 )
+            {
                 pos = i + 2;
+            }
         }
 
         return pos;
     }
 
     //adds pointer at the specified position
-    public static void addNewPointer ( int pos )
-    {
-        //First we delete any previous pointers (if any)
-        //editorPanel.setText(editorPanel.getText().replace(">>",""));
-
-        RemovePointer ();
-
-        //Secondly we add new one
-        String str;
-        str = ">>";
-        editorPanel.insert ( str, pos );
-
-        //reHighlight because normally it loses highlight
-        reHighlight ( CommentsModel.commentsBag );
-    }
+//    public static void addNewPointer ( int pos )
+//    {
+//        //First we delete any previous pointers (if any)
+//        //editorPanel.setText(editorPanel.getText().replace(">>",""));
+//
+//        RemovePointer ();
+//
+//        //Secondly we add new one
+//        String str;
+//        str = ">>";
+//        editorPanel.insert ( str, pos );
+//
+//        //reHighlight because normally it loses highlight
+//        reHighlight ( CommentsModel.commentsBag );
+//    }
 
     public static void RemovePointer ()
     {
@@ -183,7 +192,7 @@ public class EditorAreaPanel extends JPanel
         }
     }
 
-    public static void reHighlight ( ArrayList<Comment> commentsBag )
+    public static void reHighlight ( ArrayList <Comment> commentsBag )
     {
         int a;
         int b;
@@ -193,7 +202,8 @@ public class EditorAreaPanel extends JPanel
         {
             System.out.println ( " >>" + FileExplorerPanel.selectedFileName );
             System.out.println ( " >>" + commentsBag.get ( i ).fileName );
-            if ( FileExplorerPanel.selectedFileName == null || commentsBag.get ( i ).fileName.equals ( FileExplorerPanel.selectedFileName ) )
+            if ( FileExplorerPanel.selectedFileName == null || commentsBag.get ( i ).fileName.equals (
+                    FileExplorerPanel.selectedFileName ) )
             {
                 //System.out.println("Equals(highlight)");
                 a = commentsBag.get ( i ).getStartIndex ();
@@ -238,7 +248,8 @@ public class EditorAreaPanel extends JPanel
 
         for ( int i = 0; i < colorsArrayList.size (); i++ )
         {
-            allColorsAndIndexes += "\n" + colorsArrayList.get ( i ) + ", " + firstIndexes.get ( i ) + ", " + lastIndexes.get ( i );
+            allColorsAndIndexes += "\n" + colorsArrayList.get ( i ) + ", " + firstIndexes.get (
+                    i ) + ", " + lastIndexes.get ( i );
         }
         return allColorsAndIndexes;
     }
@@ -264,7 +275,7 @@ public class EditorAreaPanel extends JPanel
         return lastIndexes;
     }
 
-    public ArrayList<Color> getColorsArrayList ()
+    public ArrayList <Color> getColorsArrayList ()
     {
         return colorsArrayList;
     }

@@ -52,9 +52,9 @@ public class InsertACommentPanel extends JPanel
         {
             Comment c;
             c = new Comment ( commentField.getText (),
-                    display.getSelectionFirst (),
-                    display.getSelectionLast (),
-                    display.getLineNumber ( display.getSelectionFirst () ),
+                    EditorAreaPanel.getSelectionFirst (),
+                    EditorAreaPanel.getSelectionLast (),
+                    EditorAreaPanel.getLineNumber ( EditorAreaPanel.getSelectionFirst () ),
                     selectedColor,
                     FileExplorerPanel.selectedFileName );
 

@@ -10,7 +10,6 @@ public class InsertACommentFrame extends JFrame
     {
         super ();
         setPreferredSize ( new Dimension ( 700, 500 ) );
-        ;
         insertACommentPanel = new InsertACommentPanel ( display, this );
         add ( insertACommentPanel );
 

@@ -30,7 +30,8 @@ public class CodeReviewer
                 clip.open ( audioInput );
                 clip.start ();
 
-            } else
+            }
+            else
             {
                 System.out.println ( "null" );
             }

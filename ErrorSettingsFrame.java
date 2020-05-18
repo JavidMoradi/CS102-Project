@@ -10,7 +10,6 @@ public class ErrorSettingsFrame extends JFrame
     {
         super ();
         setPreferredSize ( new Dimension ( 1080, 720 ) );
-        ;
         settings = new ErrorSettingPanel ( commentPanel );
         add ( settings );
 

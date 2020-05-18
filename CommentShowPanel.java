@@ -37,26 +37,27 @@ public class CommentShowPanel extends JPanel
             public void valueChanged ( ListSelectionEvent e )
             {
                 // TODO Auto-generated method stub
-                if ( (Comment) listFiles.getSelectedValue () != null )
+                if ( listFiles.getSelectedValue () != null )
                 {
                     if ( touchedForTheFirstTime )
                     {
                         display.addHighlight ( new Color ( 255, 255, 255, 120 ),
-                                ( (Comment) CommentShowPanel.listFiles.getSelectedValue () ).getStartIndex (),
-                                ( (Comment) CommentShowPanel.listFiles.getSelectedValue () ).getEndIndex () );
-                        lastSelectedComment = (Comment) CommentShowPanel.listFiles.getSelectedValue ();
+                                ( ( Comment ) CommentShowPanel.listFiles.getSelectedValue () ).getStartIndex (),
+                                ( ( Comment ) CommentShowPanel.listFiles.getSelectedValue () ).getEndIndex () );
+                        lastSelectedComment = ( Comment ) CommentShowPanel.listFiles.getSelectedValue ();
                         touchedForTheFirstTime = false;
 
                         EditorAreaPanel.setFocus ( lastSelectedComment );
-                    } else
+                    }
+                    else
                     {
                         display.addHighlight ( lastSelectedComment.getColor (),
                                 lastSelectedComment.getStartIndex (),
                                 lastSelectedComment.getEndIndex () );
                         display.addHighlight ( new Color ( 255, 255, 255, 120 ),
-                                ( (Comment) CommentShowPanel.listFiles.getSelectedValue () ).getStartIndex (),
-                                ( (Comment) CommentShowPanel.listFiles.getSelectedValue () ).getEndIndex () );
-                        lastSelectedComment = (Comment) CommentShowPanel.listFiles.getSelectedValue ();
+                                ( ( Comment ) CommentShowPanel.listFiles.getSelectedValue () ).getStartIndex (),
+                                ( ( Comment ) CommentShowPanel.listFiles.getSelectedValue () ).getEndIndex () );
+                        lastSelectedComment = ( Comment ) CommentShowPanel.listFiles.getSelectedValue ();
 
                         EditorAreaPanel.setFocus ( lastSelectedComment );
                     }
@@ -86,13 +87,25 @@ public class CommentShowPanel extends JPanel
 
     public static void update ()
     {
-
+//        if ( model != null )
+//        {
+//            model.removeAllElements ();
+//            for ( int i = CommentsModel.commentsBag.size () - 1; i >= 0; i-- )
+//            {
+//                if ( FileExplorerPanel.selectedFileName == null || CommentsModel.commentsBag.get ( i ).fileName.equals ( FileExplorerPanel.selectedFileName ) )
+//                {
+//                    //System.out.println("Equals(update)");
+//                    model.addElement ( CommentsModel.commentsBag.get ( i ) );
+//                }
+//            }
+//        }
         if ( model != null )
         {
             model.removeAllElements ();
-            for ( int i = CommentsModel.commentsBag.size () - 1; i >= 0; i-- )
+            for ( int i = 0; i < CommentsModel.commentsBag.size (); i++ )//int i = CommentsModel.commentsBag.size () - 1; i >= 0; i-- )
             {
-                if ( FileExplorerPanel.selectedFileName == null || CommentsModel.commentsBag.get ( i ).fileName.equals ( FileExplorerPanel.selectedFileName ) )
+                if ( FileExplorerPanel.selectedFileName == null || CommentsModel.commentsBag.get ( i ).fileName.equals (
+                        FileExplorerPanel.selectedFileName ) )
                 {
                     //System.out.println("Equals(update)");
                     model.addElement ( CommentsModel.commentsBag.get ( i ) );

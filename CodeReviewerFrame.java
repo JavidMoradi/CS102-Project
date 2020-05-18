@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class CodeReviewerFrame extends JFrame
 {
@@ -8,7 +9,7 @@ public class CodeReviewerFrame extends JFrame
     JPanel p = new JPanel ();
     JPanel panel = new JPanel ();
 
-    public CodeReviewerFrame ( String title )
+    public CodeReviewerFrame ( String title ) throws IOException
     {
         super ( title );
         setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );

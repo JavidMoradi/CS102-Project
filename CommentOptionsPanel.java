@@ -33,7 +33,7 @@ public class CommentOptionsPanel extends JPanel
         insertCommentButton.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
         insertCommentButton.setBorder ( BorderFactory.createLineBorder ( Color.BLACK ) );
         insertCommentButton.setPreferredSize ( new Dimension ( 210, 40 ) );
-        insertCommentButton.addActionListener ( (ActionListener) new ActionListener ()
+        insertCommentButton.addActionListener ( new ActionListener ()
         {
 
             @Override
@@ -78,8 +78,8 @@ public class CommentOptionsPanel extends JPanel
 
                 CommentsModel.commentsBag.remove ( CommentShowPanel.listFiles.getSelectedValue () );
 
-                display.removeHighlights ();
-                display.reHighlight ( CommentsModel.commentsBag );
+                EditorAreaPanel.removeHighlights ();
+                EditorAreaPanel.reHighlight ( CommentsModel.commentsBag );
 
                 CommentShowPanel.update ();
                 CommentShowPanel.touchedForTheFirstTime = true;

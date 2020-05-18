@@ -36,7 +36,9 @@ public class ErrorSettingPanel extends JPanel
         errorTypes.setSelectionMode ( ListSelectionModel.SINGLE_SELECTION );
 
         for ( int error = 0; error < ERRORS.length; error++ )
+        {
             model.addElement ( ERRORS[error] );
+        }
 
         errorTypes.setSelectedIndex ( 0 );
         errorTypes.addListSelectionListener ( new ErrorSelectionListener () );
@@ -52,9 +54,9 @@ public class ErrorSettingPanel extends JPanel
         errorTypes.setBackground ( new Color ( 204, 0, 102 ) );
 
 
-        colorAndText = new ColorAndText();
-        colorAndText.setPreferredSize( new Dimension( 600, 360));
-        add( colorAndText, BorderLayout.EAST);
+        colorAndText = new ColorAndText ();
+        colorAndText.setPreferredSize ( new Dimension ( 600, 360 ) );
+        add ( colorAndText, BorderLayout.EAST );
 
         applyButton = new JButton ( "Apply" );
         applyButton.setPreferredSize ( new Dimension ( 100, 40 ) );
@@ -64,18 +66,20 @@ public class ErrorSettingPanel extends JPanel
 
     }
 
-    private class ColorAndText extends JPanel {
-        public ColorAndText() {
+    private class ColorAndText extends JPanel
+    {
+        public ColorAndText ()
+        {
             colorChooser = new JColorChooser ();
             add ( colorChooser, BorderLayout.NORTH );
             colorChooser.getSelectionModel ().addChangeListener ( new ColorChangeListener () );
 
-            rename = new JLabel( "Rename your error: ");
-            add(rename, BorderLayout.WEST);
+            rename = new JLabel ( "Rename your error: " );
+            add ( rename, BorderLayout.WEST );
 
-            renameField = new JTextField();
-            renameField.setPreferredSize( new Dimension(300,30));
-            add( renameField, BorderLayout.SOUTH);
+            renameField = new JTextField ();
+            renameField.setPreferredSize ( new Dimension ( 300, 30 ) );
+            add ( renameField, BorderLayout.SOUTH );
         }
     }
 
@@ -84,10 +88,14 @@ public class ErrorSettingPanel extends JPanel
         @Override
         public void valueChanged ( ListSelectionEvent e )
         {
-            selectedError = (String) errorTypes.getSelectedValue ();
+            selectedError = ( String ) errorTypes.getSelectedValue ();
             for ( int error = 0; error < ERRORS.length; error++ )
+            {
                 if ( ERRORS[error].equals ( selectedError ) )
+                {
                     selectedErrorPos = error;
+                }
+            }
         }
     }
 
@@ -104,11 +112,13 @@ public class ErrorSettingPanel extends JPanel
         @Override
         public void actionPerformed ( ActionEvent e )
         {
-            try {
+            try
+            {
                 commentPanel.editColor ( selectedErrorPos, selectedColor );
-                commentPanel.editErrorName( selectedErrorPos, renameField.getText());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+                commentPanel.editErrorName ( selectedErrorPos, renameField.getText () );
+            } catch ( IOException ioException )
+            {
+                ioException.printStackTrace ();
             }
         }
     }

@@ -50,7 +50,7 @@ public class TextLineNumber extends JPanel
     private boolean updateFont;
     private int borderGap;
     private Color currentLineForeground;
-    private HashMap<String, FontMetrics> fonts;
+    private HashMap <String, FontMetrics> fonts;
 
     /**
      * Create a line number component for a text component. This minimum
@@ -72,7 +72,7 @@ public class TextLineNumber extends JPanel
      */
     public TextLineNumber ( JTextComponent component, int minimumDisplayDigits )
     {
-        this.component = component;
+        TextLineNumber.component = component;
 
         called = false;
         calledLine = 0;
@@ -175,12 +175,13 @@ public class TextLineNumber extends JPanel
      * <li>TextLineNumber.CENTER
      * <li>TextLineNumber.RIGHT (default)
      * </ul>
-     * @param currentLineForeground  the Color used to render the current line
+     *
+     * @param currentLineForeground the Color used to render the current line
      */
     public void setDigitAlignment ( float digitAlignment )
     {
-        this.digitAlignment =
-                digitAlignment > 1.0f ? 1.0f : digitAlignment < 0.0f ? - 1.0f : digitAlignment;
+        TextLineNumber.digitAlignment =
+                digitAlignment > 1.0f ? 1.0f : digitAlignment < 0.0f ? -1.0f : digitAlignment;
     }
 
     /**
@@ -202,7 +203,7 @@ public class TextLineNumber extends JPanel
      */
     public void setMinimumDisplayDigits ( int minimumDisplayDigits )
     {
-        this.minimumDisplayDigits = minimumDisplayDigits;
+        TextLineNumber.minimumDisplayDigits = minimumDisplayDigits;
         setPreferredWidth ();
     }
 
@@ -257,9 +258,13 @@ public class TextLineNumber extends JPanel
             try
             {
                 if ( isCurrentLine ( rowStartOffset ) )
+                {
                     g.setColor ( getCurrentLineForeground () );
+                }
                 else
+                {
                     g.setColor ( getForeground () );
+                }
 
                 //  Get the line number as a string and then determine the
                 //  "X" and "Y" offsets for drawing the string.
@@ -289,10 +294,7 @@ public class TextLineNumber extends JPanel
         int caretPosition = component.getCaretPosition ();
         Element root = component.getDocument ().getDefaultRootElement ();
 
-        if ( root.getElementIndex ( rowStartOffset ) == root.getElementIndex ( caretPosition ) )
-            return true;
-        else
-            return false;
+        return root.getElementIndex ( rowStartOffset ) == root.getElementIndex ( caretPosition );
     }
 
     /*
@@ -306,9 +308,13 @@ public class TextLineNumber extends JPanel
         Element line = root.getElement ( index );
 
         if ( line.getStartOffset () == rowStartOffset )
+        {
             return String.valueOf ( index + 1 );
+        }
         else
+        {
             return "";
+        }
     }
 
     /*
@@ -316,7 +322,7 @@ public class TextLineNumber extends JPanel
      */
     private int getOffsetX ( int availableWidth, int stringWidth )
     {
-        return (int) ( ( availableWidth - stringWidth ) * digitAlignment );
+        return ( int ) ( ( availableWidth - stringWidth ) * digitAlignment );
     }
 
     /*
@@ -339,10 +345,13 @@ public class TextLineNumber extends JPanel
         if ( r.height == lineHeight )  // default font is being used
         {
             descent = fontMetrics.getDescent ();
-        } else  // We need to check all the attributes for font changes
+        }
+        else  // We need to check all the attributes for font changes
         {
             if ( fonts == null )
-                fonts = new HashMap<String, FontMetrics> ();
+            {
+                fonts = new HashMap <String, FontMetrics> ();
+            }
 
             Element root = component.getDocument ().getDefaultRootElement ();
             int index = root.getElementIndex ( rowStartOffset );
@@ -352,8 +361,8 @@ public class TextLineNumber extends JPanel
             {
                 Element child = line.getElement ( i );
                 AttributeSet as = child.getAttributes ();
-                String fontFamily = (String) as.getAttribute ( StyleConstants.FontFamily );
-                Integer fontSize = (Integer) as.getAttribute ( StyleConstants.FontSize );
+                String fontFamily = ( String ) as.getAttribute ( StyleConstants.FontFamily );
+                Integer fontSize = ( Integer ) as.getAttribute ( StyleConstants.FontSize );
                 String key = fontFamily + fontSize;
 
                 FontMetrics fm = fonts.get ( key );
@@ -469,11 +478,12 @@ public class TextLineNumber extends JPanel
         {
             if ( updateFont )
             {
-                Font newFont = (Font) evt.getNewValue ();
+                Font newFont = ( Font ) evt.getNewValue ();
                 setFont ( newFont );
                 lastDigits = 0;
                 setPreferredWidth ();
-            } else
+            }
+            else
             {
 //				repaint();
                 getParent ().repaint ();

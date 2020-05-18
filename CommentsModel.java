@@ -2,20 +2,20 @@ import java.util.ArrayList;
 
 public class CommentsModel
 {
-    static ArrayList<Comment> commentsBag;
+    static ArrayList <Comment> commentsBag;
     static EditorAreaPanel display;
 
     public CommentsModel ( EditorAreaPanel display )
     {
-        commentsBag = new ArrayList<Comment> ();
-        this.display = display;
+        commentsBag = new ArrayList <Comment> ();
+        CommentsModel.display = display;
     }
 
     public static void addComment ( Comment c )
     {
         commentsBag.add ( c );
         commentsBagChanged ();
-        display.addHighlight ( c.getColor () );
+        EditorAreaPanel.addHighlight ( c.getColor () );
     }
 
     public static boolean removeComment ( Comment c )
@@ -27,7 +27,9 @@ public class CommentsModel
         for ( int i = 0; i < commentsBag.size (); i++ )
         {
             if ( commentsBag.get ( i ) == c )
+            {
                 x = i;
+            }
             found = true;
 
             EditorAreaPanel.removeHighlights ();
