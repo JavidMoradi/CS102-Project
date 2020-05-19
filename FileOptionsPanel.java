@@ -280,7 +280,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener
                                 fileName.indexOf ( "." ) ); // removing th .Java from the file name
 
                         FileExplorerPanel.model.addElement ( fileName );
-                        FileExplorerPanel.lstFiles.setSelectedIndex ( fileContents.size () );
+                        FileExplorerPanel.lstFiles.setSelectedIndex ( FileExplorerPanel.model.size() - 1);//fileContents.size () );
 
                         fileText.clear ();
                         while ( scan.hasNextLine () ) // Reads the File Content
