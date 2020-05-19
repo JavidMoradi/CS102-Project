@@ -33,14 +33,16 @@ public class CommentOptionsPanel extends JPanel
         insertCommentButton.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 20 ) );
         insertCommentButton.setBorder ( BorderFactory.createLineBorder ( Color.BLACK ) );
         insertCommentButton.setPreferredSize ( new Dimension ( 430, 40 ) );
-        insertCommentButton.addActionListener((ActionListener) new ActionListener() {
+        insertCommentButton.addActionListener ( new ActionListener ()
+        {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                insertACommentFrame = new InsertACommentFrame(display);
+            public void actionPerformed ( ActionEvent e )
+            {
+                insertACommentFrame = new InsertACommentFrame ( display );
             }
 
-        });
+        } );
         add ( insertCommentButton, BorderLayout.EAST );
 
         JButton deleteCommentButton = new JButton ( "Delete Comment" );
@@ -53,18 +55,16 @@ public class CommentOptionsPanel extends JPanel
         {
 
             @Override
-            public void actionPerformed ( ActionEvent e ) {
+            public void actionPerformed ( ActionEvent e )
+            {
                 // TODO Auto-generated method stub
 
-                //another way to remove highlight which is adding a black highlight
-                //display.addHighlight( new Color( 0,0,0,255), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getStartIndex(), ((Comment)CommentShowPanel.listFiles.getSelectedValue() ).getEndIndex() );
+                CommentsModel.commentsBag.remove ( CommentShowPanel.listFiles.getSelectedValue () );
 
-                CommentsModel.commentsBag.remove(CommentShowPanel.listFiles.getSelectedValue());
+                EditorAreaPanel.removeHighlights ();
+                EditorAreaPanel.reHighlight ( CommentsModel.commentsBag );
 
-                display.removeHighlights();
-                display.reHighlight(CommentsModel.commentsBag);
-
-                CommentShowPanel.update();
+                CommentShowPanel.update ();
                 CommentShowPanel.touchedForTheFirstTime = true;
             }
 

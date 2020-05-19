@@ -62,43 +62,16 @@ public class CommentShowPanel extends JPanel
                         EditorAreaPanel.setFocus ( lastSelectedComment );
                     }
                 }
-                //set the selection indexes for the cartUpdate in the TextLineNumber class to take place
-
-                //update();
-
             }
         } );
 
         add ( scrollPane );
         add ( listFiles );
-
-        //commentJTextArea = new JTextArea("Line 5: You should avoid doing mistakes\r\n"
-        //    + "Line 15: Better to use JButton instead of Button\r\n"
-        //  + "Line 34: Names does not make sense! \r\n");
-        //commentJTextArea.setVisible(true);
-        //commentJTextArea.setRows(19);
-        //commentJTextArea.setColumns(40);
-        // commentJTextArea.setWrapStyleWord(true);
-        //commentJTextArea.setFont(new Font("Tahoma", Font.PLAIN, 19));
-        //JScrollPane scrollPane = new JScrollPane(commentJTextArea);
-        //add(scrollPane);
         setVisible ( true );
     }
 
     public static void update ()
     {
-//        if ( model != null )
-//        {
-//            model.removeAllElements ();
-//            for ( int i = CommentsModel.commentsBag.size () - 1; i >= 0; i-- )
-//            {
-//                if ( FileExplorerPanel.selectedFileName == null || CommentsModel.commentsBag.get ( i ).fileName.equals ( FileExplorerPanel.selectedFileName ) )
-//                {
-//                    //System.out.println("Equals(update)");
-//                    model.addElement ( CommentsModel.commentsBag.get ( i ) );
-//                }
-//            }
-//        }
         if ( model != null )
         {
             model.removeAllElements ();
@@ -111,18 +84,6 @@ public class CommentShowPanel extends JPanel
                     model.addElement ( CommentsModel.commentsBag.get ( i ) );
                 }
             }
-        }
-    }
-
-    public void setComments ( String allComments )
-    {
-        int numberOfLines;
-        numberOfLines = 0;
-        String[] lines = allComments.split ( "\r\n|\r|\n" );
-        model.removeAllElements ();
-        for ( int i = 1; i < lines.length; i++ )
-        {
-            model.addElement ( lines[i] );
         }
     }
 }

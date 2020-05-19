@@ -13,8 +13,8 @@ public class HomeOptionsPanel extends JPanel
     EditorAreaPanel display;
     JComboBox fontComboBox;
     Font displayFont;
-    String fontList[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-    String[] sizes = {"10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34"};
+    String[] fontList = GraphicsEnvironment.getLocalGraphicsEnvironment ().getAvailableFontFamilyNames ();
+    String[] sizes = { "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34" };
     JTextField tf;
     Highlighter.HighlightPainter myHighlightPainter = new MyHighlighPainter ( Color.red );
 
@@ -46,7 +46,9 @@ public class HomeOptionsPanel extends JPanel
         {
             fontComboBox.addItem ( fontList[i] );
             if ( display.getEditorFont ().getFontName ().equals ( fontList[i] ) )
+            {
                 fontComboBox.setSelectedItem ( fontList[i] );
+            }
         }
         fontComboBox.setForeground ( Color.black );
         fontComboBox.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 13 ) );
@@ -61,7 +63,9 @@ public class HomeOptionsPanel extends JPanel
         {
             sizeComboBox.addItem ( sizes[i] );
             if ( display.getEditorFont ().getSize () == Integer.parseInt ( sizes[i] ) )
+            {
                 sizeComboBox.setSelectedItem ( sizes[i] );
+            }
         }
         sizeComboBox.setForeground ( Color.BLACK );
         sizeComboBox.setFont ( new Font ( "Microsoft Tai Le", Font.BOLD, 13 ) );
@@ -145,8 +149,8 @@ public class HomeOptionsPanel extends JPanel
 
         public void actionPerformed ( ActionEvent e )
         {
-            fontName = (String) ((JComboBox) e.getSource()).getSelectedItem();
-            displayFont = display.getEditorFont();
+            fontName = ( String ) ( ( JComboBox ) e.getSource () ).getSelectedItem ();
+            displayFont = display.getEditorFont ();
             display.setEditorFont ( new Font ( fontName, displayFont.getStyle (), displayFont.getSize () ) );
         }
     }
@@ -156,11 +160,12 @@ public class HomeOptionsPanel extends JPanel
 
         String size;
 
-        public void actionPerformed ( ActionEvent e ) {
-            JComboBox cb = (JComboBox) e.getSource();
-            size = (String) cb.getSelectedItem();
-            displayFont = display.getEditorFont();
-            display.setEditorFont(displayFont.deriveFont((float) Integer.parseInt(size)));
+        public void actionPerformed ( ActionEvent e )
+        {
+            JComboBox cb = ( JComboBox ) e.getSource ();
+            size = ( String ) cb.getSelectedItem ();
+            displayFont = display.getEditorFont ();
+            display.setEditorFont ( displayFont.deriveFont ( ( float ) Integer.parseInt ( size ) ) );
         }
     }
 

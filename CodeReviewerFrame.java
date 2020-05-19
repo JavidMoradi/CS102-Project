@@ -8,105 +8,125 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
-public class CodeReviewerFrame extends JFrame {
-    EditorAreaPanel display = new EditorAreaPanel();
+public class CodeReviewerFrame extends JFrame
+{
+    EditorAreaPanel display = new EditorAreaPanel ();
     //FileOptionsPanel fileOptionsPanel = new FileOptionsPanel( display );
-    JPanel p = new JPanel();
-    JPanel panel = new JPanel();
+    JPanel p = new JPanel ();
+    JPanel panel = new JPanel ();
 
-    public CodeReviewerFrame(String title) throws IOException {
-        super(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1500, 1000));
+    public CodeReviewerFrame ( String title ) throws IOException
+    {
+        super ( title );
+        setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
+        setPreferredSize ( new Dimension ( 1500, 1000 ) );
 
         // Temporary Solution for "Resizing"
-        setMinimumSize(new Dimension(1470, 700));
+        setMinimumSize ( new Dimension ( 1470, 700 ) );
 
-        ImageIcon img = new ImageIcon("icon.png");
-        setIconImage(img.getImage());
+        ImageIcon img = new ImageIcon ( "icon.png" );
+        setIconImage ( img.getImage () );
 
-        setLayout(new BorderLayout());
+        setLayout ( new BorderLayout () );
 
-        p.setLayout(new BorderLayout());
-        p.add(new HomeOptionsPanel(display), BorderLayout.LINE_START);
-        p.add(new NewCommentPanel(display), BorderLayout.CENTER);
-        p.add(new CommentOptionsPanel(display), BorderLayout.LINE_END);
-        add(p, BorderLayout.PAGE_START);
+        p.setLayout ( new BorderLayout () );
+        p.add ( new HomeOptionsPanel ( display ), BorderLayout.LINE_START );
+        p.add ( new NewCommentPanel ( display ), BorderLayout.CENTER );
+        p.add ( new CommentOptionsPanel ( display ), BorderLayout.LINE_END );
+        add ( p, BorderLayout.PAGE_START );
 
-        panel.setLayout(new BorderLayout());
-        panel.add(new FileExplorerPanel(), BorderLayout.LINE_START);
-        panel.add(new FileOptionsPanel(display), BorderLayout.CENTER);
-        panel.add(new CommentShowPanel(display), BorderLayout.LINE_END);
-        add(panel, BorderLayout.CENTER);
+        panel.setLayout ( new BorderLayout () );
+        panel.add ( new FileExplorerPanel (), BorderLayout.LINE_START );
+        panel.add ( new FileOptionsPanel ( display ), BorderLayout.CENTER );
+        panel.add ( new CommentShowPanel ( display ), BorderLayout.LINE_END );
+        add ( panel, BorderLayout.CENTER );
 
-        addWindowListener(new closeSong());
+        addWindowListener ( new closeSong () );
 
-        pack();
-        setVisible(true);
+        pack ();
+        setVisible ( true );
 
         /**
          * Everything Under This is experimental
          */
-        GridBagConstraints constraints = new GridBagConstraints();
+        GridBagConstraints constraints = new GridBagConstraints ();
         constraints.gridx = 0;
         constraints.gridy = 0;
         //add ( fileOptionsPanel, constraints );
     }
 
-    public static void playMusic(String musicLocation) {
-        try {
+    public static void playMusic ( String musicLocation )
+    {
+        try
+        {
 
-            File musicPath = new File(musicLocation);
-            if (musicPath.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                clip.start();
+            File musicPath = new File ( musicLocation );
+            if ( musicPath.exists () )
+            {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream ( musicPath );
+                Clip clip = AudioSystem.getClip ();
+                clip.open ( audioInput );
+                clip.start ();
 
-            } else {
-                System.out.println("null");
+            }
+            else
+            {
+                System.out.println ( "null" );
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch ( Exception e )
+        {
+            e.printStackTrace ();
 
         }
     }
 
-    class closeSong implements WindowListener {
+    class closeSong implements WindowListener
+    {
         @Override
-        public void windowOpened(WindowEvent e) {
+        public void windowOpened ( WindowEvent e )
+        {
         }
 
         @Override
-        public void windowClosing(WindowEvent e) {
-            playMusic("closingsong.wav");
-            int dialogButton = JOptionPane.showConfirmDialog(null, "Close the program?", "ALERT", JOptionPane.YES_NO_OPTION);
-            if (dialogButton == JOptionPane.YES_OPTION) {
-                System.exit(0);
-            } else {
-                remove(dialogButton);
+        public void windowClosing ( WindowEvent e )
+        {
+            playMusic ( "closingsong.wav" );
+            int dialogButton = JOptionPane.showConfirmDialog ( null, "Close the program?", "ALERT",
+                    JOptionPane.YES_NO_OPTION );
+            if ( dialogButton == JOptionPane.YES_OPTION )
+            {
+                System.exit ( 0 );
+            }
+            else
+            {
+                remove ( dialogButton );
             }
         }
 
         @Override
-        public void windowClosed(WindowEvent e) {
+        public void windowClosed ( WindowEvent e )
+        {
         }
 
         @Override
-        public void windowIconified(WindowEvent e) {
+        public void windowIconified ( WindowEvent e )
+        {
         }
 
         @Override
-        public void windowDeiconified(WindowEvent e) {
+        public void windowDeiconified ( WindowEvent e )
+        {
         }
 
         @Override
-        public void windowActivated(WindowEvent e) {
+        public void windowActivated ( WindowEvent e )
+        {
         }
 
         @Override
-        public void windowDeactivated(WindowEvent e) {
+        public void windowDeactivated ( WindowEvent e )
+        {
         }
     }
 
