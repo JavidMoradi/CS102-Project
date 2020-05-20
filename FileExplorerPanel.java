@@ -4,7 +4,10 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
-
+/**
+ * @authors Ahmad Salman, Tuna Öğüt, Hissam Faramawy, Javid Moradi
+ * @version 1.1
+ */
 public class FileExplorerPanel extends JPanel implements ListSelectionListener
 {
 
