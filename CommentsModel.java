@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class CommentsModel
 {
-    private static ArrayList <Comment> commentsBag;
+    static ArrayList <Comment> commentsBag;
     private static EditorAreaPanel display;
 
     public CommentsModel ( EditorAreaPanel display )
