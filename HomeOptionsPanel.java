@@ -7,16 +7,19 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @authors Javid Moradi, Atasagun Samed Şanap, Ahmad Salman
+ * @version 1.1
+ */
 public class HomeOptionsPanel extends JPanel
 {
-    EditorAreaPanel display;
-    JComboBox fontComboBox;
-    Font displayFont;
-    String[] fontList = GraphicsEnvironment.getLocalGraphicsEnvironment ().getAvailableFontFamilyNames ();
-    String[] sizes = { "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34" };
-    JTextField tf;
-    Highlighter.HighlightPainter myHighlightPainter = new MyHighlighPainter ( Color.red );
+    private EditorAreaPanel display;
+    private JComboBox fontComboBox;
+    private Font displayFont;
+    private String fontList[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+    private String[] sizes = {"10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34"};
+    private JTextField tf;
+    private Highlighter.HighlightPainter myHighlightPainter = new MyHighlighPainter ( Color.red );
 
 
     public HomeOptionsPanel ( EditorAreaPanel display )
@@ -101,6 +104,10 @@ public class HomeOptionsPanel extends JPanel
 
     }
 
+    /**
+     * Remove the searched words from text area
+     * @param textComp gets the highlights of the text
+     */
     public void removeHighlights ( JTextComponent textComp )
     {
         Highlighter hlt = textComp.getHighlighter ();
@@ -115,6 +122,11 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
+    /**
+     * Highlight the searched word on the text area
+     * @param textComp gets the highlights of the text
+     * @param pattern the searched word
+     */
     public void highlight ( JTextComponent textComp, String pattern )
     {
 
@@ -143,6 +155,9 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
+    /**
+     * Set the font of the text area
+     */
     class FontListener implements ActionListener
     {
         String fontName;
@@ -155,6 +170,9 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
+    /**
+     * sets the font size of the text area
+     */
     class SizeListener implements ActionListener
     {
 
@@ -169,6 +187,9 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
+    /**
+     * gets the highlighter color
+     */
     class MyHighlighPainter extends DefaultHighlighter.DefaultHighlightPainter
     {
         public MyHighlighPainter ( Color color )
@@ -177,6 +198,9 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
+    /**
+     * finds the inserted word and highlights it
+     */
     class findListener implements ActionListener
     {
 
@@ -187,6 +211,9 @@ public class HomeOptionsPanel extends JPanel
         }
     }
 
+    /**
+     * clear all the highlights
+     */
     class clearListener implements ActionListener
     {
         public void actionPerformed ( ActionEvent e )
