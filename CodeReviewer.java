@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 /**
-* @authors Javid, Ahmad
+* @authors Javid Moradi, Ahmad Salman
 * @version 1.1
 */
 public class CodeReviewer
