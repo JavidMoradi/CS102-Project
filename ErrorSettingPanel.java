@@ -8,23 +8,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+/**
+ * @authors Javid Moradi, Atasagun Samed Şanap, Ahmad Salman
+ * @version 1.1
+ */
 public class ErrorSettingPanel extends JPanel {
 
-    static Color selectedColor;
-    static int selectedErrorPos;
-    String[] errors = {"Wrong Indentation", "Inefficient Code", "Naming Conventions Error", "JavaDoc Error", "Blank Line/Space Error", "Comment Error"};
-    JColorChooser colorChooser;
-    String selectedError;
-    DefaultListModel model;
-    JList errorTypes;
-    JScrollPane scrollPane;
-    JTextField renameField;
-    JLabel rename;
-    JButton applyButton, okButton, cancelButton;
+    private static Color selectedColor;
+    private static int selectedErrorPos;
+    private String[] ERRORS = {"Wrong Indentation", "Inefficient Code", "Naming Conventions Error", "JavaDoc Error", "Blank Line/Space Error", "Comment Error"};
+    private JColorChooser colorChooser;
+    private String selectedError;
+    private DefaultListModel model;
+    private JList errorTypes;
+    private JScrollPane scrollPane;
+    private JTextField renameField;
+    private JLabel rename;
+    private JButton applyButton;
 
-    ColorAndText colorAndText;
-    NewCommentPanel commentPanel;
+    private ColorAndText colorAndText;
+    private NewCommentPanel commentPanel;
 
     JFrame frame;
 
