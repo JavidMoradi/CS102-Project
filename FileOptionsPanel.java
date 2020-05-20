@@ -9,37 +9,41 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * @authors Hissam Faramawy, Ahmad Salman, Tuna Öğüt, Atasagun Samed Şanap, Javid Moradi
+ * @version 1.1
+ */
 public class FileOptionsPanel extends JPanel implements ActionListener
 {
-    static String fileName;
-    static EditorAreaPanel displayArea;
-    static CommentShowPanel commentShowPanel;
-    static CommentsModel commentsModel;
-    static String fileContent;
-    static ArrayList<String> fileContents;
-    static ArrayList<Integer> staticAllColorsAndIndexes;
-    static String theFileName;
-    JButton newFile;
-    JButton saveFile;
-    JButton openFile;
-    JButton closeFile;
-    JFileChooser chooser;
-    Scanner scan;
-    String extension;
-    File selectedFile;
-    FileWriter fileWriter;
-    String filePath;
-    String allComments;
-    ArrayList<String> fileText;
-    ArrayList<Integer> allColorsAndIndexes;
-    String currentFileLineContent;
-    ArrayList commentsArrayList;
-    ArrayList<Integer> indexesArrayList;
-    ArrayList<Color> colorsArrayList;
-    ArrayList<Comment> commentArrayList;
-    ArrayList<String> fileNamesArrayList;
-    static String theFilteredFileName;
+    private static String fileName;
+    private static EditorAreaPanel displayArea;
+    private static CommentShowPanel commentShowPanel;
+    private static CommentsModel commentsModel;
+    private static String fileContent;
+    private static ArrayList<String> fileContents;
+    private static ArrayList<Integer> staticAllColorsAndIndexes;
+    private static String theFileName;
+    private JButton newFile;
+    private JButton saveFile;
+    private JButton openFile;
+    private JButton closeFile;
+    private JFileChooser chooser;
+    private Scanner scan;
+    private String extension;
+    private File selectedFile;
+    private FileWriter fileWriter;
+    private String filePath;
+    private String allComments;
+    private ArrayList<String> fileText;
+    private ArrayList<Integer> allColorsAndIndexes;
+    private String currentFileLineContent;
+    private ArrayList commentsArrayList;
+    private ArrayList<Integer> indexesArrayList;
+    private ArrayList<Color> colorsArrayList;
+    private ArrayList<Comment> commentArrayList;
+    private ArrayList<String> fileNamesArrayList;
+    private static String theFilteredFileName;
+
 
     public FileOptionsPanel ( EditorAreaPanel display )
     {
