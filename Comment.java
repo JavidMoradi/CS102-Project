@@ -1,14 +1,16 @@
 import java.awt.*;
-
-
+/**
+ * @authors Ahmad Salman, Hissam Faramawy
+ * @version 1.1
+ */
 public class Comment
 {
-    Color c;
-    String comment;
-    String fileName;
-    int start;
-    int end;
-    int line;
+    private Color c;
+    private String comment;
+    private String fileName;
+    private int start;
+    private int end;
+    private int line;
 
     public Comment ( String comment, int start, int end, int line, Color c )
     {
