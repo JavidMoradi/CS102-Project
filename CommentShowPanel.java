@@ -2,15 +2,18 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-
+/**
+ * @authors Javid Moradi, Ahmad Salman, Onuralp Avcı, Hissam Faramawy, Atasagun Samed Şanap
+ * @version 1.1
+ */ 
 public class CommentShowPanel extends JPanel
 {
     public static DefaultListModel model;
-    static JList listFiles;
-    static boolean touchedForTheFirstTime;
+    private static JList listFiles;
+    private static boolean touchedForTheFirstTime;
     public Comment lastSelectedComment;
-    CommentsModel commentsModel;
-    EditorAreaPanel display;
+    private CommentsModel commentsModel;
+    private EditorAreaPanel display;
 
     public CommentShowPanel ( EditorAreaPanel display )
     {
