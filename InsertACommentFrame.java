@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-
+/** 
+ * @authors Ahmad Salman, Onuralp Avcı
+ * @version 1.1
+ */
 public class InsertACommentFrame extends JFrame
 {
 
-    InsertACommentPanel insertACommentPanel;
+    private InsertACommentPanel insertACommentPanel;
 
     public InsertACommentFrame ( EditorAreaPanel display )
     {
