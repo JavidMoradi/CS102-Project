@@ -4,16 +4,19 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @authors Ahmad Salman, Hissam Faramawy, Onuralp Avcı
+ * @version 1.1
+ */
 public class InsertACommentPanel extends JPanel
 {
 
-    static Color selectedColor;
-    JColorChooser colorChooser;
-    JTextField commentField;
-    JButton applyButton;
-    EditorAreaPanel display;
-    JFrame frame;
+    private static Color selectedColor;
+    private JColorChooser colorChooser;
+    private JTextField commentField;
+    private JButton applyButton;
+    private EditorAreaPanel display;
+    private JFrame frame;
 
 
     public InsertACommentPanel ( EditorAreaPanel display, JFrame frame )
