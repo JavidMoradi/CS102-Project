@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * @authors Javid Moradi, Ahmad Salman, Atasagun Samed Şanap
+ * @version 1.1
+ */
 public class ErrorSettingsFrame extends JFrame {
 
-    ErrorSettingPanel settings;
-    Dimension size;
-    Toolkit toolkit;
+    private ErrorSettingPanel settings;
+    private Dimension size;
+    private Toolkit toolkit;
 
     public ErrorSettingsFrame(NewCommentPanel commentPanel) {
         super();
