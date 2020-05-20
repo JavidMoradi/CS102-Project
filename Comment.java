@@ -7,7 +7,7 @@ public class Comment
 {
     private Color c;
     private String comment;
-    private String fileName;
+    String fileName;
     private int start;
     private int end;
     private int line;
