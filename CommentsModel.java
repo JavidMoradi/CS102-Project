@@ -1,9 +1,12 @@
 import java.util.ArrayList;
-
+/**
+ * @authors Ahmed Salman, Hissam Faramawy, Atasagun Samed Şanap
+ * @version 1.1
+ */
 public class CommentsModel
 {
-    static ArrayList <Comment> commentsBag;
-    static EditorAreaPanel display;
+    private static ArrayList <Comment> commentsBag;
+    private static EditorAreaPanel display;
 
     public CommentsModel ( EditorAreaPanel display )
     {
