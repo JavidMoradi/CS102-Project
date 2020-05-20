@@ -39,6 +39,10 @@ public class CommentShowPanel extends JPanel
                 // TODO Auto-generated method stub
                 if ( listFiles.getSelectedValue () != null )
                 {
+                 //This condition is important to check when alternating between two files!
+                    if ( lastSelectedComment != null && !lastSelectedComment.fileName.equals( FileExplorerPanel.selectedFileName))
+                        touchedForTheFirstTime = true;
+                        
                     if ( touchedForTheFirstTime )
                     {
                         display.addHighlight ( new Color ( 255, 255, 255, 120 ),
