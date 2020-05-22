@@ -22,7 +22,7 @@ public class FileOptionsPanel extends JPanel implements ActionListener
     private static String fileContent;
     private static ArrayList<String> fileContents;
     private static ArrayList<Integer> staticAllColorsAndIndexes;
-    private static String theFileName;
+    public static String theFileName;
     private JButton newFile;
     private JButton saveFile;
     private JButton openFile;
