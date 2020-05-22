@@ -8,8 +8,8 @@ public class Comment
     private Color c;
     private String comment;
     String fileName;
-    private int start;
-    private int end;
+    public int start;
+    public int end;
     private int line;
 
     public Comment ( String comment, int start, int end, int line, Color c )
