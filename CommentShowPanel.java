@@ -9,7 +9,7 @@ import java.awt.*;
 public class CommentShowPanel extends JPanel
 {
     public static DefaultListModel model;
-    private static JList listFiles;
+    public static JList listFiles;
     private static boolean touchedForTheFirstTime;
     public Comment lastSelectedComment;
     private CommentsModel commentsModel;
