@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class FileOptionsPanel extends JPanel implements ActionListener
 {
-    private static String fileName;
+    public static String fileName;
     private static EditorAreaPanel displayArea;
     private static CommentShowPanel commentShowPanel;
     private static CommentsModel commentsModel;
