@@ -10,7 +10,7 @@ public class CommentShowPanel extends JPanel
 {
     public static DefaultListModel model;
     public static JList listFiles;
-    private static boolean touchedForTheFirstTime;
+    public static boolean touchedForTheFirstTime;
     public Comment lastSelectedComment;
     private CommentsModel commentsModel;
     private EditorAreaPanel display;
