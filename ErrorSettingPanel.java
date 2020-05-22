@@ -16,7 +16,7 @@ public class ErrorSettingPanel extends JPanel {
 
     private static Color selectedColor;
     private static int selectedErrorPos;
-    private String[] ERRORS = {"Wrong Indentation", "Inefficient Code", "Naming Conventions Error", "JavaDoc Error", "Blank Line/Space Error", "Comment Error"};
+    private String[] errors = {"Wrong Indentation", "Inefficient Code", "Naming Conventions Error", "JavaDoc Error", "Blank Line/Space Error", "Comment Error"};
     private JColorChooser colorChooser;
     private String selectedError;
     private DefaultListModel model;
@@ -24,7 +24,7 @@ public class ErrorSettingPanel extends JPanel {
     private JScrollPane scrollPane;
     private JTextField renameField;
     private JLabel rename;
-    private JButton applyButton;
+    private JButton applyButton, okButton, cancelButton;
 
     private ColorAndText colorAndText;
     private NewCommentPanel commentPanel;
