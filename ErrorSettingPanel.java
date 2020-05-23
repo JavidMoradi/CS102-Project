@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 /**
+ * ErrorSettinPanel that contains buttons and a colorchooser to allow user rename and recolor the chosen error types
  * @authors Javid Moradi, Atasagun Samed Şanap, Ahmad Salman
  * @version 1.1
  */
