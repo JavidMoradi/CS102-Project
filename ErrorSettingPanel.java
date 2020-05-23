@@ -41,6 +41,7 @@ public class ErrorSettingPanel extends JPanel {
         errorTypes = new JList(model);
         errorTypes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+        //error names are added
         for (int error = 0; error < errors.length; error++)
             model.addElement(errors[error]);
 
@@ -62,6 +63,7 @@ public class ErrorSettingPanel extends JPanel {
         colorAndText.setPreferredSize(new Dimension(600, 360));
         add(colorAndText, BorderLayout.EAST);
 
+        //buttons are assigned
         JPanel buttonPanel = new JPanel();
         add( buttonPanel, BorderLayout.SOUTH);
         buttonPanel.setLayout( new BorderLayout());
@@ -86,6 +88,7 @@ public class ErrorSettingPanel extends JPanel {
 
     }
 
+    //color and name defining panel
     private class ColorAndText extends JPanel {
         public ColorAndText() {
             colorChooser = new JColorChooser();
@@ -101,6 +104,7 @@ public class ErrorSettingPanel extends JPanel {
         }
     }
 
+    //errorselection listener class to indicate which error is selected
     private class ErrorSelectionListener implements ListSelectionListener
     {
         @Override
@@ -114,6 +118,7 @@ public class ErrorSettingPanel extends JPanel {
         }
     }
 
+    //to indicate which color is chosen
     private class ColorChangeListener implements ChangeListener
     {
         public void stateChanged ( ChangeEvent e )
@@ -122,6 +127,7 @@ public class ErrorSettingPanel extends JPanel {
         }
     }
 
+    //to apply the changes
     private class ApplyListener implements ActionListener
     {
         @Override
@@ -135,6 +141,7 @@ public class ErrorSettingPanel extends JPanel {
         }
     }
 
+    //to apply the changes and exit
     private class OkListener implements ActionListener
     {
         @Override
@@ -148,7 +155,7 @@ public class ErrorSettingPanel extends JPanel {
             frame.dispose();
         }
     }
-
+    //to exit
     private class CancelListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
