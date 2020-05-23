@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
+ * NewCommentPanel for adding comments/errors to the selected line of the code
  * @authors Onuralp Avcı, Ahmad Salman, Hissam Faramawy, Tuna Öğüt, Atasagun Samed Şanap, Javid Moradi
  * @version 1.1
  */
@@ -60,6 +61,7 @@ public class NewCommentPanel extends JPanel
         errorSettingsButton.setPreferredSize ( new Dimension ( 640, 10 ) );
         add ( errorSettingsButton );
 
+        //errorSettingsFrame is opened in this case when this button is clicked
         NewCommentPanel thisPanel = this;
         errorSettingsButton.addActionListener ( new ActionListener ()
         {
@@ -69,10 +71,12 @@ public class NewCommentPanel extends JPanel
             }
         } );
 
+        //arraylists are defined to hold the buttons, their colors and errorNames(errortypes) to be changed later on by the errorSettings
         errorColors = new ArrayList <Color> ();
         errorButtons = new ArrayList <JButton> ();
         errorNames = new ArrayList <String> ();
 
+        //for the saving mechanism a txt file is created (if does not exist) with the following default colors and names.
         errors = new File ( "errors.txt" );
 
         if ( !errors.exists () )
@@ -88,6 +92,9 @@ public class NewCommentPanel extends JPanel
             defaultErrors.close ();
         }
 
+        //having the file in a variable, the error types are read. The names and color components (R,G,B) are 
+        //seperated in commas, so here the string in each line of the text in split by the commas and the 
+        //values are stored.
         errorsRead = new FileReader ( errors );
         bufferedReader = new BufferedReader ( errorsRead );
         errorNumber = 0;
@@ -142,6 +149,12 @@ public class NewCommentPanel extends JPanel
 
     }
 
+     /**
+     * this method is not used currently but for the future uses, when a new button is to be added, this method is called. 
+     * @param newErrorName
+     * @param color
+     * @throws IOException
+     */
     public void addErrorButton ( String newErrorName, Color color ) throws IOException
     {
         PrintWriter out = new PrintWriter ( new BufferedWriter ( new FileWriter ( "errors.txt", true ) ) );
@@ -177,6 +190,12 @@ public class NewCommentPanel extends JPanel
         out.close ();
     }
 
+    /**
+     * editColor function can be called to change the color of the selected button index
+     * @param pos
+     * @param color
+     * @throws IOException
+     */
     public void editColor ( int pos, Color color ) throws IOException
     {
         errorColors.set ( pos, color );
@@ -190,7 +209,13 @@ public class NewCommentPanel extends JPanel
         fileContent.set ( pos, errorName + "," + color.getRed () + "," + color.getGreen () + "," + color.getBlue () );
         Files.write ( Paths.get ( "errors.txt" ), fileContent, StandardCharsets.UTF_8 );
     }
-
+    
+    /**
+     * editErrorName function can be called to change the errorName of the selected button index
+     * @param pos
+     * @param errorName
+     * @throws IOException
+     */
     public void editErrorName ( int pos, String errorName ) throws IOException
     {
         errorNames.set ( pos, errorName );
