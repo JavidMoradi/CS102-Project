@@ -2,15 +2,18 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-
+/**
+ * @authors Javid Moradi, Ahmad Salman, Onuralp Avcı, Hissam Faramawy, Atasagun Samed Şanap
+ * @version 1.1
+ */ 
 public class CommentShowPanel extends JPanel
 {
     public static DefaultListModel model;
-    static JList listFiles;
-    static boolean touchedForTheFirstTime;
+    public static JList listFiles;
+    public static boolean touchedForTheFirstTime;
     public Comment lastSelectedComment;
-    CommentsModel commentsModel;
-    EditorAreaPanel display;
+    private CommentsModel commentsModel;
+    private EditorAreaPanel display;
 
     public CommentShowPanel ( EditorAreaPanel display )
     {
@@ -39,6 +42,10 @@ public class CommentShowPanel extends JPanel
                 // TODO Auto-generated method stub
                 if ( listFiles.getSelectedValue () != null )
                 {
+                 //This condition is important to check when alternating between two files!
+                    if ( lastSelectedComment != null && !lastSelectedComment.fileName.equals( FileExplorerPanel.selectedFileName))
+                        touchedForTheFirstTime = true;
+                        
                     if ( touchedForTheFirstTime )
                     {
                         display.addHighlight ( new Color ( 255, 255, 255, 120 ),

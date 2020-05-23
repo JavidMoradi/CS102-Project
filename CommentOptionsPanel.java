@@ -3,11 +3,14 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @authors Javid Moradi, Hissam Faramawy, Ahmad Salman, Onuralp Avcı
+ * @version 1.1
+ */
 public class CommentOptionsPanel extends JPanel
 {
-    EditorAreaPanel display;
-    InsertACommentFrame insertACommentFrame;
+    private EditorAreaPanel display;
+    private InsertACommentFrame insertACommentFrame;
 
     public CommentOptionsPanel ( EditorAreaPanel display )
     {

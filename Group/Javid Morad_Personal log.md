@@ -6,7 +6,7 @@
 On this page I will keep a weekly record of what I have done for the CS102 group project. This page will be submitted together with the rest of the repository, in partial fulfillment of the CS102 course requirements.
 
 ### ~ week #1 ( 3/02/2020 - 9/02/2020 ) ~
-First of the semester. I met with some people that I knew from CS101 and I was planning on group members. 
+First week of the semester. I met with some people that I knew from CS101 and I was planning on group members. 
 
 ### ~ week #2 ( 10/02/2020 - 16/02/2020 ) ~
 Decided on the memebers of the group. All members of the group was thinking about on good project idea. Couldn't come up with particular idea, but we got to know each other.

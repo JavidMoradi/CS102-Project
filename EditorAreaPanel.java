@@ -4,24 +4,27 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import java.awt.*;
 import java.util.ArrayList;
-
+/**
+ * @authors Javid Moradi, Ahmad Salman, Tuna Öğüt, Bill Gates, Hissam Faramawy, Onuralp Avcı, Atasagun Samed Şanap
+ * @version 1.1
+ */
 public class EditorAreaPanel extends JPanel
 {
-    static CommentsModel commentControl;
-    static JTextArea editorPanel;
-    static TextLineNumber textLineNumber;
-    static JScrollPane scrollPane = new JScrollPane ( editorPanel );
+    private static CommentsModel commentControl;
+    private static JTextArea editorPanel;
+    private static TextLineNumber textLineNumber;
+    private static JScrollPane scrollPane = new JScrollPane ( editorPanel );
     //static CommentsModel commentsModel;
-    static int a;
-    static int b;
-    static DefaultHighlighter highlighter;
-    static DefaultHighlighter.DefaultHighlightPainter painter;
-    static ArrayList firstIndexes;
-    static ArrayList lastIndexes;
-    static ArrayList <Color> colorsArrayList;
-    Font editorFont;
-    int firstIndex;
-    int lastIndex;
+    private static int a;
+    private static int b;
+    private static DefaultHighlighter highlighter;
+    private static DefaultHighlighter.DefaultHighlightPainter painter;
+    private static ArrayList firstIndexes;
+    private static ArrayList lastIndexes;
+    private static ArrayList<Color> colorsArrayList;
+    private Font editorFont;
+    private int firstIndex;
+    private int lastIndex;
 
     public EditorAreaPanel ()
     {
@@ -316,6 +319,10 @@ public class EditorAreaPanel extends JPanel
         }
     }
 
+    /**
+     * get the text area
+     * @return JtextArea, which is editorPanel
+     */
     public JTextArea getTextArea ()
     {
         return editorPanel;

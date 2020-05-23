@@ -7,13 +7,16 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * @authors Javid Moradi, Ahmad Salman, Atasagun Samed Şanap, Hissam Faramawy, Onuralp Avcı, Tuna Öğüt
+ * @version 1.1
+ */
 public class CodeReviewerFrame extends JFrame
 {
-    EditorAreaPanel display = new EditorAreaPanel ();
+    private EditorAreaPanel display = new EditorAreaPanel ();
     //FileOptionsPanel fileOptionsPanel = new FileOptionsPanel( display );
-    JPanel p = new JPanel ();
-    JPanel panel = new JPanel ();
+    private JPanel p = new JPanel ();
+    private JPanel panel = new JPanel ();
 
     public CodeReviewerFrame ( String title ) throws IOException
     {
@@ -55,6 +58,10 @@ public class CodeReviewerFrame extends JFrame
         //add ( fileOptionsPanel, constraints );
     }
 
+    /**
+     * Plays the song (tune) on the directory of the project
+     * @param musicLocation, song name with ".wav" extension
+     */
     public static void playMusic ( String musicLocation )
     {
         try
@@ -80,7 +87,9 @@ public class CodeReviewerFrame extends JFrame
 
         }
     }
-
+    /**
+     * Window Listener for tune that plays when user wants to close the program
+     */
     class closeSong implements WindowListener
     {
         @Override

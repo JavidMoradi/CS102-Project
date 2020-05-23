@@ -9,26 +9,30 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
+/**
+ * @authors Onuralp Avcı, Ahmad Salman, Hissam Faramawy, Tuna Öğüt, Atasagun Samed Şanap, Javid Moradi
+ * @version 1.1
+ */
 public class NewCommentPanel extends JPanel
 {
-    static ArrayList <Color> errorColors;
-    static ArrayList <JButton> errorButtons;
-    static ArrayList <String> errorNames;
-    Dimension ERRORBUTTONDIMENSION = new Dimension ( 210, 35 );
-    Font ERRORFONT = new Font ( "Microsoft Tai Le", Font.BOLD, 18 );
-    int errorNumber;
+    private Dimension ERRORBUTTONDIMENSION = new Dimension(210, 35);
+    private Font ERRORFONT = new Font("Microsoft Tai Le", Font.BOLD, 18);
 
-    File errors;
-    FileReader errorsRead;
-    BufferedReader bufferedReader;
+    private static ArrayList<Color> errorColors;
+    private static ArrayList<JButton> errorButtons;
+    private static ArrayList<String> errorNames;
+    private int errorNumber;
 
-    EditorAreaPanel display;
-    ErrorSettingsFrame errorSettings;
+    private File errors;
+    private FileReader errorsRead;
+    private BufferedReader bufferedReader;
 
-    JButton errorSettingsButton;
+    private EditorAreaPanel display;
+    private ErrorSettingsFrame errorSettings;
 
-    Color[] colour = { Color.BLACK, Color.WHITE, Color.darkGray, Color.RED, Color.BLUE, Color.PINK, Color.LIGHT_GRAY, Color.green, Color.cyan, Color.ORANGE, Color.YELLOW };
+    private JButton errorSettingsButton;
+
+    private Color[] colour = {Color.BLACK, Color.WHITE, Color.darkGray, Color.RED, Color.BLUE, Color.PINK, Color.LIGHT_GRAY, Color.green, Color.cyan, Color.ORANGE, Color.YELLOW};
 
     public NewCommentPanel ( EditorAreaPanel display ) throws IOException
     {
@@ -203,6 +207,9 @@ public class NewCommentPanel extends JPanel
         Files.write ( Paths.get ( "errors.txt" ), fileContent, StandardCharsets.UTF_8 );
     }
 
+    /**
+     * changes the color of the "error color changer" after it pressed
+     */
     class gamingRGB implements ActionListener
     {
 

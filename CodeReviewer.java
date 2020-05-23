@@ -4,13 +4,19 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-
+/**
+* @authors Javid Moradi, Ahmad Salman
+* @version 1.1
+*/
 public class CodeReviewer
 {
 
     // Main method
     public static void main ( String[] args ) throws IOException
     {
+        /**
+         * Try-Catch block for applying the LookAndFeel
+         */
         try
         {
             //here you can put the selected theme class name in JTattoo
@@ -32,6 +38,7 @@ public class CodeReviewer
             java.util.logging.Logger.getLogger ( CodeReviewer.class.getName () ).log ( java.util.logging.Level.SEVERE,
                     null, ex );
         }
+        
         CodeReviewerFrame frame = new CodeReviewerFrame ( " Jhub " );
         frame.setExtendedState ( JFrame.MAXIMIZED_BOTH );
         playMusic ( "openingsong.wav" );
@@ -39,6 +46,10 @@ public class CodeReviewer
 
     }
 
+    /**
+     * Plays the song (tune) on the directory of the project
+     * @param musicLocation, song name with ".wav" extension
+     */
     public static void playMusic ( String musicLocation )
     {
         try
