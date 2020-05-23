@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 /**
+ * ErrorSEttingsFrame that has a panel to allow user rename and recolor errors
  * @authors Javid Moradi, Ahmad Salman, Atasagun Samed Şanap
  * @version 1.1
  */
