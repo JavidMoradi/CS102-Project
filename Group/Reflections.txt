@@ -1,0 +1,14 @@
++Positive Reviews:
+-First, and most importantly, this project gave us the opportunity to pursue something we are interested in with quite a bit of space for creativity.
+-This project has allowed us to experience working within groups, thus it taught us teamwork. This gave us the opportunity to realize that when working with a team, there is always someone prepared to help.
+-This project gave us a better insight into the world of programming by working on a project that is considered to be much more complicated relative to our usual Lab sessions.
+-Made us realize that we don't necessarily need a person to teach us everything, this project allowed us to explore different ways of obtaining programming knowledge without the aid of the university's instructors.
+For instance, we learned to use Eclipse's UI Designer, we learned how to utilize external libraries that would help provide a better programming experience.
+-"We" learned how to manipulate and implement audio files.
+-Ever since receiving this project "order", we learned how to build a program according to the customer's expectations, thus we learned how to actually serve customers by providing the product they asked for.
+-Due to the outbreak, we learned how to still manage our work and duties even during times of hardships.
+
++Negative Reviews:
+-I would've hoped we would get more freedom when choosing our project idea, but due to a lack of clearance from BCC, we weren't able to go through the process of building our program of choice.
+-we would've hoped that more time would be available for us during the development process.
+-We think the steps leading up to the first written line of code were insufficient in terms of guidance.  For instance, because we learned GUI and event-driven programming almost half-way through the semester, we lost quite a bit of time in that sense. Moreover, we had some problems about where to commence the building process from, and how to divide the parts of the projects among the members.
