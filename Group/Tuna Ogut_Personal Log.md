@@ -28,4 +28,4 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 
 13th Week ( 27/04/2020 - 3/05/2020 ) New bugs occured about comments so ı have started to work on comments and highlighting them automatically
 
-14th Week ( 2/03/2020 - 8/03/2020 )
+14th Week ( 2/03/2020 - 8/03/2020 ) In the last week I did not work on something spesific and I cannot say I worked hard I just talked to my partners and tried to fix the last bugs remained then I started to add comments
