@@ -15,8 +15,8 @@
 + Group Members And Their Respective Parts
   - Ahmet Salman: Mainly worked on the FileOptionsPanel, which is the file-managment mechanism aspect of the project, which includes,       but not limited to, the "Save", "Open", "Close", and "New" File.
   - Atasagun Samed Şanap: Worked on HomeOptionsPanel, NewCommentPanel, ErrorSettingsPanel, ErrorSettingFrame
-  - Hissam Faramawy: TextLineNumber, Comment, CommentModel, CommentShowPanel, EditorAreaPanel
-  - Javid Moradi: HomeOptionsPanel, GUI Design
+  - Hissam Faramawy: Comment, CommentModel, CommentShowPanel, EditorAreaPanel
+  - Javid Moradi: Some interesting features that located in HomeOptionsPanel, as well as, the general design of GUI by making some           changes on almost each class. 
   - Onuralp Avcı:
   - Tuna Öğüt: Worked on managing multiple files, which is FileExplorerPanel and FileOptionsPanel, I contributed with some methods to       CommentsModel.
 
@@ -25,13 +25,11 @@
   - First of all, JDK 14 must be used for the GUI of our program to be displayed correctly.
   - Import the Following Libraries:
     * org.apache.commons:commons-lang3:3.9.
+    * org.sonar.scanner.protocol.viewer
     * com.jtattoo:JTattoo:1.6.13.
-  // This is all what's needed for the code to execute properly, (HOPEFULLY!).
+    // This is all what's needed for the code to execute properly, (HOPEFULLY!).
   
   
   
  + Notes:
  - An external class ( TextLineNumber ) was implemented from an online source to aid us in some aspects of the development process, we added our modifications on top of the base version.
- 
- + Works Cited:
- - // To Be Written
