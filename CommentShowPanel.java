@@ -77,6 +77,9 @@ public class CommentShowPanel extends JPanel
         setVisible ( true );
     }
 
+    /**
+     * This method updates model using the data from comments bag
+     */
     public static void update ()
     {
         if ( model != null )
