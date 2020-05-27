@@ -31,26 +31,46 @@ public class Comment
         this.fileName = fileName;
     }
 
+    /**
+     * 
+     * @return the comment as string
+     */
     public String getType ()
     {
         return comment;
     }
 
+    /**
+     * 
+     * @return start index of comment as int
+     */
     public int getStartIndex ()
     {
         return start;
     }
 
+    /**
+     * 
+     * @return end index of comment as int
+     */
     public int getEndIndex ()
     {
         return end;
     }
 
+    /**
+     * 
+     * @return return color of the comment as Color
+     */
     public Color getColor ()
     {
         return c;
     }
 
+    /**
+     * 
+     * @return line number of comment as int
+     */
     public int getLine ()
     {
         return line;
