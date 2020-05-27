@@ -42,7 +42,7 @@ public class Comment
 
     /**
      * 
-     * @return start index of comment as int
+     * @return start index of the comment as int
      */
     public int getStartIndex ()
     {
