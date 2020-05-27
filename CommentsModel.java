@@ -14,6 +14,10 @@ public class CommentsModel
         CommentsModel.display = display;
     }
 
+    /**
+     * This method adds comment to the bag and also highlight the code on the panel
+     * @param c comment to be added
+     */
     public static void addComment ( Comment c )
     {
         commentsBag.add ( c );
@@ -21,6 +25,11 @@ public class CommentsModel
         EditorAreaPanel.addHighlight ( c.getColor () );
     }
 
+    /**
+     * This method removes the comment from the bag and it also rehighlights the part.
+     * @param c comment to be removed
+     * @return return true if comment is removed, false it is not found
+     */
     public static boolean removeComment ( Comment c )
     {
         int x = 0;
@@ -86,6 +95,11 @@ public class CommentsModel
     //	EditorAreaPanel.addNewPointer(pos);
 //	}
 
+    /**
+    * This method returns all comments as string
+    * @param fullFileName file name
+    * @return returns all comments
+    */
     public String getAllComments ( String fullFileName )
     {
 
