@@ -22,10 +22,10 @@ On this page I will keep a weekly record of what I have done for the CS102 group
 
 10th Week ( 6/04/2020 - 12/04/2020 ) Everybody started to add codes to GitHub and project started to be functional
 
-11th Week ( 13/04/2020 - 19/04/2020 ) Same process continued
+11th Week ( 13/04/2020 - 19/04/2020 ) Worked on adding new custom comments
 
-12th Week ( 20/04/2020 - 26/04/2020 ) Same process continued
+12th Week ( 20/04/2020 - 26/04/2020 ) Worked on navigating between comments which are selected
 
-13th Week ( 27/04/2020 - 3/05/2020 )
+13th Week ( 27/04/2020 - 3/05/2020 ) Worked on deleting comments
 
-14th Week ( 2/05/2020 - 8/05/2020 )
+14th Week ( 2/05/2020 - 8/05/2020 ) Worked on fixing some bugs.
