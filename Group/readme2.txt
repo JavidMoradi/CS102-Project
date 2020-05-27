@@ -17,7 +17,7 @@
   - Atasagun Samed Şanap: Worked on HomeOptionsPanel, NewCommentPanel, ErrorSettingsPanel, ErrorSettingFrame
   - Hissam Faramawy: Comment, CommentModel, CommentShowPanel, EditorAreaPanel
   - Javid Moradi: Some interesting features that located in HomeOptionsPanel, as well as, the general design of GUI by making some           changes on almost each class. 
-  - Onuralp Avcı:
+  - Onuralp Avcı: Worked on adding new comments, displaying them on the panel, and deleting the ones selected.
   - Tuna Öğüt: Worked on managing multiple files, which is FileExplorerPanel and FileOptionsPanel, I contributed with some methods to       CommentsModel.
 
 + Software Details:
@@ -29,7 +29,3 @@
     * com.jtattoo:JTattoo:1.6.13.
     // This is all what's needed for the code to execute properly, (HOPEFULLY!).
   
-  
-  
- + Notes:
- - An external class ( TextLineNumber ) was implemented from an online source to aid us in some aspects of the development process, we added our modifications on top of the base version.
